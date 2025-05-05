@@ -31,7 +31,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/preflight.kibot.yaml
           dir: output
@@ -79,7 +79,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/3d_render_top_angled.kibot.yaml
           dir: output
@@ -138,7 +138,7 @@ jobs:
           cp ci/template/* template/
           ls -l template
       - name: Run Kibot for Dark PCBPrint
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/pcb_print_dark.kibot.yaml
           dir: output
@@ -146,7 +146,7 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Run Kibot for Light PCBPrint
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/pcb_print_light.kibot.yaml
           dir: output
@@ -169,7 +169,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/3d_render_top.kibot.yaml
           dir: output
@@ -193,7 +193,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/3d_step_file.kibot.yaml
           dir: output
@@ -217,7 +217,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk8
+        uses: INTI-CMNB/KiBot@v2_dk9
         with:
           config: ci/3d_render_bottom.kibot.yaml
           dir: output

@@ -2,7 +2,7 @@ kibot:
   version: 1
 
 import:
-  - file: ci/pcb_print.kibot.yaml
+  - file: ./pcb_print.kibot.yaml
     definitions:
       BACKGROUND_COLOR: "#050505"
       FOREGROUND_COLOR: "#FFFFFF"
