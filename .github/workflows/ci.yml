@@ -68,29 +68,6 @@ jobs:
         with:
           name: Preflight
           path: output
-  Render_3D_Top_Angled:
-    runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: "1"
-          submodules: "true"
-      - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk9
-        with:
-          config: ci/3d_render_top_angled.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Render_Top_Angled
-          path: output
   Report:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -158,6 +135,29 @@ jobs:
         with:
           name: PCBPrint
           path: output
+  Render_3D_Top_Angled:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "1"
+          submodules: "true"
+      - name: Run Kibot
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/3d_render_top_angled.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Render_Top_Angled
+          path: output
   Render_3D_Top:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -181,31 +181,6 @@ jobs:
         with:
           name: Render_Top
           path: output
-
-  Step:
-    runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: "1"
-          submodules: "true"
-      - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk9
-        with:
-          config: ci/3d_step_file.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Step
-          path: output
-
   Render_3D_Bottom:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -229,6 +204,30 @@ jobs:
         with:
           name: Render_Bottom
           path: output
+  Step:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "1"
+          submodules: "true"
+      - name: Run Kibot
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/3d_step_file.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Step
+          path: output
+
+
   Build_Jekyll:
     runs-on: ubuntu-latest
     needs:
