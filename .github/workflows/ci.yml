@@ -276,7 +276,7 @@ jobs:
           mv output/Render_Bottom/$PROJECT_NAME-3D_blender_top.png images/$PROJECT_NAME-3D_blender_bottom.png
           mv output/Render_Top_Angled/$PROJECT_NAME-3D_blender_top.png images/$PROJECT_NAME-3D_blender_top_angled.png
           mv output/Report/IBOM/$PROJECT_NAME-ibom.html export/$PROJECT_NAME-ibom.html
-          mv output/Report/BOM/$PROJECT_NAME_bom.html export/$PROJECT_NAME-bom.html
+          mv output/Report/BOM/${PROJECT_NAME}_bom.html export/$PROJECT_NAME-bom.html
           mv output/Report/Schematic/$PROJECT_NAME-schematic-default.pdf documents/$PROJECT_NAME-schematic-default.pdf
           mv output/Report/Schematic/$PROJECT_NAME-schematic-dark.pdf documents/$PROJECT_NAME-schematic-dark.pdf
           mv output/Report/Schematic/$PROJECT_NAME-schematic-mono.pdf documents/$PROJECT_NAME-schematic-mono.pdf
