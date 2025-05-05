@@ -280,8 +280,8 @@ jobs:
           mv output/Report/Schematic/$PROJECT_NAME-schematic-default.pdf documents/$PROJECT_NAME-schematic-default.pdf
           mv output/Report/Schematic/$PROJECT_NAME-schematic-dark.pdf documents/$PROJECT_NAME-schematic-dark.pdf
           mv output/Report/Schematic/$PROJECT_NAME-schematic-mono.pdf documents/$PROJECT_NAME-schematic-mono.pdf
-          mv output/PCBPrint/PCBPrintDark/$PROJECT_NAME-united-Dark.pdf documents/$PROJECT_NAME-pcb-dark.pdf
-          mv output/PCBPrint/PCBPrintLight/$PROJECT_NAME-united-Light.pdf documents/$PROJECT_NAME-pcb-light.pdf
+          mv output/PCBPrint/PCBPrintDark/$PROJECT_NAME-assembly.pdf documents/$PROJECT_NAME-pcb-dark.pdf
+          mv output/PCBPrint/PCBPrintLight/$PROJECT_NAME-assembly.pdf documents/$PROJECT_NAME-pcb-light.pdf
           mv output/Report/KiRiDark ./ || true
           mv output/Report/KiRiLight ./ || true
           mv output/Report/JLCPCB/$PROJECT_NAME-JLCPCB.zip export/$PROJECT_NAME-JLCPCB.zip
