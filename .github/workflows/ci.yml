@@ -35,8 +35,8 @@ jobs:
         with:
           config: ci/preflight.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
@@ -83,8 +83,8 @@ jobs:
         with:
           config: ci/3d_render_top_angled.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -105,7 +105,7 @@ jobs:
         run: |
           ls -l
           mkdir template
-          cp template/* template/
+          cp ci/template/* template/
           ls -l template
       - name: Run Kibot
         run: |
@@ -135,23 +135,23 @@ jobs:
         run: |
           ls -l
           mkdir template
-          cp template/* template/
+          cp ci/template/* template/
           ls -l template
       - name: Run Kibot for Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_dk8
         with:
           config: ci/pcb_print_dark.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Run Kibot for Light PCBPrint
         uses: INTI-CMNB/KiBot@v2_dk8
         with:
           config: ci/pcb_print_light.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -173,8 +173,8 @@ jobs:
         with:
           config: ci/3d_render_top.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -197,8 +197,8 @@ jobs:
         with:
           config: ci/3d_step_file.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -221,8 +221,8 @@ jobs:
         with:
           config: ci/3d_render_bottom.kibot.yaml
           dir: output
-          schema: "$PROJECT_NAME.kicad_sch"
-          board: "$PROJECT_NAME.kicad_pcb"
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
