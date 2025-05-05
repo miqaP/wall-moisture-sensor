@@ -268,28 +268,28 @@ jobs:
           mkdir KiRiLight
           mv output/drc_validation.md ./
           mv output/erc_validation.md ./
-          mv output/$PROJECT_NAME-drc.html ./
-          mv output/$PROJECT_NAME-erc.html ./
-          mv output/Step/Step/$PROJECT_NAME-3D.step ./$PROJECT_NAME-3D.step
-          mv output/Report/report/$PROJECT_NAME-report.txt ./$PROJECT_NAME-report.md
-          mv output/Render_Top/$PROJECT_NAME-3D_blender_top.png images/$PROJECT_NAME-3D_blender_top.png
-          mv output/Render_Bottom/$PROJECT_NAME-3D_blender_top.png images/$PROJECT_NAME-3D_blender_bottom.png
-          mv output/Render_Top_Angled/$PROJECT_NAME-3D_blender_top.png images/$PROJECT_NAME-3D_blender_top_angled.png
-          mv output/Report/IBOM/$PROJECT_NAME-ibom.html export/$PROJECT_NAME-ibom.html
-          mv output/Report/BOM/${PROJECT_NAME}_bom.html export/$PROJECT_NAME-bom.html
-          mv output/Report/Schematic/$PROJECT_NAME-schematic-default.pdf documents/$PROJECT_NAME-schematic-default.pdf
-          mv output/Report/Schematic/$PROJECT_NAME-schematic-dark.pdf documents/$PROJECT_NAME-schematic-dark.pdf
-          mv output/Report/Schematic/$PROJECT_NAME-schematic-mono.pdf documents/$PROJECT_NAME-schematic-mono.pdf
-          mv output/PCBPrint/PCBPrintDark/$PROJECT_NAME-assembly.pdf documents/$PROJECT_NAME-pcb-dark.pdf
-          mv output/PCBPrint/PCBPrintLight/$PROJECT_NAME-assembly.pdf documents/$PROJECT_NAME-pcb-light.pdf
+          mv output/${PROJECT_NAME}-drc.html ./
+          mv output/${PROJECT_NAME}-erc.html ./
+          mv output/Step/Step/${PROJECT_NAME}-3D.step ./${PROJECT_NAME}-3D.step
+          mv output/Report/report/${PROJECT_NAME}-report.txt ./${PROJECT_NAME}-report.md
+          mv output/Render_Top/${PROJECT_NAME}-3D_blender_top.png images/${PROJECT_NAME}-3D_blender_top.png
+          mv output/Render_Bottom/${PROJECT_NAME}-3D_blender_top.png images/${PROJECT_NAME}-3D_blender_bottom.png
+          mv output/Render_Top_Angled/${PROJECT_NAME}-3D_blender_top.png images/${PROJECT_NAME}-3D_blender_top_angled.png
+          mv output/Report/IBOM/${PROJECT_NAME}-ibom.html export/${PROJECT_NAME}-ibom.html
+          mv output/Report/BOM/${PROJECT_NAME}_bom.html export/${PROJECT_NAME}-bom.html
+          mv output/Report/Schematic/${PROJECT_NAME}-schematic-default.pdf documents/${PROJECT_NAME}-schematic-default.pdf
+          mv output/Report/Schematic/${PROJECT_NAME}-schematic-dark.pdf documents/${PROJECT_NAME}-schematic-dark.pdf
+          mv output/Report/Schematic/${PROJECT_NAME}-schematic-mono.pdf documents/${PROJECT_NAME}-schematic-mono.pdf
+          mv output/PCBPrint/PCBPrintDark/${PROJECT_NAME}-assembly.pdf documents/${PROJECT_NAME}-pcb-dark.pdf
+          mv output/PCBPrint/PCBPrintLight/${PROJECT_NAME}-assembly.pdf documents/${PROJECT_NAME}-pcb-light.pdf
           mv output/Report/KiRiDark ./ || true
           mv output/Report/KiRiLight ./ || true
-          mv output/Report/JLCPCB/$PROJECT_NAME-JLCPCB.zip export/$PROJECT_NAME-JLCPCB.zip
-          mv output/Report/JLCPCB/BOM/$PROJECT_NAME_bom_jlc.csv export/$PROJECT_NAME_bom_jlc.csv
-          mv output/Report/JLCPCB/PickAndPlace/$PROJECT_NAME_cpl_jlc.csv export/$PROJECT_NAME_cpl_jlc.csv
-          cp export/$PROJECT_NAME-JLCPCB.zip export/$PROJECT_NAME-Eurocircuits.zip
-          mv output/Report/Eurocircuits/BOM/$PROJECT_NAME_bom_jlc.csv export/$PROJECT_NAME_bom_Eurocircuits.csv
-          cp export/$PROJECT_NAME_cpl_jlc.csv export/$PROJECT_NAME_cpl_Eurocircuits.csv
+          mv output/Report/JLCPCB/${PROJECT_NAME}-JLCPCB.zip export/${PROJECT_NAME}-JLCPCB.zip
+          mv output/Report/JLCPCB/BOM/${PROJECT_NAME}_bom_jlc.csv export/${PROJECT_NAME}_bom_jlc.csv
+          mv output/Report/JLCPCB/PickAndPlace/${PROJECT_NAME}_cpl_jlc.csv export/${PROJECT_NAME}_cpl_jlc.csv
+          cp export/${PROJECT_NAME}-JLCPCB.zip export/${PROJECT_NAME}-Eurocircuits.zip
+          mv output/Report/Eurocircuits/BOM/${PROJECT_NAME}_bom_jlc.csv export/${PROJECT_NAME}_bom_Eurocircuits.csv
+          cp export/${PROJECT_NAME}_cpl_jlc.csv export/${PROJECT_NAME}_cpl_Eurocircuits.csv
           rm -rf output
           ls -l
           ls -l export
