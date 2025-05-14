@@ -51,9 +51,9 @@ title: Home
 - [STEP File]({{ "/" | append: project.name | append: "-3D.step" | absolute_url | append: cacheBust }})
 
 ## Reports
-{% include_relative md/erc_validation.md %}
-{% include_relative md/drc_validation.md %}
-{% include_relative md/report.md %}
+{% include_relative erc_validation.md %}
+{% include_relative drc_validation.md %}
+{% include_relative report.md %}
 
 {% if project.known_issues %}
 ## Known Issues
