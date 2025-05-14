@@ -106,15 +106,14 @@ jobs:
           mkdir template
           cp ci/template/* template/
           ls -l template
-      - name: Run Kibot
-        run: |
-          mkdir -p /root/.ssh/ && touch /root/.ssh/known_hosts
-          ssh-keygen -R github.com
-          ssh-keyscan github.com >> /root/.ssh/known_hosts
-          echo "github.com ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCw2ggigUacx+2zTVsDR3nR4YbSYqWMa0BHTq/LrNuIO65J61yzMtZtdl7wZaKxFy/CH1O7u/IggpllEE+OrDM1YxDKS45TEhxbu34lNr8MfYaqxyZ9hyFM8DPDgT8dBklMNw3uhHGHL2SUic9AfGgaNLC4bKjcMuxU0anp2qPwGN5rRk3r6cAqXRI8EcyOAl9OqxbY0qr285rklS97KwhO7uPECi1o26kyfXFEEjOOGiisgCb/11UTfRTsEFJzbx/HPBWJAK3ENjACP6bTkJeFENBK3iebdhR5y1ibiqKAO76WAzPx6m6rYIHA9Qj8UGljYt2XTsnol/BS7VNF9wjGanAaFOukRPBex3RDREEeUcZVxxTlxgLWVF8SNY57XqhyqIcjvSOXnyCYGZjrJsDP5hhkH8Oo1art1D5pVkhxSOtXUVhT4jwlG/xnLeRICzBAToHPjnML3SB9sRNP34R3vR7NsJdupkbenDwnjcbm8MR64vVwQzJcqKIzn+fWonE=" >> /root/.ssh/known_hosts
-          eval $(ssh-agent)
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' | ssh-add - > /dev/null
-          kibot -vvv -d output -c ci/config.kibot.yaml -e $PROJECT_NAME.kicad_sch -b $PROJECT_NAME.kicad_pcb
+      - name: Run Kibot report
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/report.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:

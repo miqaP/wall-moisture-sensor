@@ -40,7 +40,6 @@ outputs:
     options:
       all_pages: true
       background_color: true
-      color_theme: "Arcana"
       monochrome: false
       dnf_filter: ""
       output: "%f-%i%I%v-dark.%x"
@@ -212,7 +211,6 @@ outputs:
     type: 'kiri'
     dir: 'KiRiDark'
     options:
-      color_theme: "Arcana"
       background_color: '#000000'
       keep_generated: true
       max_commits: 3
