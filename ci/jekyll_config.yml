@@ -1,7 +1,7 @@
 title: WallMoisture
 description: >- 
   Some Description to write
-baseurl: "/wall-moisture"
+baseurl: ""
 url: ""
 permalink: /:slug
 theme: just-the-docs
