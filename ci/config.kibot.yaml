@@ -44,7 +44,6 @@ outputs:
       monochrome: false
       dnf_filter: ""
       output: "%f-%i%I%v-dark.%x"
-      title: "AstraDriver - Schematic"
   - name: "pdf_sch_print_default"
     type: "pdf_sch_print"
     dir: "Schematic"
@@ -52,7 +51,6 @@ outputs:
       all_pages: true
       monochrome: false
       output: "%f-%i%I%v-default.%x"
-      title: "AstraDriver - Schematic"
   - name: "pdf_sch_print_mono"
     type: "pdf_sch_print"
     dir: "Schematic"
@@ -60,7 +58,6 @@ outputs:
       all_pages: true
       monochrome: true
       output: "%f-%i%I%v-mono.%x"
-      title: "AstraDriver - Schematic"
 
   - name: JLCPCB_gerbers
     comment: Gerbers compatible with JLCPCB

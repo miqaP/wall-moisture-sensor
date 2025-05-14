@@ -1,7 +1,11 @@
 # Gemfile
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3.2"
+gem "jekyll"
 
 gem "jekyll-feed"
 gem "jemoji"
+gem 'csv'
+
+# Theme
+gem "just-the-docs"

@@ -1,31 +1,55 @@
 title: WallMoisture
-email: support@liveleds.io
 description: >- 
   Some Description to write
 baseurl: "/wall-moisture"
-#url: "https://liveleds.github.io"
-#github_username: LiveLeds
+url: ""
 permalink: /:slug
-remote_theme: abhinavs/moonwalk
+theme: just-the-docs
 plugins:
+  - jekyll-include-yaml
   - jekyll-feed
   - jemoji
+  - jekyll-seo-tag 
 
-theme_config:
-  appearance: "auto"
-  appearance_toggle: true
-  back_home_text: "home.."
-  date_format: "-%d %M %y"
-  show_description: false # show blog description
-  show_copyright: true # show copyright notice in footer
-  show_projects: false # show projects as cards, add in _data/home.yml
-  show_blog: false # show blog posts added in _posts
-  show_old_projects: false # show old projects as cards, add in _data/home.yml
-  show_misc_list: false # show generic vertical list for misc details, add _data/home.yml
-  show_reading_time: false # show number of words and reading time in the blog posts
-  show_tags: false # show tags in a blog posts
+project: !include project.yml
 
 highlighter: rouge
 
 sass:
   style: :compressed
+
+
+# Just the Docs theme options
+just_the_docs:
+  logo: "/assets/images/logo.png"       # Optional: path to your logo
+  search_enabled: true                  # Enable search
+  heading_anchors: true                 # Add anchor links to headings
+  aux_links:
+    GitHub Repository: https://github.com/your-username/wall-moisture
+
+
+# Below file names are hardcode and are dependent to the github action configuration
+renders:
+  - title: "Render Top Angled"
+    image_suffix: "-3d_top_angled.png"
+  - title: "Render Top"
+    image_suffix: "-3d_top.png"
+  - title: "Render Bottom"
+    image_suffix: "-3d_bottom.png"
+
+schematic_variants:
+  - name: "Dark"
+    file_suffix: "-schematic-dark.pdf"
+  - name: "Monochromatic"
+    file_suffix: "-schematic-mono.pdf"
+  - name: "Light"
+    file_suffix: "-schematic-default.pdf"
+
+assembly_variants:
+  - name: "Dark"
+    file_suffix: "-pcb-dark.pdf"
+  - name: "Light"
+    file_suffix: "-pcb-light.pdf"
+
+manufacturers: ["JLCPCB", "Eurocircuits"]
+
