@@ -1,4 +1,5 @@
-name: wall_moisture-hardware
-title: 4-Channel LED Driver with PWM dimming
-description: >-
-  4 Channel LED Driver with PWM dimming input. LED2001PHR is the driver IC…
+project: 
+  name: wall_moisture-hardware
+  title: 4-Channel LED Driver with PWM dimming
+  description: >-
+    4 Channel LED Driver with PWM dimming input. LED2001PHR is the driver IC…

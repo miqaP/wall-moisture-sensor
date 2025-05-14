@@ -6,12 +6,7 @@ url: ""
 permalink: /:slug
 theme: just-the-docs
 plugins:
-  - jekyll-include-yaml
-  - jekyll-feed
   - jemoji
-  - jekyll-seo-tag 
-
-project: !include project.yml
 
 highlighter: rouge
 

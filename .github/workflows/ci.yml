@@ -32,8 +32,8 @@ jobs:
       - name: Load project.yml into outputs
         id: load
         run: |
-          echo "project_name=$(yq e '.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
-          echo "prefix=$(yq e '.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "prefix=$(yq e '.project.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
 
   Preflight:
@@ -301,7 +301,7 @@ jobs:
           bundle install
 
       - name: Build Jekyll site
-        run: bundle exec jekyll build --config ci/jekyll_config.yml --source . --destination ./_site --future
+        run: bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
       - name: Move KiRi files directly to site
         run: |
           ls -l
