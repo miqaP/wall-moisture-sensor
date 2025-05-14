@@ -264,28 +264,28 @@ jobs:
           mkdir KiRiLight
           mv output/drc_validation.md ./
           mv output/erc_validation.md ./
-          mv output/${env.PROJECT_NAME}-drc.html ./
-          mv output/${env.PROJECT_NAME}-erc.html ./
-          mv output/step/Step/${env.PROJECT_NAME}-3D.step ./${env.PROJECT_NAME}}-3D.step
-          mv output/Report/report/${env.PROJECT_NAME}-report.txt ./${env.PROJECT_NAME}}-report.md
-          mv output/3d_top/${env.PROJECT_NAME}-3D_blender_top.png images/${env.PROJECT_NAME}}-3d_top.png
-          mv output/3d_bottom/${env.PROJECT_NAME}-3D_blender_top.png images/${env.PROJECT_NAME}}-3d_bottom.png
-          mv output/3d_top_angled/${env.PROJECT_NAME}-3D_blender_top.png images/${env.PROJECT_NAME}}-3d_top_angled.png
-          mv output/Report/IBOM/${env.PROJECT_NAME}-ibom.html export/${env.PROJECT_NAME}}-ibom.html
-          mv output/Report/BOM/${env.PROJECT_NAME}_bom.html export/${env.PROJECT_NAME}}-bom.html
-          mv output/Report/Schematic/${env.PROJECT_NAME}-schematic-default.pdf documents/${env.PROJECT_NAME}}-schematic-default.pdf
-          mv output/Report/Schematic/${env.PROJECT_NAME}-schematic-dark.pdf documents/${env.PROJECT_NAME}}-schematic-dark.pdf
-          mv output/Report/Schematic/${env.PROJECT_NAME}-schematic-mono.pdf documents/${env.PROJECT_NAME}}-schematic-mono.pdf
-          mv output/PCBPrint/PCBPrintDark/${env.PROJECT_NAME}-assembly.pdf documents/${env.PROJECT_NAME}}-pcb-dark.pdf
-          mv output/PCBPrint/PCBPrintLight/${env.PROJECT_NAME}}-assembly.pdf documents/${env.PROJECT_NAME}}-pcb-light.pdf
+          mv output/${{ env.PROJECT_NAME }}-drc.html ./
+          mv output/${{ env.PROJECT_NAME }}-erc.html ./
+          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}}-3D.step
+          mv output/Report/report/${{ env.PROJECT_NAME }}-report.txt ./${{ env.PROJECT_NAME }}}-report.md
+          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}}-3d_top.png
+          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}}-3d_bottom.png
+          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}}-3d_top_angled.png
+          mv output/Report/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}}-ibom.html
+          mv output/Report/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}}-bom.html
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}}-schematic-default.pdf
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}}-schematic-dark.pdf
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}}-schematic-mono.pdf
+          mv output/PCBPrint/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}}-pcb-dark.pdf
+          mv output/PCBPrint/PCBPrintLight/${{ env.PROJECT_NAME }}}-assembly.pdf documents/${{ env.PROJECT_NAME }}}-pcb-light.pdf
           mv output/Report/KiRiDark ./ || true
           mv output/Report/KiRiLight ./ || true
-          mv output/Report/JLCPCB/${env.PROJECT_NAME}}-JLCPCB.zip export/${env.PROJECT_NAME}}-JLCPCB.zip
-          mv output/Report/JLCPCB/BOM/${env.PROJECT_NAME}}_bom_jlc.csv export/${env.PROJECT_NAME}}_bom_jlc.csv
-          mv output/Report/JLCPCB/PickAndPlace/${env.PROJECT_NAME}}_cpl_jlc.csv export/${env.PROJECT_NAME}}_cpl_jlc.csv
-          cp export/${env.PROJECT_NAME}}-JLCPCB.zip export/${env.PROJECT_NAME}}-Eurocircuits.zip
-          mv output/Report/Eurocircuits/BOM/${env.PROJECT_NAME}}_bom_jlc.csv export/${env.PROJECT_NAME}}_bom_Eurocircuits.csv
-          cp export/${env.PROJECT_NAME}}_cpl_jlc.csv export/${env.PROJECT_NAME}}_cpl_Eurocircuits.csv
+          mv output/Report/JLCPCB/${{ env.PROJECT_NAME }}}-JLCPCB.zip export/${{ env.PROJECT_NAME }}}-JLCPCB.zip
+          mv output/Report/JLCPCB/BOM/${{ env.PROJECT_NAME }}}_bom_jlc.csv export/${{ env.PROJECT_NAME }}}_bom_jlc.csv
+          mv output/Report/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}}_cpl_jlc.csv
+          cp export/${{ env.PROJECT_NAME }}}-JLCPCB.zip export/${{ env.PROJECT_NAME }}}-Eurocircuits.zip
+          mv output/Report/Eurocircuits/BOM/${{ env.PROJECT_NAME }}}_bom_jlc.csv export/${{ env.PROJECT_NAME }}}_bom_Eurocircuits.csv
+          cp export/${{ env.PROJECT_NAME }}}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}}_cpl_Eurocircuits.csv
           rm -rf output
           ls -l
           ls -l export
