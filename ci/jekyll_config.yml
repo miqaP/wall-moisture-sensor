@@ -24,27 +24,28 @@ just_the_docs:
 
 
 # Below file names are hardcode and are dependent to the github action configuration
-renders:
-  - title: "Render Top Angled"
-    image_suffix: "-3d_top_angled.png"
-  - title: "Render Top"
-    image_suffix: "-3d_top.png"
-  - title: "Render Bottom"
-    image_suffix: "-3d_bottom.png"
+project: 
+  renders:
+    - title: "Render Top Angled"
+      image_suffix: "-3d_top_angled.png"
+    - title: "Render Top"
+      image_suffix: "-3d_top.png"
+    - title: "Render Bottom"
+      image_suffix: "-3d_bottom.png"
 
-schematic_variants:
-  - name: "Dark"
-    file_suffix: "-schematic-dark.pdf"
-  - name: "Monochromatic"
-    file_suffix: "-schematic-mono.pdf"
-  - name: "Light"
-    file_suffix: "-schematic-default.pdf"
+  schematic_variants:
+    - name: "Dark"
+      file_suffix: "-schematic-dark.pdf"
+    - name: "Monochromatic"
+      file_suffix: "-schematic-mono.pdf"
+    - name: "Light"
+      file_suffix: "-schematic-default.pdf"
 
-assembly_variants:
-  - name: "Dark"
-    file_suffix: "-pcb-dark.pdf"
-  - name: "Light"
-    file_suffix: "-pcb-light.pdf"
+  assembly_variants:
+    - name: "Dark"
+      file_suffix: "-pcb-dark.pdf"
+    - name: "Light"
+      file_suffix: "-pcb-light.pdf"
 
-manufacturers: ["JLCPCB", "Eurocircuits"]
+  manufacturers: ["JLCPCB", "Eurocircuits"]
 
