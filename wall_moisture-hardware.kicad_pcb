@@ -10218,9 +10218,9 @@
 		(uuid "853f48ff-d195-400e-a8aa-2b5e2eb0b5ab")
 	)
 	(gr_arc
-		(start 373.279919 78.999999)
-		(mid 399.634711 10.568677)
-		(end 427.252757 78.499999)
+		(start 364.11035 65)
+		(mid 399.212948 10.733213)
+		(end 436.5 65)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -10229,8 +10229,8 @@
 		(uuid "2e4085b3-8fe8-4671-9b36-d118d004e50f")
 	)
 	(gr_line
-		(start 360.571916 49.527766)
-		(end 360.571916 110)
+		(start 364.11035 64.999997)
+		(end 364 110)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10239,18 +10239,8 @@
 		(uuid "81796dee-4939-486a-a944-8ee7f1152955")
 	)
 	(gr_line
-		(start 360.571916 110)
-		(end 373.279919 110)
-		(stroke
-			(width 0.05)
-			(type default)
-		)
-		(layer "Edge.Cuts")
-		(uuid "ec5d6399-746d-4ac4-8acc-2b2dd61e1d47")
-	)
-	(gr_line
-		(start 373.279919 110)
-		(end 427.252757 110)
+		(start 364 110)
+		(end 436.5 110)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10259,8 +10249,8 @@
 		(uuid "edf879b7-bc47-4e19-86d4-94389c6321e7")
 	)
 	(gr_line
-		(start 439 110)
-		(end 439.432984 50.048749)
+		(start 436.5 110)
+		(end 436.5 64.999997)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10310,7 +10300,7 @@
 		(layer "Dwgs.User")
 		(uuid "768989b2-be42-4549-bba7-53a6d0ab0777")
 		(pts
-			(xy 400.365184 10.568677) (xy 374.2265 107.575512)
+			(xy 400.365184 10.568677) (xy 364 110)
 		)
 		(height -64.865184)
 		(orientation 1)
@@ -10330,8 +10320,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "97.0068 mm"
-			(at 334.35 59.072095 90)
+		(gr_text "99.4313 mm"
+			(at 334.35 60.284339 90)
 			(layer "Dwgs.User")
 			(uuid "768989b2-be42-4549-bba7-53a6d0ab0777")
 			(effects
@@ -10347,7 +10337,7 @@
 		(layer "Dwgs.User")
 		(uuid "b8c0346f-bf4f-4141-b181-b7afcc19fc49")
 		(pts
-			(xy 427.252754 78.499999) (xy 427.252757 110)
+			(xy 427.252754 78.499999) (xy 436.5 110)
 		)
 		(height 28.247246)
 		(orientation 1)
@@ -10384,7 +10374,7 @@
 		(layer "Dwgs.User")
 		(uuid "ee77c1c9-3868-49ca-8742-64d9b740ae64")
 		(pts
-			(xy 360.5 109.720001) (xy 439 110)
+			(xy 364 110) (xy 436.5 110)
 		)
 		(height 22.279999)
 		(orientation 0)
@@ -10404,8 +10394,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "78.5000 mm"
-			(at 399.75 130.85 0)
+		(gr_text "72.5000 mm"
+			(at 400.25 131.129999 0)
 			(layer "Dwgs.User")
 			(uuid "ee77c1c9-3868-49ca-8742-64d9b740ae64")
 			(effects
