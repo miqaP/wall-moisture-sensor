@@ -2,8 +2,13 @@ name: CI
 
 on:
   push:
+    paths:
+      - '*.kicad_sch'
+      - '*.kicad_pcb'
+      - '*.kibot.yaml'
+      - '.github/workflows/*'
     branches:
-      - main
+      - release
       - test-ci-workflow
 
 env:
@@ -52,7 +57,7 @@ jobs:
       - name: Run Kibot
         uses: INTI-CMNB/KiBot@v2_dk9
         with:
-          config: ci/preflight.kibot.yaml
+          config: ci/preflight_enforce.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
