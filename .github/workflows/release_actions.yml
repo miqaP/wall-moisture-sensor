@@ -1,0 +1,371 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - '*.kicad_sch'
+      - '*.kicad_pcb'
+      - '*.kibot.yaml'
+      - '.github/workflows/*'
+    branches:
+      - release
+      - test-ci-workflow
+
+env:
+  # we’ll use `yq` to read project.yml
+  PROJECT_CONFIGURATION: project.yml
+
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      project_name: ${{ steps.load.outputs.project_name }}
+      prefix:       ${{ steps.load.outputs.prefix }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Load project.yml into outputs
+        id: load
+        run: |
+          echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "prefix=$(yq e '.project.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+
+  preflight:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: setup
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "1"
+          submodules: "true"
+      - name: Run Kibot
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/preflight_enforce.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: "Setup jq"
+        uses: dcarbone/install-jq-action@v2
+      - name: Parse ERC
+        run: |
+          erc_warnings=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          erc_errors=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/erc_validation.md
+          ### ERC Report
+          - **Errors**: $erc_errors
+          - **Warnings**: $erc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
+          EOF
+          cat output/erc_validation.md
+      - name: Parse DRC
+        run: |
+          drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          drc_errors=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/drc_validation.md
+          ### DRC Report
+          - **Errors**: $drc_errors
+          - **Warnings**: $drc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
+          EOF
+          cat output/drc_validation.md
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Preflight
+          path: output
+
+  semanticRelease:
+    runs-on: ubuntu-latest
+    needs:
+      [
+        setup,
+        preflight,
+      ]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
+
+  report:
+    runs-on: ubuntu-latest
+    needs: [ setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "5"
+          submodules: "true"
+      - name: Move template to root
+        run: |
+          ls -l
+          mkdir template
+          cp ci/template/* template/
+          ls -l template
+      - name: Run Kibot report
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/report.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Report
+          path: output
+  PcbPrint:
+    runs-on: ubuntu-latest
+    needs: [ setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "1"
+          submodules: "true"
+      - name: Move template to root
+        run: |
+          ls -l
+          mkdir template
+          cp ci/template/* template/
+          ls -l template
+      - name: Run Kibot for Dark PCBPrint
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/pcb_print_dark.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Run Kibot for Light PCBPrint
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/pcb_print_light.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: PCBPrint
+          path: output
+  renders:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: [setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    strategy:
+      matrix:
+        include:
+          - name: 3d_top_angled
+            file: ci/3d_render_top_angled.kibot.yaml
+          - name: 3d_top
+            file: ci/3d_render_top.kibot.yaml
+          - name: 3d_bottom
+            file: ci/3d_render_bottom.kibot.yaml
+          - name: step
+            file: ci/3d_step_file.kibot.yaml
+            # …and so on for each config…
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1, submodules: true }
+      - name: Run ${{ matrix.name }}
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ${{ matrix.file }}
+          dir: output/${{ matrix.name }}
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload ${{ matrix.name }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: output/${{ matrix.name }}
+  step:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: [ setup, semanticRelease ] # Because it adds the version in silk layer
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: "1"
+          submodules: "true"
+      - name: Run Kibot
+        uses: INTI-CMNB/KiBot@v2_dk9
+        with:
+          config: ci/3d_step_file.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Step
+          path: output
+
+
+
+  Build_Jekyll:
+    runs-on: ubuntu-latest
+    needs:
+      [
+        setup,
+        preflight,
+        semanticRelease,
+        renders,
+        report,
+        PcbPrint,
+        step        
+      ]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Preflight
+          path: output
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: output
+      - name: Move artifact files
+        run: |
+          ls -l
+          ls -l output
+          ls -l output/3d_top_angled
+          ls -l output/3d_top
+          ls -l output/3d_bottom
+          ls -l output/Report
+          ls -l output/step
+          find .
+          mkdir export
+          mkdir html
+          mkdir images
+          mkdir documents
+          mkdir KiRiDark
+          mkdir KiRiLight
+          mv output/drc_validation.md ./
+          mv output/erc_validation.md ./
+          mv output/${{ env.PROJECT_NAME }}-drc.html ./
+          mv output/${{ env.PROJECT_NAME }}-erc.html ./
+          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}-3D.step
+          mv output/Report/report/${{ env.PROJECT_NAME }}-report.txt ./report.md
+          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top.png
+          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_bottom.png
+          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top_angled.png
+          mv output/Report/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}-ibom.html
+          mv output/Report/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}-bom.html
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
+          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
+          mv output/PCBPrint/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
+          mv output/PCBPrint/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/Report/KiRiDark ./ || true
+          mv output/Report/KiRiLight ./ || true
+          mv output/Report/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-JLCPCB.zip
+          mv output/Report/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_jlc.csv
+          mv output/Report/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
+          cp export/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-Eurocircuits.zip
+          mv output/Report/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
+          cp export/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_Eurocircuits.csv
+          rm -rf output
+          ls -l
+          ls -l export
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+
+      - name: Install dependencies
+        run: |
+          gem install bundler --user-install
+          export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+          bundle config set path 'vendor/bundle'
+          bundle install
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+      - name: Move KiRi files directly to site
+        run: |
+          ls -l
+          sudo chown -R $USER:$USER ./_site/
+          cp -r ./KiRiDark ./_site/ || true
+          cp -r ./KiRiLight ./_site/ || true
+          find .
+      - name: Upload Site Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site/
+
+  Deploy_Jekyll:
+    needs: Build_Jekyll
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Site Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=_site --prod

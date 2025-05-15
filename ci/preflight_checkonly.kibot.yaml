@@ -7,8 +7,10 @@ globals:
 preflight:
   check_zone_fills: true
   drc:
-    dont_stop: true
+    dont_stop: true    
+    warnings_as_errors: true
     format: "JSON,HTML,CSV"
   erc:
     dont_stop: true
+    warnings_as_errors: true
     format: "JSON,HTML,CSV"

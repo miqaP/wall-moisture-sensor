@@ -137,7 +137,6 @@
 			(psnegative no)
 			(psa4output no)
 			(plot_black_and_white yes)
-			(plotinvisibletext no)
 			(sketchpadsonfab no)
 			(plotpadnumbers no)
 			(hidednponfab no)
@@ -1090,18 +1089,6 @@
 			)
 			(layer "F.Fab")
 			(uuid "0d908b00-5abd-4128-ae01-0be47253e290")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "14e3deeb-9574-4f97-b533-068485b53406")
-			(effects
-				(font
-					(size 0.5 0.5)
-					(thickness 0.075)
-				)
-			)
 		)
 		(pad "1" smd rect
 			(at -0.7 0 90)
@@ -2166,18 +2153,6 @@
 			(layer "F.Fab")
 			(uuid "5ac38f77-89f9-4077-a74d-a2fb77c30d6b")
 		)
-		(fp_text user "${REFERENCE}"
-			(at -2.5 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9538fdcf-2ede-4c12-bb5c-b2ff5b2ed977")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.775 0 180)
 			(size 0.9 0.95)
@@ -2508,18 +2483,6 @@
 			)
 			(layer "F.Fab")
 			(uuid "525c7914-5013-4ef2-80b5-a19a248194f7")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 1.5 90)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "19e9b19a-f5ec-40c9-a8a6-bc5cc69977ca")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
 		)
 		(pad "1" smd roundrect
 			(at -3 -2.85 90)
@@ -4097,18 +4060,6 @@
 			(layer "F.Fab")
 			(uuid "d7d9044f-880b-484c-915e-80881fb5f92e")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "bfeeb51f-96ca-4379-a049-6dbd15de2f65")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -1.1375 -0.95 180)
 			(size 1.325 0.6)
@@ -4408,18 +4359,6 @@
 			)
 			(layer "F.Fab")
 			(uuid "e74f26fd-f692-4cfb-ab9e-70f620f1b2f8")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "29ca7aff-10fe-482d-b8be-7d1675934d7f")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
 		)
 		(pad "" smd roundrect
 			(at -1.15 -1.15 180)
@@ -7116,18 +7055,6 @@
 			)
 			(layer "F.Fab")
 			(uuid "004f0923-01d8-4219-bd93-31693152d774")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cfb661ed-cf71-40e8-bd1d-4c28f2263470")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
 		)
 		(pad "1" smd roundrect
 			(at -1.1375 -0.95 180)
@@ -9877,18 +9804,6 @@
 			(layer "F.Fab")
 			(uuid "40825fa7-80d3-4506-8bcb-5b5cd46958ce")
 		)
-		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "3a0019a0-39fb-41da-8ca6-a294d841efb8")
-			(effects
-				(font
-					(size 0.4 0.4)
-					(thickness 0.06)
-				)
-			)
-		)
 		(pad "1" smd roundrect
 			(at -0.775 0 180)
 			(size 0.9 0.95)
@@ -10303,9 +10218,9 @@
 		(uuid "853f48ff-d195-400e-a8aa-2b5e2eb0b5ab")
 	)
 	(gr_arc
-		(start 373.279919 78.999999)
-		(mid 399.634711 10.568677)
-		(end 427.252757 78.499999)
+		(start 364.11035 65)
+		(mid 399.212948 10.733213)
+		(end 436.5 65)
 		(stroke
 			(width 0.05)
 			(type solid)
@@ -10314,8 +10229,8 @@
 		(uuid "2e4085b3-8fe8-4671-9b36-d118d004e50f")
 	)
 	(gr_line
-		(start 361 79.537471)
-		(end 361 110.537474)
+		(start 364.11035 64.999997)
+		(end 364 110)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10324,8 +10239,8 @@
 		(uuid "81796dee-4939-486a-a944-8ee7f1152955")
 	)
 	(gr_line
-		(start 373.279919 110)
-		(end 427.252757 110)
+		(start 364 110)
+		(end 436.5 110)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10334,8 +10249,8 @@
 		(uuid "edf879b7-bc47-4e19-86d4-94389c6321e7")
 	)
 	(gr_line
-		(start 439 111.220001)
-		(end 439 79.719998)
+		(start 436.5 110)
+		(end 436.5 64.999997)
 		(stroke
 			(width 0.05)
 			(type default)
@@ -10385,7 +10300,7 @@
 		(layer "Dwgs.User")
 		(uuid "768989b2-be42-4549-bba7-53a6d0ab0777")
 		(pts
-			(xy 401.311765 8.144189) (xy 374.2265 107.575512)
+			(xy 400.365184 10.568677) (xy 364 110)
 		)
 		(height -64.865184)
 		(orientation 1)
@@ -10406,7 +10321,7 @@
 			(keep_text_aligned yes)
 		)
 		(gr_text "99.4313 mm"
-			(at 335.296581 57.859851 90)
+			(at 334.35 60.284339 90)
 			(layer "Dwgs.User")
 			(uuid "768989b2-be42-4549-bba7-53a6d0ab0777")
 			(effects
@@ -10422,7 +10337,7 @@
 		(layer "Dwgs.User")
 		(uuid "b8c0346f-bf4f-4141-b181-b7afcc19fc49")
 		(pts
-			(xy 427.252754 78.499999) (xy 427.252757 110)
+			(xy 427.252754 78.499999) (xy 436.5 110)
 		)
 		(height 28.247246)
 		(orientation 1)
@@ -10459,9 +10374,9 @@
 		(layer "Dwgs.User")
 		(uuid "ee77c1c9-3868-49ca-8742-64d9b740ae64")
 		(pts
-			(xy 373.279919 110) (xy 427.252757 110)
+			(xy 364 110) (xy 436.5 110)
 		)
-		(height 21.000002)
+		(height 22.279999)
 		(orientation 0)
 		(format
 			(prefix "")
@@ -10479,8 +10394,8 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "53.9728 mm"
-			(at 400.266338 129.850002 0)
+		(gr_text "72.5000 mm"
+			(at 400.25 131.129999 0)
 			(layer "Dwgs.User")
 			(uuid "ee77c1c9-3868-49ca-8742-64d9b740ae64")
 			(effects
