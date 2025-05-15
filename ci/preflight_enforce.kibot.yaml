@@ -8,9 +8,9 @@ preflight:
   check_zone_fills: true
   drc:
     dont_stop: false    
-    warning_as_error: true
+    warnings_as_errors: true
     format: "JSON,HTML,CSV"
   erc:
     dont_stop: false
-    warning_as_error: true
+    warnings_as_errors: true
     format: "JSON,HTML,CSV"
