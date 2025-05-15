@@ -30,5 +30,11 @@ fp-info-cache
 *.xml
 *.csv
 
+# Gem files
 .bundle
+
+# Node files 
+package-lock.json 
+node_modules
+
 vendor
