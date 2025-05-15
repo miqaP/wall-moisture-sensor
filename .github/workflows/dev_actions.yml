@@ -43,6 +43,8 @@ jobs:
 
       - name: Run Kibot ERC (schematic)
         uses: INTI-CMNB/KiBot@v2_dk9
+        id: erc
+        continue-on-error: true
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
@@ -50,8 +52,11 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
+
       - name: Run Kibot DRC (layout)
         uses: INTI-CMNB/KiBot@v2_dk9
+        id: drc
+        continue-on-error: true
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
@@ -59,8 +64,22 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
-      - name: Retrieve reports
+
+      - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: Preflight reports
           path: output
+
+      - name: Fail if any Kibot step failed
+        if: |
+          steps.erc.outcome == 'failure' ||
+          steps.drc.outcome == 'failure'
+        run: |
+          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
+            echo "❌ ERC Step : Failed"
+          fi
+          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
+            echo "❌ DRC Step : Failed"
+          fi
+          exit 1

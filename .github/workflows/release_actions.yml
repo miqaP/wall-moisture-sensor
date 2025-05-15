@@ -53,14 +53,31 @@ jobs:
         with:
           fetch-depth: "1"
           submodules: "true"
-      - name: Run Kibot
+
+      - name: Run Kibot ERC (schematic)
         uses: INTI-CMNB/KiBot@v2_dk9
+        id: erc
+        continue-on-error: true
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
+          skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
+
+      - name: Run Kibot DRC (layout)
+        uses: INTI-CMNB/KiBot@v2_dk9
+        id: drc
+        continue-on-error: true
+        with:
+          config: ci/preflight_enforce.kibot.yaml
+          dir: output
+          skip: run_erc
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 3
+
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
       - name: Parse ERC
@@ -86,11 +103,24 @@ jobs:
           EOF
           cat output/drc_validation.md
 
-      - name: Upload Artifacts
+      - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
           name: Preflight
           path: output
+        
+      - name: Fail if any Kibot step failed
+        if: |
+          steps.erc.outcome == 'failure' ||
+          steps.drc.outcome == 'failure'
+        run: |
+          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
+            echo "❌ ERC Step : Failed"
+          fi
+          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
+            echo "❌ DRC Step : Failed"
+          fi
+          exit 1
 
   semanticRelease:
     runs-on: ubuntu-latest
