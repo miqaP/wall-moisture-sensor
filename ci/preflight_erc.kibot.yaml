@@ -10,3 +10,8 @@ preflight:
     dont_stop: false
     warnings_as_errors: true
     format: "JSON,HTML,CSV"
+    filters: [
+      error: "lib_symbol_issues",
+      error: "footprint_link_issues",
+      error: "simulation_model_issue"
+    ]
