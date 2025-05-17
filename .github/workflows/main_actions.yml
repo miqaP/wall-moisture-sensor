@@ -1,4 +1,4 @@
-name: CI
+name: Main Actions
 
 on:
   pull_request:
@@ -42,7 +42,7 @@ jobs:
         with:
           fetch-depth: "1"
           submodules: "true"
-            - name: Run Kibot ERC (schematic)
+      - name: Run Kibot ERC (schematic)
         uses: INTI-CMNB/KiBot@v2_dk9
         id: erc
         continue-on-error: true
