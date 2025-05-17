@@ -46,9 +46,8 @@ jobs:
         id: erc
         continue-on-error: true
         with:
-          config: ci/preflight_enforce.kibot.yaml
+          config: ci/preflight_erc.kibot.yaml
           dir: output
-          skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
@@ -58,9 +57,8 @@ jobs:
         id: drc
         continue-on-error: true
         with:
-          config: ci/preflight_enforce.kibot.yaml
+          config: ci/preflight_drc.kibot.yaml
           dir: output
-          skip: run_erc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 3
