@@ -340,26 +340,6 @@
 				(justify right)
 			)
 		)
-		(pin "I2C_SDA" input
-			(at 125.73 106.68 0)
-			(uuid "a51eec37-fc94-4fba-9429-d7abfc88fd97")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "I2C_SCL" input
-			(at 125.73 109.22 0)
-			(uuid "de37f6ef-ca91-4aa5-9e59-ca17aef558f4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "LPUART_RX" input
 			(at 96.52 123.19 180)
 			(uuid "bb2a85ef-5e24-4d8e-9936-1fdde29daaf8")
@@ -370,7 +350,7 @@
 				(justify left)
 			)
 		)
-		(pin "LPUART_TX" input
+		(pin "LPUART_TX" output
 			(at 96.52 125.73 180)
 			(uuid "f88916e3-6b73-4fbf-b447-2d9d3347be8e")
 			(effects
@@ -380,7 +360,7 @@
 				(justify left)
 			)
 		)
-		(pin "AD7747_SHIELD" input
+		(pin "AD7747_SHIELD" output
 			(at 125.73 118.11 0)
 			(uuid "a8dfbd35-f5d8-4e7c-a861-29819d02b575")
 			(effects
@@ -390,7 +370,7 @@
 				(justify right)
 			)
 		)
-		(pin "AD7747_CIN+" input
+		(pin "AD7747_CIN+" output
 			(at 125.73 113.03 0)
 			(uuid "36285d00-963e-4840-87df-6e6e012cc286")
 			(effects
@@ -400,17 +380,7 @@
 				(justify right)
 			)
 		)
-		(pin "AD7747_CIN-" input
-			(at 125.73 115.57 0)
-			(uuid "250a360a-4a60-40d4-8d8b-ebdec11ee465")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "SENSOR_EXC_1" input
+		(pin "SENSOR_EXC_1" output
 			(at 125.73 123.19 0)
 			(uuid "b7957fe1-d4c0-45b4-8b81-28e9b7226562")
 			(effects
@@ -420,7 +390,7 @@
 				(justify right)
 			)
 		)
-		(pin "SENSOR_EXC_2" input
+		(pin "SENSOR_EXC_2" output
 			(at 125.73 125.73 0)
 			(uuid "bfd71a09-ce79-452c-b1e7-7ada0f3d1509")
 			(effects
@@ -430,7 +400,7 @@
 				(justify right)
 			)
 		)
-		(pin "SENSOR_EXC_3" input
+		(pin "SENSOR_EXC_3" output
 			(at 125.73 128.27 0)
 			(uuid "8b24f206-7062-433a-b11c-4ee068fd2eec")
 			(effects
@@ -440,7 +410,7 @@
 				(justify right)
 			)
 		)
-		(pin "SENSOR_EXC_4" input
+		(pin "SENSOR_EXC_4" output
 			(at 125.73 130.81 0)
 			(uuid "8bb27c56-cb63-4fc4-9ba9-4e6b5461fd8b")
 			(effects
@@ -491,16 +461,6 @@
 				(justify left top)
 			)
 		)
-		(pin "5V" input
-			(at 48.26 104.14 90)
-			(uuid "c5d9a1ee-6be6-4f61-8967-36873cff183b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "MASTER_RX" input
 			(at 68.58 125.73 0)
 			(uuid "28d9d723-2308-4238-8266-738efe4ccc5e")
@@ -511,7 +471,7 @@
 				(justify right)
 			)
 		)
-		(pin "MASTER_TX" input
+		(pin "MASTER_TX" output
 			(at 68.58 123.19 0)
 			(uuid "86e2cff0-6b02-43fe-88c1-671e5dedf155")
 			(effects
@@ -521,7 +481,7 @@
 				(justify right)
 			)
 		)
-		(pin "3.3V" input
+		(pin "3.3V" output
 			(at 57.15 104.14 90)
 			(uuid "77444e89-1fc5-4283-96c6-ba26198a66e3")
 			(effects
@@ -531,7 +491,7 @@
 				(justify right)
 			)
 		)
-		(pin "3.3V_LN" input
+		(pin "3.3V_LN" output
 			(at 54.61 104.14 90)
 			(uuid "b3ecb439-8888-48df-b394-bcc0a0811d02")
 			(effects

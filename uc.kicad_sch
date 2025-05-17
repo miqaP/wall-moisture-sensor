@@ -2458,7 +2458,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD7745_7746.pdf"
+			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad7747.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2504,6 +2504,27 @@
 					)
 					(fill
 						(type background)
+					)
+				)
+			)
+			(symbol "AD7747_1_0"
+				(pin no_connect line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
 					)
 				)
 			)
@@ -3021,12 +3042,6 @@
 		(uuid "a3735638-1799-4329-a5ac-a996eb05e25b")
 	)
 	(junction
-		(at 38.1 72.39)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a7fc7996-4b0c-487a-8ce9-3ccdacd6ac7b")
-	)
-	(junction
 		(at 102.87 95.25)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3051,12 +3066,6 @@
 		(uuid "d7601596-50d7-4b3e-bdb7-53c0946623df")
 	)
 	(junction
-		(at 30.48 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "de8e7f52-7794-4acf-bb6e-6fbb367c7b4e")
-	)
-	(junction
 		(at 135.89 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3073,6 +3082,42 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ff8341f0-2dab-48aa-b3bb-6061eb3e0e2d")
+	)
+	(no_connect
+		(at 233.68 90.17)
+		(uuid "20fceca5-2340-4f8e-b58f-9f325391af34")
+	)
+	(no_connect
+		(at 123.19 99.06)
+		(uuid "50aa4f80-1a34-4756-be16-05194c899d03")
+	)
+	(no_connect
+		(at 233.68 82.55)
+		(uuid "7723ced9-a537-480f-9fb0-86ebe6ffb02a")
+	)
+	(no_connect
+		(at 233.68 100.33)
+		(uuid "818c7c76-9414-412d-95ae-22cbe212b142")
+	)
+	(no_connect
+		(at 123.19 104.14)
+		(uuid "93fa0ef8-0b45-4926-bf33-c30ef1a9d8ba")
+	)
+	(no_connect
+		(at 233.68 92.71)
+		(uuid "96bb78a6-3897-4ac6-b824-300ba1e43e28")
+	)
+	(no_connect
+		(at 233.68 85.09)
+		(uuid "b5350280-0c86-412c-b588-fe6c0e5bdf18")
+	)
+	(no_connect
+		(at 153.67 116.84)
+		(uuid "dd0eac71-dfba-44d3-bd22-c0bb01f57d91")
+	)
+	(no_connect
+		(at 123.19 83.82)
+		(uuid "f3423fc1-6d1a-44b0-b34c-1148a7236165")
 	)
 	(wire
 		(pts
@@ -3626,6 +3671,16 @@
 	)
 	(wire
 		(pts
+			(xy 231.14 82.55) (xy 233.68 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "66b70252-aea6-44f6-a7af-cd310469ebd2")
+	)
+	(wire
+		(pts
 			(xy 92.71 25.4) (xy 105.41 25.4)
 		)
 		(stroke
@@ -3936,16 +3991,6 @@
 	)
 	(wire
 		(pts
-			(xy 38.1 72.39) (xy 40.64 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9fd56b4d-5be3-4d2f-b0ff-97f281da31cd")
-	)
-	(wire
-		(pts
 			(xy 45.72 106.68) (xy 41.91 106.68)
 		)
 		(stroke
@@ -3973,16 +4018,6 @@
 			(type default)
 		)
 		(uuid "a8adca42-12cd-4b1a-a458-8a8126d239f7")
-	)
-	(wire
-		(pts
-			(xy 231.14 100.33) (xy 234.95 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aabc7432-1721-4c7c-8edb-1496770283cb")
 	)
 	(wire
 		(pts
@@ -4056,13 +4091,13 @@
 	)
 	(wire
 		(pts
-			(xy 30.48 74.93) (xy 40.64 74.93)
+			(xy 231.14 90.17) (xy 233.68 90.17)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bdccbc0e-7afe-4dc6-bca0-bb199b3541a6")
+		(uuid "b98ee6f9-38e2-499f-9e49-a31ecb7a5df5")
 	)
 	(wire
 		(pts
@@ -4156,6 +4191,16 @@
 	)
 	(wire
 		(pts
+			(xy 231.14 85.09) (xy 233.68 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d52e37f2-fe50-4ffa-a639-507de9e13b05")
+	)
+	(wire
+		(pts
 			(xy 34.29 53.34) (xy 34.29 55.88)
 		)
 		(stroke
@@ -4186,6 +4231,26 @@
 	)
 	(wire
 		(pts
+			(xy 123.19 104.14) (xy 125.73 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d73e1b7a-235d-4dce-9208-531b1343e8ff")
+	)
+	(wire
+		(pts
+			(xy 231.14 92.71) (xy 233.68 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d7808eed-b49b-459c-b184-54fad3decd50")
+	)
+	(wire
+		(pts
 			(xy 151.13 88.9) (xy 153.67 88.9)
 		)
 		(stroke
@@ -4213,6 +4278,16 @@
 			(type default)
 		)
 		(uuid "da3aaf6e-20d2-43c5-b143-499cba966bd3")
+	)
+	(wire
+		(pts
+			(xy 231.14 100.33) (xy 233.68 100.33)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "daf44d56-fdd6-4187-8380-33dcec0a9b9a")
 	)
 	(wire
 		(pts
@@ -4293,6 +4368,16 @@
 			(type default)
 		)
 		(uuid "ea2f7526-8cc8-42cb-b8ec-da7642cc549e")
+	)
+	(wire
+		(pts
+			(xy 123.19 83.82) (xy 125.73 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebbceb54-d337-4974-884b-0c24a2e0da38")
 	)
 	(wire
 		(pts
@@ -4584,6 +4669,16 @@
 		)
 		(uuid "969d3af2-10e5-46d1-981d-999937dc8c56")
 	)
+	(label "I2C1_SDA"
+		(at 203.2 85.09 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "976dec48-2677-42b5-afb6-fca7a8b70a1e")
+	)
 	(label "DIP_SW_5"
 		(at 45.72 104.14 0)
 		(effects
@@ -4593,6 +4688,16 @@
 			(justify left bottom)
 		)
 		(uuid "9a647cda-9513-4e95-bbea-439149d4b220")
+	)
+	(label "I2C1_SCL"
+		(at 203.2 82.55 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a14591fd-5944-4339-96be-46dbe2377d22")
 	)
 	(label "DIP_SW_8"
 		(at 153.67 109.22 0)
@@ -4744,17 +4849,6 @@
 		)
 		(uuid "fab16c4f-9f62-443f-8a40-48940bc6f26d")
 	)
-	(hierarchical_label "I2C_SDA"
-		(shape input)
-		(at 40.64 74.93 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "02e391ce-c7e6-4941-9cf4-cd8f62e99463")
-	)
 	(hierarchical_label "LPUART_RX"
 		(shape input)
 		(at 153.67 86.36 0)
@@ -4843,39 +4937,6 @@
 		)
 		(uuid "7740fb56-1e08-4cf7-bc9b-0a8c78e084da")
 	)
-	(hierarchical_label "I2C_SDA"
-		(shape input)
-		(at 203.2 85.09 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "8329e6dc-36ef-4f5a-9372-66331f6e092a")
-	)
-	(hierarchical_label "I2C_SCL"
-		(shape input)
-		(at 203.2 82.55 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "90168644-3a5c-47c3-889e-766fbcf45fbe")
-	)
-	(hierarchical_label "I2C_SCL"
-		(shape input)
-		(at 40.64 72.39 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a083888a-b702-48ae-b203-17338a34b53e")
-	)
 	(hierarchical_label "SENSOR_EXC_2"
 		(shape input)
 		(at 170.18 101.6 0)
@@ -4963,17 +5024,6 @@
 			(justify left)
 		)
 		(uuid "e51add0e-32da-41c7-832f-5e5d30e6dadf")
-	)
-	(hierarchical_label "AD7747_CIN-"
-		(shape input)
-		(at 234.95 100.33 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f875526b-9d85-4244-8890-e79955f71c5e")
 	)
 	(symbol
 		(lib_id "Device:C")
@@ -5571,6 +5621,15 @@
 			)
 		)
 		(property "Description" "STMicroelectronics Arm Cortex-M4 MCU, 256KB flash, 64KB RAM, 80 MHz, 1.71-3.6V, 26 GPIO, UFQFPN32"
+			(at 138.43 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 138.43 99.06 0)
 			(effects
 				(font
@@ -6603,7 +6662,7 @@
 			)
 		)
 		(property "Value" "AD7747"
-			(at 216.2967 77.47 0)
+			(at 216.154 77.216 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6620,7 +6679,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/AD7745_7746.pdf"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad7747.pdf"
 			(at 218.44 97.79 0)
 			(effects
 				(font
@@ -6630,6 +6689,15 @@
 			)
 		)
 		(property "Description" "24-bit capacitance-to-digital converter with temperature sensor, TSSOP-16"
+			(at 218.44 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 218.44 97.79 0)
 			(effects
 				(font
@@ -6682,6 +6750,9 @@
 		)
 		(pin "14"
 			(uuid "dbebea53-7c4f-4511-bede-731efb0d6bf9")
+		)
+		(pin "4"
+			(uuid "fce4c162-c053-4082-b036-4e48dfc85a79")
 		)
 		(instances
 			(project ""
