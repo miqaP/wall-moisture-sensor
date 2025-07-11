@@ -17,9 +17,18 @@
         {
           "preset": "eslint",
           "releaseRules": [
-            { "type": "feature", "release": "major" },
-            { "type": "design", "release": "minor" },
-            { "type": "bom", "release": "patch" }
+            {
+              "type": "feature",
+              "release": "major"
+            },
+            {
+              "type": "design",
+              "release": "minor"
+            },
+            {
+              "type": ["bom", "silk"],
+              "release": "patch"
+            }
           ]
         }
       ],
