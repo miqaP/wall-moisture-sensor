@@ -38,3 +38,6 @@ Chose a réaliser:
 - Un rapport de release qui montre la différence entre la version actuelle et la version précedente -> Voir Kicad-diff
     - Il faut pouvoir détérminer la version précédente, comment faire ?
 - Exporter les pdf des schémas et du hardware ( les couches du PCB et la carte complète)
+
+# Note sur la configuration du projet
+Commitlint s’exécute à chaque commit grâce au hook Git commit-msg. Ce hook est un script situé dans le dossier .git/hooks/commit-msg qui est automatiquement lancé par Git à la validation d’un commit. Ce script appelle Commitlint pour vérifier que le message du commit respecte les règles définies.
