@@ -2104,7 +2104,7 @@
 		)
 		(uuid "213abb76-b059-4e2f-a0c0-283937477de2")
 	)
-	(label "SENSOR_EXC"
+	(label "SENSOR_EXC_MCU"
 		(at 73.66 106.68 90)
 		(effects
 			(font
@@ -2114,7 +2114,7 @@
 		)
 		(uuid "492b05a9-5381-4076-82dd-479386faaaba")
 	)
-	(label "SENSOR_EXC"
+	(label "SENSOR_EXC_MCU"
 		(at 104.14 64.77 180)
 		(effects
 			(font
@@ -2124,7 +2124,17 @@
 		)
 		(uuid "63432dd1-fb77-4326-89b2-8d2912841ab0")
 	)
-	(label "SENSOR_EXC"
+	(label "SENSOR_EXCITATION"
+		(at 128.27 59.69 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "77101769-038a-4958-b54c-9afbfb7bc60c")
+	)
+	(label "SENSOR_EXC_MCU"
 		(at 207.01 102.87 180)
 		(effects
 			(font
@@ -3516,6 +3526,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 158.75 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 158.75 59.69 0)
 			(effects
 				(font
