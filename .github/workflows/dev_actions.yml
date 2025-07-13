@@ -1,5 +1,5 @@
+# Action triggered on dev and feature branches 
 name: Dev Actions
-
 on:
   push:
     paths:
@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Kibot ERC (schematic)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: erc
         continue-on-error: true
         with:
@@ -53,7 +53,7 @@ jobs:
           verbose: 1
 
       - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: drc
         continue-on-error: true
         with:
@@ -61,7 +61,7 @@ jobs:
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: Upload reports
         uses: actions/upload-artifact@v4

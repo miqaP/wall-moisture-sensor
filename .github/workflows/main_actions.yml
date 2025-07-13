@@ -1,3 +1,4 @@
+# Action triggered on main branche
 name: Main Actions
 
 on:
@@ -43,7 +44,7 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot ERC (schematic)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: erc
         continue-on-error: true
         with:
@@ -52,10 +53,10 @@ jobs:
           skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: drc
         continue-on-error: true
         with:
@@ -64,7 +65,7 @@ jobs:
           skip: run_erc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: Upload reports
         uses: actions/upload-artifact@v4

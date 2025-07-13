@@ -1,3 +1,4 @@
+# Action triggered on release branche
 name: Release Actions
 
 on:
@@ -55,7 +56,7 @@ jobs:
           submodules: "true"
 
       - name: Run Kibot ERC (schematic)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: erc
         continue-on-error: true
         with:
@@ -64,10 +65,10 @@ jobs:
           skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         id: drc
         continue-on-error: true
         with:
@@ -76,7 +77,7 @@ jobs:
           skip: run_erc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
@@ -140,7 +141,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
@@ -171,13 +172,13 @@ jobs:
           cp ci/template/* template/
           ls -l template
       - name: Run Kibot report
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/report.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -203,21 +204,21 @@ jobs:
           cp ci/template/* template/
           ls -l template
       - name: Run Kibot for Dark PCBPrint
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/pcb_print_dark.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
       - name: Run Kibot for Light PCBPrint
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/pcb_print_light.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -245,13 +246,13 @@ jobs:
       - uses: actions/checkout@v4
         with: { fetch-depth: 1, submodules: true }
       - name: Run ${{ matrix.name }}
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ${{ matrix.file }}
           dir: output/${{ matrix.name }}
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
       - name: Upload ${{ matrix.name }}
         uses: actions/upload-artifact@v4
         with:
@@ -270,13 +271,13 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
       - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_dk9
+        uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/3d_step_file.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
