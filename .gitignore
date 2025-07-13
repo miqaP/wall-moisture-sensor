@@ -34,7 +34,6 @@ fp-info-cache
 .bundle
 
 # Node files 
-package-lock.json 
 node_modules
 
 vendor
