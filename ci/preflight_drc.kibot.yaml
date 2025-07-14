@@ -6,6 +6,9 @@ globals:
 
 preflight:
   check_zone_fills: true
+  filters:
+    - filter: 'Temporary rule to fix DRC warnings due to missmatch between Kicad Kibot version and my version'
+      error: 'lib_footprint_mismatch'
   drc:
     dont_stop: false    
     warnings_as_errors: true
