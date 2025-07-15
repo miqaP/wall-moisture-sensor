@@ -1,0 +1,154 @@
+(footprint "Skedd490107670612_2x06_P2.54mm_Debug"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 9.5 0 270)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "af1d3970-0d4f-444b-9143-40d53e4d5b94")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "490107670612"
+		(at 0 -7 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "fa0c260a-1e74-4e38-8ca7-bd81217f3bee")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.we-online.com/components/products/datasheet/490107670612.pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "163be35d-d133-4735-85c1-8b4b3c56da10")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "Generic connector, single row, 01x06, script generated"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fd461225-403d-4fd6-aaf6-90232d1b8cfb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -6.97 -2.8)
+		(end 8.24 2.8)
+		(stroke
+			(width 0.1)
+			(type dash)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "21682ccf-3941-44e7-a0fc-3255407cee58")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 -10 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "fd4cfbe9-ccf1-442e-868d-636be0b865bc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" np_thru_hole circle
+		(at -3.77 -1.27)
+		(size 2.2 2.2)
+		(drill 2.2)
+		(layers "F&B.Cu" "*.Mask")
+		(uuid "36cf6c40-e04a-42e8-815b-fe8ab8be1459")
+	)
+	(pad "" np_thru_hole circle
+		(at 5.04 1.27)
+		(size 2.6 2.6)
+		(drill 2.6)
+		(layers "F&B.Cu" "*.Mask")
+		(uuid "4b954b68-bb25-4fab-abcd-f54d7347369c")
+	)
+	(pad "1" thru_hole circle
+		(at 3.81 -1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "0fde7dbb-30f9-411f-ac8c-a4a0adad754b")
+	)
+	(pad "2" thru_hole circle
+		(at 1.27 -1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "736e6d59-5f7a-4b92-bb12-c47967883980")
+	)
+	(pad "3" thru_hole circle
+		(at -1.27 -1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "17b26d17-1068-456d-a8c0-eb93c3db7102")
+	)
+	(pad "4" thru_hole circle
+		(at -2.54 1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "e25e3d2f-f255-443b-9091-5484668ca9fa")
+	)
+	(pad "5" thru_hole circle
+		(at 0 1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "caa88a87-4a49-4ca1-a4ca-b2e41f21d73a")
+	)
+	(pad "6" thru_hole circle
+		(at 2.54 1.27)
+		(size 1.85 1.85)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "0961d849-cfab-4c3f-be3a-6263e0292ddb")
+	)
+	(embedded_fonts no)
+	(model "${KICAD9_3DMODEL_DIR}/Connector_Wuerth.3dshapes/Wuerth_WR-WST_490107670612_2x03_P2.54mm.stp"
+		(offset
+			(xyz -1.5 0 5.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
+)
