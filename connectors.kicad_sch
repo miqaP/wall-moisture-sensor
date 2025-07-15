@@ -4,6 +4,9 @@
 	(generator_version "9.0")
 	(uuid "8cfe5d41-4e70-4cc3-8754-a28aa67e6899")
 	(paper "A4")
+	(title_block
+		(title "${SHEETNAME}")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x04_Socket"
 			(pin_names
@@ -1681,7 +1684,7 @@
 			(uuid "5d611119-eb03-407f-bbd2-b891d4411e9b")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "#PWR04")
 					(unit 1)
@@ -1823,7 +1826,7 @@
 			(uuid "235f8294-8ff6-4147-a959-ecec33fadbb2")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "U3")
 					(unit 1)
@@ -1963,7 +1966,7 @@
 			(uuid "64a6e99c-a6bf-4604-84ff-9ba5ae81ebb7")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "#PWR01")
 					(unit 1)
@@ -2169,7 +2172,7 @@
 			(uuid "f3627d6e-8566-4208-896b-c7ccb2b0d576")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "U4")
 					(unit 1)
@@ -2369,7 +2372,7 @@
 			(uuid "1f7acc1d-d90c-4a0f-af23-6f3d6cc25d5e")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "#FLG02")
 					(unit 1)
@@ -2643,7 +2646,7 @@
 			(uuid "6b7ae4d9-2595-43f3-89e2-306a0133b63b")
 		)
 		(instances
-			(project ""
+			(project "wall_moisture-hardware"
 				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/6d9e78ef-2aac-40ff-a2f1-475c572a17ad"
 					(reference "C3")
 					(unit 1)
