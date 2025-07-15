@@ -67,13 +67,13 @@
 		)
 	)
 	(pad "1" smd circle
-		(at 0.5 0 180)
+		(at 0 0 180)
 		(size 20 20)
 		(layers "F.Cu")
 		(uuid "0d2c221e-389a-4511-a313-b5c10d07023c")
 	)
 	(pad "2" smd custom
-		(at 0 -30 180)
+		(at 0 30 180)
 		(size 5 5)
 		(layers "F.Cu")
 		(options
