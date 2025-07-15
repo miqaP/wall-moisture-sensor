@@ -4,6 +4,9 @@
 	(generator_version "9.0")
 	(uuid "291b9682-ad14-4b7a-9a20-0ac48afbf866")
 	(paper "A4")
+	(title_block
+		(title "${SHEETNAME}")
+	)
 	(lib_symbols
 		(symbol "Connector:Conn_01x06_Socket"
 			(pin_names

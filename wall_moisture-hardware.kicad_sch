@@ -443,7 +443,7 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "6d9e78ef-2aac-40ff-a2f1-475c572a17ad")
-		(property "Sheetname" "Connector and Power"
+		(property "Sheetname" "Connectors and Power"
 			(at 32.512 102.108 0)
 			(effects
 				(font
@@ -452,7 +452,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "Connector.kicad_sch"
+		(property "Sheetfile" "connectors.kicad_sch"
 			(at 38.1 132.6646 0)
 			(effects
 				(font
