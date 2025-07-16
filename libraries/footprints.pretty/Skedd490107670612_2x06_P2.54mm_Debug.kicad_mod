@@ -7,7 +7,7 @@
 		(at 9.5 0 270)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "af1d3970-0d4f-444b-9143-40d53e4d5b94")
+		(uuid "db6f18be-97c3-4731-bd13-0a30443f3a4b")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 		(at 0 -7 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "fa0c260a-1e74-4e38-8ca7-bd81217f3bee")
+		(uuid "778c076a-b5ad-4369-b006-2a8e2fe56a92")
 		(effects
 			(font
 				(size 1 1)
@@ -32,7 +32,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "163be35d-d133-4735-85c1-8b4b3c56da10")
+		(uuid "8a844599-cadc-4184-adea-db7911e1c043")
 		(effects
 			(font
 				(size 1 1)
@@ -45,7 +45,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "fd461225-403d-4fd6-aaf6-90232d1b8cfb")
+		(uuid "1fdb69c6-f9b6-4b8d-b35d-3e7db0b15b7a")
 		(effects
 			(font
 				(size 1 1)
@@ -63,13 +63,13 @@
 		)
 		(fill no)
 		(layer "F.SilkS")
-		(uuid "21682ccf-3941-44e7-a0fc-3255407cee58")
+		(uuid "1fc949b7-bcc6-42bf-a5a7-bfeb2574eaf3")
 	)
 	(fp_text user "${REFERENCE}"
 		(at 0 -10 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "fd4cfbe9-ccf1-442e-868d-636be0b865bc")
+		(uuid "e1bf11db-039f-4d0d-8635-1d0ed6a590aa")
 		(effects
 			(font
 				(size 1 1)
@@ -82,14 +82,14 @@
 		(size 2.2 2.2)
 		(drill 2.2)
 		(layers "F&B.Cu" "*.Mask")
-		(uuid "36cf6c40-e04a-42e8-815b-fe8ab8be1459")
+		(uuid "68e1618f-c4f7-4201-bfcc-d0f134b308a9")
 	)
 	(pad "" np_thru_hole circle
 		(at 5.04 1.27)
 		(size 2.6 2.6)
 		(drill 2.6)
 		(layers "F&B.Cu" "*.Mask")
-		(uuid "4b954b68-bb25-4fab-abcd-f54d7347369c")
+		(uuid "93ce2d86-ba47-4315-b167-ad267a409fa6")
 	)
 	(pad "1" thru_hole circle
 		(at 3.81 -1.27)
@@ -97,7 +97,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "0fde7dbb-30f9-411f-ac8c-a4a0adad754b")
+		(uuid "397a02d5-3279-408e-9601-fff9aa65fe7d")
 	)
 	(pad "2" thru_hole circle
 		(at 1.27 -1.27)
@@ -105,7 +105,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "736e6d59-5f7a-4b92-bb12-c47967883980")
+		(uuid "a4912d03-a391-4898-b217-7235fc6a9679")
 	)
 	(pad "3" thru_hole circle
 		(at -1.27 -1.27)
@@ -113,7 +113,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "17b26d17-1068-456d-a8c0-eb93c3db7102")
+		(uuid "1b2f6581-27f7-4d4a-b914-c0b1feceb9ae")
 	)
 	(pad "4" thru_hole circle
 		(at -2.54 1.27)
@@ -121,7 +121,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "e25e3d2f-f255-443b-9091-5484668ca9fa")
+		(uuid "27ef2e4e-9e5e-479d-8fd9-8b3c8014287d")
 	)
 	(pad "5" thru_hole circle
 		(at 0 1.27)
@@ -129,7 +129,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "caa88a87-4a49-4ca1-a4ca-b2e41f21d73a")
+		(uuid "d632edfd-cd39-47b7-bb78-ec63249809d4")
 	)
 	(pad "6" thru_hole circle
 		(at 2.54 1.27)
@@ -137,7 +137,7 @@
 		(drill 1.5)
 		(layers "*.Cu" "*.Mask")
 		(remove_unused_layers no)
-		(uuid "0961d849-cfab-4c3f-be3a-6263e0292ddb")
+		(uuid "ad9713f4-feb7-446c-97fb-2b7e3ddc963a")
 	)
 	(embedded_fonts no)
 	(model "${KICAD9_3DMODEL_DIR}/Connector_Wuerth.3dshapes/Wuerth_WR-WST_490107670612_2x03_P2.54mm.stp"

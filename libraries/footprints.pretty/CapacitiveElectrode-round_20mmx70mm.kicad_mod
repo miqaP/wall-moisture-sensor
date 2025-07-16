@@ -4,10 +4,10 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at -2.5 -11.9 0)
+		(at -2.5 -11.9 180)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "8eaf1726-8b64-4c7c-8648-99e79462c552")
+		(uuid "488178c9-5d4e-4135-8be9-7b47cec8ad1b")
 		(effects
 			(font
 				(size 1 1)
@@ -16,10 +16,10 @@
 		)
 	)
 	(property "Value" "~"
-		(at 0 13 180)
+		(at 0 13 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "eb2d8733-c58b-4621-bd23-dc51f8971d63")
+		(uuid "b42e404d-8472-4411-8e44-e48db9475e48")
 		(effects
 			(font
 				(size 1 1)
@@ -28,11 +28,11 @@
 		)
 	)
 	(property "Datasheet" ""
-		(at 0 0 180)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "55ca5c87-3363-451f-8fe2-e472f81d46a8")
+		(uuid "9aceaf58-d79c-4a2a-8d24-8c71ff69238e")
 		(effects
 			(font
 				(size 1 1)
@@ -41,11 +41,11 @@
 		)
 	)
 	(property "Description" ""
-		(at 0 0 180)
+		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "677dee4c-a291-42c9-913e-ad3817bf25ae")
+		(uuid "093e771f-7921-44c7-bd9d-e1b3a59f8090")
 		(effects
 			(font
 				(size 1 1)
@@ -55,10 +55,10 @@
 	)
 	(attr smd)
 	(fp_text user "${REFERENCE}"
-		(at 0 2.5 180)
+		(at 0 2.5 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "37f85645-7284-4a78-80fc-acad298faddf")
+		(uuid "2aebf5d2-9036-4001-89c8-9b702e89e484")
 		(effects
 			(font
 				(size 1 1)
@@ -70,7 +70,7 @@
 		(at 0 0 180)
 		(size 20 20)
 		(layers "F.Cu")
-		(uuid "0d2c221e-389a-4511-a313-b5c10d07023c")
+		(uuid "e03851a2-d306-4be2-9c49-18146ec4f950")
 	)
 	(pad "2" smd custom
 		(at 0 30 180)
@@ -88,7 +88,7 @@
 				(fill no)
 			)
 		)
-		(uuid "9b6f0073-ccb1-4bdd-b8fe-f43ca623e2aa")
+		(uuid "aa3ebdd7-95bc-4038-81f7-3452652cfd0d")
 	)
 	(embedded_fonts no)
 )
