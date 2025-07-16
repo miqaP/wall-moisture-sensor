@@ -50,8 +50,6 @@ jobs:
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
-          erc: true
-          drc: true
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
