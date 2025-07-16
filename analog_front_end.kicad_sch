@@ -2333,7 +2333,7 @@
 		(fields_autoplaced yes)
 		(uuid "0d4c87c8-53aa-4192-9347-0a33e6325d92")
 		(property "Reference" "U7"
-			(at 93.98 106.7114 0)
+			(at 99.06 105.3398 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2341,14 +2341,14 @@
 			)
 		)
 		(property "Value" "OPA388IDBV"
-			(at 93.98 108.6165 0)
+			(at 99.06 107.8798 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "footprints:SOT-23-5"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
 			(at 86.36 111.76 0)
 			(effects
 				(font
@@ -2357,7 +2357,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#sec__SUBCKT_Subcircuits"
 			(at 86.36 111.76 0)
 			(effects
 				(font
@@ -2366,7 +2366,44 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Operational amplifier, single"
+			(at 86.36 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=in+ 2=in- 3=vcc 4=vee 5=out"
+			(at 86.36 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "SUBCKT"
+			(at 86.36 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Sim.Library" "${KICAD8_SYMBOL_DIR}/Simulation_SPICE.sp"
+			(at 86.36 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Name" "kicad_builtin_opamp"
 			(at 86.36 111.76 0)
 			(effects
 				(font
@@ -2790,7 +2827,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Device" "SUBCKT"
+		(property "Sim.Device" "NMOS"
 			(at 204.47 147.955 0)
 			(effects
 				(font
@@ -2799,7 +2836,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Pins" "1=10 2=20 3=30"
+		(property "Sim.Pins" "1=D 2=G 3=S"
 			(at 204.47 146.05 0)
 			(effects
 				(font
@@ -2808,7 +2845,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Library" "/tools/kicad/spice/2N7002.spice.txt"
+		(property "LCSC" ""
 			(at 204.47 130.81 0)
 			(effects
 				(font
@@ -2817,7 +2854,7 @@
 				(hide yes)
 			)
 		)
-		(property "Sim.Name" "N7002"
+		(property "Sim.Type" "VDMOS"
 			(at 204.47 130.81 0)
 			(effects
 				(font
