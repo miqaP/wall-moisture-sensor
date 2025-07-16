@@ -44,7 +44,9 @@ jobs:
         id: erc
         continue-on-error: true
         with:
-          config: ci/preflight_erc.kibot.yaml
+          config: ci/preflight_enforce.kibot.yaml
+          erc: true
+          drc: false
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
@@ -55,7 +57,9 @@ jobs:
         id: drc
         continue-on-error: true
         with:
-          config: ci/preflight_drc.kibot.yaml
+          config: ci/preflight_enforce.kibot.yaml
+          erc: false
+          drc: true
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
