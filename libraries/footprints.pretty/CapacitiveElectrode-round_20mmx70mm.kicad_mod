@@ -1,0 +1,94 @@
+(footprint "CapacitiveElectrode-round_20mmx70mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -2.5 -11.9 180)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "488178c9-5d4e-4135-8be9-7b47cec8ad1b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "~"
+		(at 0 13 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "b42e404d-8472-4411-8e44-e48db9475e48")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9aceaf58-d79c-4a2a-8d24-8c71ff69238e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "093e771f-7921-44c7-bd9d-e1b3a59f8090")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "2aebf5d2-9036-4001-89c8-9b702e89e484")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd circle
+		(at 0 0 180)
+		(size 20 20)
+		(layers "F.Cu")
+		(uuid "e03851a2-d306-4be2-9c49-18146ec4f950")
+	)
+	(pad "2" smd custom
+		(at 0 30 180)
+		(size 5 5)
+		(layers "F.Cu")
+		(options
+			(clearance outline)
+			(anchor circle)
+		)
+		(primitives
+			(gr_circle
+				(center 0 30)
+				(end 30 30)
+				(width 10)
+				(fill no)
+			)
+		)
+		(uuid "aa3ebdd7-95bc-4038-81f7-3452652cfd0d")
+	)
+	(embedded_fonts no)
+)

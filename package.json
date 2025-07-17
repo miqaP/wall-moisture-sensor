@@ -1,0 +1,46 @@
+{
+  "name": "kicad-project",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^21.0.7"
+  },
+  "release": {
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "eslint",
+          "releaseRules": [
+            {
+              "type": "feature",
+              "release": "major"
+            },
+            {
+              "type": "design",
+              "release": "minor"
+            },
+            {
+              "type": ["bom", "silk"],
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/exec",
+      "@semantic-release/git"
+    ],
+    "exec": {
+      "prepareCmd": "./ci/insert-pcb-version.sh ${process.env.PROJECT_NAME} ${nextRelease.version}"
+    },
+    "git": {
+      "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+    }
+  }
+}
