@@ -11,6 +11,7 @@
     "semantic-release": "^21.0.7"
   },
   "release": {
+    "branches": ["release"],
     "plugins": [
       [
         "@semantic-release/commit-analyzer",

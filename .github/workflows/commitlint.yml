@@ -1,6 +1,16 @@
 name: Commitlint
 
-on: [push, pull_request]
+
+on:
+  # Ignore the trigger main and release branch as the commit should be pushed 
+  # through a pull request
+  push:
+    branches-ignore:
+      - main 
+      - release
+  pull_request:
+    branches:
+      - '**'
 
 permissions:
   contents: read
