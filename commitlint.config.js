@@ -10,7 +10,8 @@ module.exports = {
       'chore',
       'docs',
     ]],
-    'subject-case': [2, 'always', ['sentence-case', 'lower-case']],
-    'body-max-line-length': [2, 'always', 500], 
+    'subject-case': [2, 'always', ['sentence-case']],
+    'body-max-line-length': [2, 'always', 500],
+    'header-max-length': [2, 'always', 200],
   },
 };

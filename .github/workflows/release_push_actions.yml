@@ -2,12 +2,7 @@
 name: Release Actions
 
 on:
-  pull_request:
-    paths:
-      - '*.kicad_sch'
-      - '*.kicad_pcb'
-      - '*.kibot.yaml'
-      - '.github/workflows/*'
+  push:
     branches:
       - release
       - test-ci-workflow
@@ -286,7 +281,7 @@ jobs:
 
 
 
-  Build_Jekyll:
+  buildJekyll:
     runs-on: ubuntu-latest
     needs:
       [
@@ -382,8 +377,8 @@ jobs:
           name: jekyll-site
           path: ./_site/
 
-  Deploy_Jekyll:
-    needs: Build_Jekyll
+  deployJekyll:
+    needs: buildJekyll
     runs-on: ubuntu-latest
     steps:
       - name: Download Site Artifact
