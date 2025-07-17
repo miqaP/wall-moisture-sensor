@@ -2,7 +2,11 @@
 name: Release Actions
 
 on:
+<<<<<<< HEAD:.github/workflows/release_push_actions.yml
   push:
+=======
+  pull_request:
+>>>>>>> 9f41fcb (ci: trigger release action on every pull request not only those which change the pcb):.github/workflows/release_actions.yml
     branches:
       - release
       - test-ci-workflow
