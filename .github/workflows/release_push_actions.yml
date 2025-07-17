@@ -2,7 +2,11 @@
 name: Release Actions
 
 on:
+<<<<<<< HEAD:.github/workflows/release_push_actions.yml
   push:
+=======
+  pull_request:
+>>>>>>> 9f41fcb (ci: trigger release action on every pull request not only those which change the pcb):.github/workflows/release_actions.yml
     branches:
       - release
       - test-ci-workflow
@@ -149,7 +153,8 @@ jobs:
 
   report:
     runs-on: ubuntu-latest
-    needs: [ setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    # Because semanticRelease step is required because it adds the board version in silk layer
+    needs: [ setup, preflight, semanticRelease ] 
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
@@ -179,9 +184,11 @@ jobs:
         with:
           name: Report
           path: output
+
   PcbPrint:
     runs-on: ubuntu-latest
-    needs: [ setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    # Because semanticRelease step is required because it adds the board version in silk layer
+    needs: [ setup, preflight, semanticRelease ]
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
 
     env:
