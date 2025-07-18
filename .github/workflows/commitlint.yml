@@ -1,6 +1,4 @@
 name: Commitlint
-
-
 on:
   # Ignore the trigger main and release branch as the commit should be pushed 
   # through a pull request

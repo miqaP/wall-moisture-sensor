@@ -1,5 +1,5 @@
 # Action triggered on release branche
-name: Release Actions
+name: Release PR Actions
 
 on:
   pull_request:
