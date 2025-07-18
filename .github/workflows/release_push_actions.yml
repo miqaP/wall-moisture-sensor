@@ -35,13 +35,20 @@ jobs:
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
           echo "prefix=$(yq e '.project.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
+      - name: Get semantic-release version (dry-run)
+        id: get_version
+        run: |
+          VERSION=$(npx semantic-release --dry-run --no-ci | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          echo "next_version=$VERSION" >> $GITHUB_OUTPUT
+
 
   preflight:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
     env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - name: Checkout
@@ -50,29 +57,19 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
 
-      - name: Run Kibot ERC (schematic)
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
         uses: INTI-CMNB/KiBot@v2_k9
         id: erc
         continue-on-error: true
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
-          skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-      - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_k9
-        id: drc
-        continue-on-error: true
-        with:
-          config: ci/preflight_enforce.kibot.yaml
-          dir: output
-          skip: run_erc
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
 
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2

@@ -42,9 +42,6 @@
       "@semantic-release/exec",
       "@semantic-release/git"
     ],
-    "exec": {
-      "prepareCmd": "./ci/insert-pcb-version.sh ${process.env.PROJECT_NAME} ${nextRelease.version}"
-    },
     "git": {
       "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }
