@@ -44,6 +44,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install dependencies
+        run: npm ci
 
       - name: Get semantic-release version (dry-run)
         id: get_version
