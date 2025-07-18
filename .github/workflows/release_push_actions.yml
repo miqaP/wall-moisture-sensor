@@ -323,7 +323,10 @@ jobs:
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+          DEBUG: semantic-release:*
+        run: |
+          ls -la dist
+          npx semantic-release
 
   deployJekyll:
     needs: buildJekyll
