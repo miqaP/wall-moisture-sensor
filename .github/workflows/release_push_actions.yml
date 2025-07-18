@@ -187,7 +187,6 @@ jobs:
         setup,
         reports,
         renders,
-        step        
       ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
