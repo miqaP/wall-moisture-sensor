@@ -24,10 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
-      prefix:       ${{ steps.load.outputs.prefix }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Load project.yml into outputs
         id: load
