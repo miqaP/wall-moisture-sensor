@@ -1,7 +1,13 @@
 #!/bin/sh
+
 PROJECT_NAME=$1
 VERSION=$2
 
-echo "from insert-pcb-version.sh project name $PROJECT_NAME / version $VERSION
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 <project_name> <version>"
+  exit 1
+fi
 
-sed -i "s/{{VERSION}}/$VERSION/g" $PROJECT_NAME.kicad_pcb
+echo "insert-pcb-version.sh: insert $VERSION in $PROJECT_NAME.kicad_pcb"
+
+sed -i "s/__VERSION__/$VERSION/g" "$PROJECT_NAME.kicad_pcb"
