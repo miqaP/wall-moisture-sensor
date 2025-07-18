@@ -1,5 +1,5 @@
 # Action triggered on release branche
-name: Release Actions
+name: Release Push Actions
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
       - release
       - test-ci-workflow
   pull_request:
+    branches:
       - test-ci-workflow
 env:
   # we’ll use `yq` to read project.yml
