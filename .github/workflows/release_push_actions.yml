@@ -102,47 +102,10 @@ jobs:
         with:
           name: Preflight
           path: output
-        
-      - name: Fail if any Kibot step failed
-        if: |
-          steps.erc_drc.outcome == 'failure'
-        run: |
-          echo "❌ ERC/DRCR Step : Failed"
-          exit 1
-
-  semanticRelease:
-    runs-on: ubuntu-latest
-    needs:
-      [
-        setup,
-        preflight,
-      ]
-    env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # required for semantic-release to see tags
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run Semantic Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
-
 
   report:
     runs-on: ubuntu-latest
-    # Because semanticRelease step is required because it adds the board version in silk layer
-    needs: [ setup, preflight, semanticRelease ] 
+    needs: [ setup, preflight] 
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
@@ -175,8 +138,7 @@ jobs:
 
   PcbPrint:
     runs-on: ubuntu-latest
-    # Because semanticRelease step is required because it adds the board version in silk layer
-    needs: [ setup, preflight, semanticRelease ]
+    needs: [ setup, preflight ]
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
 
     env:
@@ -217,7 +179,7 @@ jobs:
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    needs: [setup, preflight, semanticRelease ] # Because it adds the version in silk layer
+    needs: [setup, preflight]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
     strategy:
@@ -251,7 +213,7 @@ jobs:
   step:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    needs: [ setup, semanticRelease ] # Because it adds the version in silk layer
+    needs: [ setup, preflight ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
     steps:
@@ -274,15 +236,12 @@ jobs:
           name: Step
           path: output
 
-
-
   buildJekyll:
     runs-on: ubuntu-latest
     needs:
       [
         setup,
         preflight,
-        semanticRelease,
         renders,
         report,
         PcbPrint,
@@ -371,6 +330,30 @@ jobs:
         with:
           name: jekyll-site
           path: ./_site/
+
+  semanticRelease:
+    runs-on: ubuntu-latest
+    needs: buildJekyll
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
 
   deployJekyll:
     needs: buildJekyll
