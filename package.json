@@ -14,7 +14,9 @@
   "release": {
     "branches": [
       "release",
-      "test-ci-workflow"
+      "test-ci-workflow", 
+      {"name": "main", "prerelease": true},
+      {"name": "test-ci-workflow-pre", "prerelease": true}
     ],
     "plugins": [
       [
