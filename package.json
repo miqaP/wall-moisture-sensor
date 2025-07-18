@@ -8,11 +8,12 @@
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "semantic-release": "^21.1.2"
+    "@semantic-release/github": "^11.0.3"
   },
   "release": {
     "branches": [
-      "release", "test-ci-workflow"
+      "release",
+      "test-ci-workflow"
     ],
     "plugins": [
       [
@@ -40,10 +41,17 @@
       ],
       "@semantic-release/release-notes-generator",
       "@semantic-release/exec",
-      "@semantic-release/git"
-    ],
-    "git": {
-      "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-    }
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "dist/release-jekyll_website.zip",
+              "label": "Release Report"
+            }
+          ]
+        }
+      ]
+    ]
   }
 }
