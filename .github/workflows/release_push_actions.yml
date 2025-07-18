@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
-      prefix:       ${{ steps.load.outputs.prefix }}
+      next_version: ${{ steps.get_version.outputs.next_version }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,7 +38,6 @@ jobs:
         id: load
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
-          echo "prefix=$(yq e '.project.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -55,7 +54,9 @@ jobs:
           GITHUB_REF=${{ github.head_ref }}
           npx semantic-release --dry-run --no-ci --branches ${{ github.head_ref }}
           VERSION=$(npx semantic-release --dry-run --no-ci --branches ${{ github.head_ref }} | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          echo $VERSION
           echo "next_version=$VERSION" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
 
 
   reports:
@@ -74,6 +75,8 @@ jobs:
 
       - name: Apply next version on PCB file
         run: |
+          echo $PROJECT_NAME
+          echo $NEXT_VERSION
           ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
 
       - name: Run Kibot ERC / DRC
