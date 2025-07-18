@@ -55,12 +55,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: "1"
-          submodules: "true"
-
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Run Kibot ERC / DRC
         uses: INTI-CMNB/KiBot@v2_k9
         id: erc_drc
-        continue-on-error: true
+
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
@@ -68,9 +69,6 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-      - name: Apply next version on PCB file
-        run: |
-          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
 
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
@@ -109,13 +107,16 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: "5"
-          submodules: "true"
+          fetch-depth: ""
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Move template to root
         run: |
           ls -l
@@ -143,12 +144,15 @@ jobs:
 
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: "1"
-          submodules: "true"
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Move template to root
         run: |
           ls -l
@@ -182,6 +186,7 @@ jobs:
     needs: [setup, preflight]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     strategy:
       matrix:
         include:
@@ -196,7 +201,11 @@ jobs:
             # …and so on for each config…
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 1, submodules: true }
+        with: 
+          fetch-depth: 1
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Run ${{ matrix.name }}
         uses: INTI-CMNB/KiBot@v2_k9
         with:
@@ -216,12 +225,15 @@ jobs:
     needs: [ setup, preflight ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: "1"
-          submodules: "true"
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Run Kibot
         uses: INTI-CMNB/KiBot@v2_k9
         with:
@@ -249,6 +261,7 @@ jobs:
       ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -336,6 +349,7 @@ jobs:
     needs: buildJekyll
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - uses: actions/checkout@v4
