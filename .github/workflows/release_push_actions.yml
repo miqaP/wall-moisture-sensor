@@ -54,7 +54,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: "1"
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Apply next version on PCB file
         run: |
@@ -162,7 +167,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: 
-          fetch-depth: 1
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Apply next version on PCB file
         run: |
           ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
