@@ -50,64 +50,12 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
 
-      - name: Run Kibot ERC (schematic)
+      - name: Run Kibot ERC/DRC
         uses: INTI-CMNB/KiBot@v2_k9
-        id: erc
-        continue-on-error: true
+        id: erc_drc
         with:
           config: ci/preflight_enforce.kibot.yaml
           dir: output
-          skip: run_drc
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-
-      - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_k9
-        id: drc
-        continue-on-error: true
-        with:
-          config: ci/preflight_enforce.kibot.yaml
-          dir: output
-          skip: run_erc
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
-      - name: "Setup jq"
-        uses: dcarbone/install-jq-action@v2
-      - name: Parse ERC
-        run: |
-          erc_warnings=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
-          erc_errors=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "error")] | length')
-          cat <<EOF > output/erc_validation.md
-          ### ERC Report
-          - **Errors**: $erc_errors
-          - **Warnings**: $erc_warnings
-          - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
-          EOF
-          cat output/erc_validation.md
-      - name: Parse DRC
-        run: |
-          drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
-          drc_errors=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "error")] | length')
-          cat <<EOF > output/drc_validation.md
-          ### DRC Report
-          - **Errors**: $drc_errors
-          - **Warnings**: $drc_warnings
-          - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
-          EOF
-          cat output/drc_validation.md
-
-      - name: Fail if any Kibot step failed
-        if: |
-          steps.erc.outcome == 'failure' ||
-          steps.drc.outcome == 'failure'
-        run: |
-          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
-            echo "❌ ERC Step : Failed"
-          fi
-          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
-            echo "❌ DRC Step : Failed"
-          fi
-          exit 1

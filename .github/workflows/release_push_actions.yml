@@ -57,11 +57,9 @@ jobs:
           fetch-depth: "1"
           submodules: "true"
 
-      - name: Apply next version on PCB file
-        run: |
-          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
+      - name: Run Kibot ERC / DRC
         uses: INTI-CMNB/KiBot@v2_k9
-        id: erc
+        id: erc_drc
         continue-on-error: true
         with:
           config: ci/preflight_enforce.kibot.yaml
@@ -70,6 +68,9 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+      - name: Apply next version on PCB file
+        run: |
+          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
 
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
@@ -104,15 +105,9 @@ jobs:
         
       - name: Fail if any Kibot step failed
         if: |
-          steps.erc.outcome == 'failure' ||
-          steps.drc.outcome == 'failure'
+          steps.erc_drc.outcome == 'failure'
         run: |
-          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
-            echo "❌ ERC Step : Failed"
-          fi
-          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
-            echo "❌ DRC Step : Failed"
-          fi
+          echo "❌ ERC/DRCR Step : Failed"
           exit 1
 
   semanticRelease:
