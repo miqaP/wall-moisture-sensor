@@ -27,22 +27,36 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
-      prefix:       ${{ steps.load.outputs.prefix }}
+      next_version: ${{ steps.get_version.outputs.next_version }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
 
       - name: Load project.yml into outputs
         id: load
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
-          echo "prefix=$(yq e '.project.schematic_prefix' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
 
       - name: Get semantic-release version (dry-run)
         id: get_version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(npx semantic-release --dry-run --no-ci | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          GITHUB_REF=${{ github.head_ref }}
+          npx semantic-release --dry-run --no-ci --branches ${{ github.head_ref }}
+          VERSION=$(npx semantic-release --dry-run --no-ci --branches ${{ github.head_ref }} | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          echo $VERSION
           echo "next_version=$VERSION" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
 
 
   reports:
@@ -57,15 +71,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # required for semantic-release to see tags
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+          fetch-depth: 1
 
       - name: Apply next version on PCB file
         run: |
+          echo $PROJECT_NAME
+          echo $NEXT_VERSION
           ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
 
       - name: Run Kibot ERC / DRC
@@ -170,12 +181,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: 
-          fetch-depth: 0  # required for semantic-release to see tags
+          fetch-depth: 1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
       - name: Apply next version on PCB file
         run: |
           ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
@@ -209,11 +216,6 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: Preflight
-          path: output
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
           path: output
       - name: Move artifact files
         run: |
@@ -222,7 +224,7 @@ jobs:
           ls -l output/3d_top_angled
           ls -l output/3d_top
           ls -l output/3d_bottom
-          ls -l output/Report
+          ls -l output/reports
           ls -l output/step
           find .
           mkdir export
@@ -231,29 +233,29 @@ jobs:
           mkdir documents
           mkdir KiRiDark
           mkdir KiRiLight
-          mv output/drc_validation.md ./
-          mv output/erc_validation.md ./
-          mv output/${{ env.PROJECT_NAME }}-drc.html ./
-          mv output/${{ env.PROJECT_NAME }}-erc.html ./
+          mv output/reports/drc_validation.md ./
+          mv output/reports/erc_validation.md ./
+          mv output/reports/${{ env.PROJECT_NAME }}-drc.html ./
+          mv output/reports/${{ env.PROJECT_NAME }}-erc.html ./
           mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}-3D.step
-          mv output/Report/report/${{ env.PROJECT_NAME }}-report.txt ./report.md
+          mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt ./report.md
           mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top.png
           mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_bottom.png
           mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top_angled.png
-          mv output/Report/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}-ibom.html
-          mv output/Report/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}-bom.html
-          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
-          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
-          mv output/Report/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
-          mv output/PCBPrint/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
-          mv output/PCBPrint/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
-          mv output/Report/KiRiDark ./ || true
-          mv output/Report/KiRiLight ./ || true
-          mv output/Report/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-JLCPCB.zip
-          mv output/Report/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_jlc.csv
-          mv output/Report/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
+          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}-ibom.html
+          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}-bom.html
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
+          mv output/reports//PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
+          mv output/reports//PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/reports/KiRiDark ./ || true
+          mv output/reports/KiRiLight ./ || true
+          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-JLCPCB.zip
+          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_jlc.csv
+          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
           cp export/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-Eurocircuits.zip
-          mv output/Report/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
+          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
           cp export/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_Eurocircuits.csv
           rm -rf output
           ls -l
