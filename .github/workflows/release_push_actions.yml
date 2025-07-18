@@ -42,7 +42,7 @@ jobs:
           echo "next_version=$VERSION" >> $GITHUB_OUTPUT
 
 
-  preflight:
+  reports:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
@@ -82,7 +82,6 @@ jobs:
           - **Warnings**: $erc_warnings
           - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
           EOF
-          cat output/erc_validation.md
       - name: Parse DRC
         run: |
           drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
@@ -93,37 +92,14 @@ jobs:
           - **Warnings**: $drc_warnings
           - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
           EOF
-          cat output/drc_validation.md
 
-      - name: Upload reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: Preflight
-          path: output
-
-  report:
-    runs-on: ubuntu-latest
-    needs: [ setup, preflight] 
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: ""
-      - name: Apply next version on PCB file
-        run: |
-          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
       - name: Move template to root
         run: |
           ls -l
           mkdir template
           cp ci/template/* template/
           ls -l template
-      - name: Run Kibot report
+      - name: Kibot generate report
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/report.kibot.yaml
@@ -131,35 +107,8 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Report
-          path: output
 
-  PcbPrint:
-    runs-on: ubuntu-latest
-    needs: [ setup, preflight ]
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-
-    env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: "1"
-      - name: Apply next version on PCB file
-        run: |
-          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
-      - name: Move template to root
-        run: |
-          ls -l
-          mkdir template
-          cp ci/template/* template/
-          ls -l template
-      - name: Run Kibot for Dark PCBPrint
+      - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/pcb_print_dark.kibot.yaml
@@ -167,7 +116,7 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-      - name: Run Kibot for Light PCBPrint
+      - name: Kibot generate Light PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/pcb_print_light.kibot.yaml
@@ -175,15 +124,26 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-      - name: Upload Artifacts
+
+        - name: Kibot generate step file
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/3d_step_file.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
-          name: PCBPrint
+          name: reports
           path: output
+
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    needs: [setup, preflight]
+    needs: [setup]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
       NEXT_VERSION: ${{needs.setup.outputs.next_version}}
@@ -219,49 +179,18 @@ jobs:
         with:
           name: ${{ matrix.name }}
           path: output/${{ matrix.name }}
-  step:
-    runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    needs: [ setup, preflight ]
-    env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: "1"
-      - name: Apply next version on PCB file
-        run: |
-          ./ci/insert-pcb-version.sh $PROJECT_NAME $NEXT_VERSION
-      - name: Run Kibot
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/3d_step_file.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: Step
-          path: output
 
   buildJekyll:
     runs-on: ubuntu-latest
     needs:
       [
         setup,
-        preflight,
+        reports,
         renders,
-        report,
-        PcbPrint,
         step        
       ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -349,7 +278,6 @@ jobs:
     needs: buildJekyll
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - uses: actions/checkout@v4
