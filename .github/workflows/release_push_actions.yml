@@ -6,6 +6,8 @@ on:
     branches:
       - release
       - test-ci-workflow
+  pull_request:
+      - test-ci-workflow
 env:
   # we’ll use `yq` to read project.yml
   PROJECT_CONFIGURATION: project.yml
