@@ -40,14 +40,15 @@
         }
       ],
       "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog", 
       "@semantic-release/exec",
       [
         "@semantic-release/github",
         {
           "assets": [
             {
-              "path": "dist/release-jekyll_website.zip",
-              "label": "Release Report"
+              "path": "dist/release-jekyll_report_website.zip",
+              "label": "Release Jekyll Report Website"
             }
           ]
         }
