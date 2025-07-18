@@ -10,7 +10,6 @@ on:
       - '.github/workflows/*'
     branches:
       - main
-      - test-ci-workflow
 env:
   # we’ll use `yq` to read project.yml
   PROJECT_CONFIGURATION: project.yml
