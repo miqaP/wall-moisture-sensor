@@ -10,9 +10,9 @@ globals:
 outputs:
   - name: "Step"
     comment: "Exports the PCB as a 3D model."
-    type: "step"
+    type: "export_3d"
     dir: "Step"
     options:
+      format: "step"
       download: false
-      download_lcsc: False
-      metric_units: true
+      download_lcsc: false
