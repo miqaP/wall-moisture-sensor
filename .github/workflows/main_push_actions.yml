@@ -1,0 +1,291 @@
+# Action triggered on main branche
+name: Main Actions
+
+on:
+  push:
+    branches:
+      - main
+      - test-ci-workflow-pre
+env:
+  # we’ll use `yq` to read project.yml
+  PROJECT_CONFIGURATION: project.yml
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      project_name: ${{ steps.load.outputs.project_name }}
+      next_version: ${{ steps.get_version.outputs.next_version }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Load project.yml into outputs
+        id: load
+        run: |
+          echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+  reports:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: setup
+    env:
+      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+
+      - name: Run Kibot ERC / DRC
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: erc_drc
+        with:
+          config: ci/preflight_enforce.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: "Setup jq"
+        uses: dcarbone/install-jq-action@v2
+      - name: Parse ERC
+        run: |
+          erc_warnings=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          erc_errors=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/erc_validation.md
+          ### ERC Report
+          - **Errors**: $erc_errors
+          - **Warnings**: $erc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
+          EOF
+      - name: Parse DRC
+        run: |
+          drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          drc_errors=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/drc_validation.md
+          ### DRC Report
+          - **Errors**: $drc_errors
+          - **Warnings**: $drc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
+          EOF
+
+      - name: Move template to root
+        run: |
+          ls -l
+          mkdir template
+          cp ci/template/* template/
+          ls -l template
+
+      - name: Kibot generate report
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/report.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Kibot generate Dark PCBPrint
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/pcb_print_dark.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Kibot generate Light PCBPrint
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/pcb_print_light.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Kibot generate step file
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/3d_step_file.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: output
+  renders:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: [setup]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    strategy:
+      matrix:
+        include:
+          - name: 3d_top_angled
+            file: ci/3d_render_top_angled_lowres.kibot.yaml
+          - name: 3d_top
+            file: ci/3d_render_top_lowres.kibot.yaml
+          - name: 3d_bottom
+            file: ci/3d_render_bottom_lowres.kibot.yaml
+          - name: step
+            file: ci/3d_step_file.kibot.yaml
+            
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 1
+
+      - name: Run ${{ matrix.name }}
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ${{ matrix.file }}
+          dir: output/${{ matrix.name }}
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Upload ${{ matrix.name }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: output/${{ matrix.name }}
+
+  buildJekyll:
+    runs-on: ubuntu-latest
+    needs:
+      [
+        setup,
+        reports,
+        renders,
+      ]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: output
+      - name: Move artifact files
+        run: |
+          ls -l
+          ls -l output
+          ls -l output/3d_top_angled
+          ls -l output/3d_top
+          ls -l output/3d_bottom
+          ls -l output/reports
+          ls -l output/step
+          find .
+          mkdir export
+          mkdir html
+          mkdir images
+          mkdir documents
+          mkdir KiRiDark
+          mkdir KiRiLight
+          mv output/reports/drc_validation.md ./
+          mv output/reports/erc_validation.md ./
+          mv output/reports/${{ env.PROJECT_NAME }}-drc.html ./
+          mv output/reports/${{ env.PROJECT_NAME }}-erc.html ./
+          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}-3D.step
+          mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt ./report.md
+          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top.png
+          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_bottom.png
+          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top_angled.png
+          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}-ibom.html
+          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}-bom.html
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
+          mv output/reports//PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
+          mv output/reports//PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/reports/KiRiDark ./ || true
+          mv output/reports/KiRiLight ./ || true
+          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-JLCPCB.zip
+          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_jlc.csv
+          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
+          cp export/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-Eurocircuits.zip
+          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
+          cp export/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_Eurocircuits.csv
+          rm -rf output
+          ls -l
+          ls -l export
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+
+      - name: Install dependencies
+        run: |
+          gem install bundler --user-install
+          export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+          bundle config set path 'vendor/bundle'
+          bundle install
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+      - name: Move KiRi files directly to site
+        run: |
+          ls -l
+          sudo chown -R $USER:$USER ./_site/
+          cp -r ./KiRiDark ./_site/ || true
+          cp -r ./KiRiLight ./_site/ || true
+          find .
+      - name: Upload Site Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site/
+
+  semanticRelease:
+    runs-on: ubuntu-latest
+    needs: buildJekyll
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download Site Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site
+      - name: Zip website
+        run: |
+          mkdir dist
+          zip -r dist/release-jekyll_report_website.zip ./_site
+
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: semantic-release:*
+        run: |
+          ls -la dist
+          npx semantic-release
