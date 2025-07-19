@@ -115,15 +115,6 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-      - name: Kibot generate step file
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/3d_step_file.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
@@ -231,15 +222,20 @@ jobs:
         with:
           ruby-version: 3.1
 
+      - name: Checkout Jekyll site repository
+        uses: actions/checkout@v3
+        with:
+          repository: miqaP/kicad-jekyll-report
+          path: kicad-jekyll-report
       - name: Install dependencies
         run: |
-          gem install bundler --user-install
-          export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
-          bundle config set path 'vendor/bundle'
-          bundle install
-
+            gem install bundler --user-install
+            export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+            bundle config set --local path 'vendor/bundle'
+            BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle install
       - name: Build Jekyll site
-        run: bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+        run: BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+
       - name: Move KiRi files directly to site
         run: |
           ls -l

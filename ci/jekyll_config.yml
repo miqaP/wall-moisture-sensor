@@ -20,7 +20,7 @@ just_the_docs:
   search_enabled: true                  # Enable search
   heading_anchors: true                 # Add anchor links to headings
   aux_links:
-    GitHub Repository: https://github.com/your-username/wall-moisture
+    GitHub Repository: https://github.com/miqap/wall-moisture
 
 
 # Below file names are hardcode and are dependent to the github action configuration

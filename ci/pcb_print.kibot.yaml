@@ -67,8 +67,9 @@ outputs:
           layers:
             - layer: B.Cu
             - layer: Edge.Cuts
+            - layer: F.Fab
               color: "@FOREGROUND_COLOR@"
-        - title: "Top (Component Dimensions)"
+        - title: "Layer 4 (Component Dimensions)"
           scaling: 1.3
           sketch_pads_on_fab_layers: true
           colored_holes: true

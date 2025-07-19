@@ -213,8 +213,6 @@ outputs:
     options:
       background_color: '#000000'
       keep_generated: true
-      max_commits: 3
-      revision: 'HEAD'
       zones: 'global'
     layers: all
   - name: 'Kiri Light'
@@ -223,8 +221,6 @@ outputs:
     dir: 'KiRiLight'
     options:
       keep_generated: true
-      max_commits: 3
-      revision: 'HEAD'
       zones: 'global'
     layers: all
   - name: "Markdown components table"
