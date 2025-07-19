@@ -143,7 +143,7 @@ jobs:
           - name: 3d_bottom
             file: ci/3d_render_bottom_lowres.kibot.yaml
           - name: step
-            file: ci/3d_step_file_lowres.kibot.yaml
+            file: ci/3d_step_file.kibot.yaml
             # …and so on for each config…
     steps:
       - uses: actions/checkout@v4
