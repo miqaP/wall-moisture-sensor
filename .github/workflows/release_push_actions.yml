@@ -206,6 +206,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: output
+      - name: Checkout Jekyll site repository
+        uses: actions/checkout@v3
+        with:
+          repository: miqaP/kicad-jekyll-report
+          path: kicad-jekyll-report
+
       - name: Move artifact files
         run: |
           ls -l
@@ -222,12 +228,12 @@ jobs:
           mkdir documents
           mkdir KiRiDark
           mkdir KiRiLight
-          mv output/reports/drc_validation.md ./
-          mv output/reports/erc_validation.md ./
+          mv output/reports/drc_validation.md kicad-jekyll-report/
+          mv output/reports/erc_validation.md kicad-jekyll-report/
           mv output/reports/${{ env.PROJECT_NAME }}-drc.html ./
           mv output/reports/${{ env.PROJECT_NAME }}-erc.html ./
           mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}-3D.step
-          mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt ./report.md
+          mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
           mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top.png
           mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_bottom.png
           mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top_angled.png
@@ -253,12 +259,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
-
-      - name: Checkout Jekyll site repository
-        uses: actions/checkout@v3
-        with:
-          repository: miqaP/kicad-jekyll-report
-          path: kicad-jekyll-report
       - name: Install dependencies
         run: |
             gem install bundler --user-install
