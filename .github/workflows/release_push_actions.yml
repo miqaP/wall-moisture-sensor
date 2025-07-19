@@ -143,15 +143,6 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-      - name: Kibot generate step file
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/3d_step_file.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:

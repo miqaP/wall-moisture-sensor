@@ -222,22 +222,20 @@ jobs:
         with:
           ruby-version: 3.1
 
-            # Checkout the Jekyll site repo into a subdirectory
       - name: Checkout Jekyll site repository
         uses: actions/checkout@v3
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
-
       - name: Install dependencies
         run: |
             gem install bundler --user-install
             export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
             bundle config set --local path 'vendor/bundle'
             BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle install
-
       - name: Build Jekyll site
         run: BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+
       - name: Move KiRi files directly to site
         run: |
           ls -l
