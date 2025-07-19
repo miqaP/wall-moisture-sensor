@@ -6,6 +6,9 @@ on:
     branches:
       - main
       - test-ci-workflow-pre
+  pull_request:
+    branches:
+      - test-ci-workflow-pre
 env:
   # we’ll use `yq` to read project.yml
   PROJECT_CONFIGURATION: project.yml
@@ -46,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0 # Required by KiRi output in order to get information about all commits
 
 
       - name: Run Kibot ERC / DRC
@@ -170,15 +173,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
           path: output
       - name: Checkout Jekyll site repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
+          fetch-depth: 1
 
       - name: Move artifact files
         run: |
@@ -189,40 +195,37 @@ jobs:
           ls -l output/3d_bottom
           ls -l output/reports
           ls -l output/step
-          find .
-          mkdir export
-          mkdir html
-          mkdir images
-          mkdir documents
-          mkdir KiRiDark
-          mkdir KiRiLight
+          echo "Here 1"
+          mkdir -p kicad-jekyll-report/{export,html,images,documents}
           mv output/reports/drc_validation.md kicad-jekyll-report/
           mv output/reports/erc_validation.md kicad-jekyll-report/
-          mv output/reports/${{ env.PROJECT_NAME }}-drc.html ./
-          mv output/reports/${{ env.PROJECT_NAME }}-erc.html ./
-          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step ./${{ env.PROJECT_NAME }}-3D.step
           mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
-          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top.png
-          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_bottom.png
-          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png images/${{ env.PROJECT_NAME }}-3d_top_angled.png
-          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html export/${{ env.PROJECT_NAME }}-ibom.html
-          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html export/${{ env.PROJECT_NAME }}-bom.html
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
-          mv output/reports//PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
-          mv output/reports//PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
-          mv output/reports/KiRiDark ./ || true
-          mv output/reports/KiRiLight ./ || true
-          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-JLCPCB.zip
-          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_jlc.csv
-          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
-          cp export/${{ env.PROJECT_NAME }}-JLCPCB.zip export/${{ env.PROJECT_NAME }}-Eurocircuits.zip
-          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
-          cp export/${{ env.PROJECT_NAME }}_cpl_jlc.csv export/${{ env.PROJECT_NAME }}_cpl_Eurocircuits.csv
+          mv output/reports/${{ env.PROJECT_NAME }}-drc.html kicad-jekyll-report/
+          mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
+          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3D.step
+          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top.png
+          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_bottom.png
+          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top_angled.png
+          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-ibom.html
+          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom.html
+          echo "Here 2"
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
+          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
+          mv output/reports/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
+          mv output/reports/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/reports/KiRiDark kicad-jekyll-report/ || true
+          mv output/reports/KiRiLight kicad-jekyll-report/ || true
+          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-JLCPCB.zip
+          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_jlc.csv
+          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlc.csv
+          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-Eurocircuits.zip
+          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_Eurocircuits.csv
+          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_Eurocircuits.csv
+          echo "Here 3"
           rm -rf output
           ls -l
-          ls -l export
+          ls -l kicad-jekyll-report
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -231,20 +234,16 @@ jobs:
 
       - name: Install dependencies
         run: |
+            cd kicad-jekyll-report
             gem install bundler --user-install
             export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
             bundle config set --local path 'vendor/bundle'
-            BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle install
+            bundle install
       - name: Build Jekyll site
-        run: BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
-
-      - name: Move KiRi files directly to site
         run: |
-          ls -l
-          sudo chown -R $USER:$USER ./_site/
-          cp -r ./KiRiDark ./_site/ || true
-          cp -r ./KiRiLight ./_site/ || true
-          find .
+            cd kicad-jekyll-report
+            bundle exec jekyll build --config ../ci/jekyll_config.yml,../project.yml --source . --destination ../_site --future
+
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -277,13 +276,10 @@ jobs:
           mkdir dist
           zip -r dist/release-jekyll_report_website.zip ./_site
 
-
       - name: Install dependencies
         run: npm ci
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEBUG: semantic-release:*
         run: |
-          ls -la dist
           npx semantic-release
