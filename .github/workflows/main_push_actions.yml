@@ -6,9 +6,6 @@ on:
     branches:
       - main
       - test-ci-workflow-pre
-  pull_request:
-    branches:
-      - test-ci-workflow-pre
 env:
   # we’ll use `yq` to read project.yml
   PROJECT_CONFIGURATION: project.yml
@@ -37,6 +34,22 @@ jobs:
         id: load
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get semantic-release version (dry-run)
+        id: get_version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(npx semantic-release --dry-run --no-ci  | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          echo $VERSION
+          echo "next_version=$VERSION" >> $GITHUB_OUTPUT
 
   reports:
     runs-on: ubuntu-latest
