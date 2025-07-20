@@ -142,6 +142,7 @@ jobs:
         with:
           name: reports
           path: output
+          include-hidden-files: true
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
