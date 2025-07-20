@@ -1,5 +1,5 @@
 # Action triggered on main branche
-name: Main Actions
+name: Main PR Actions
 
 on:
   pull_request:
