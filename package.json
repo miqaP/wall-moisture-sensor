@@ -49,8 +49,22 @@
           ]
         }
       ],
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
+        [
+        "@semantic-release/release-notes-generator", {
+          "preset": "angular",
+          "presetConfig": {
+            "types": [
+              { "type": "feature", "section": "✨ Features", "hidden": false },
+              { "type": "design", "section": "🎨 Design", "hidden": false },
+              { "type": "silk", "section": "🧵 Silk Layer", "hidden": false },
+              { "type": "bom", "section": "📦 BOM", "hidden": false },
+              { "type": "ci", "section": "⚙️ CI", "hidden": false },
+              { "type": "chore", "section": "🔧 Chore", "hidden": false },
+              { "type": "docs", "section": "📝 Docs", "hidden": false }
+            ]
+          }
+        }
+      ],
       "@semantic-release/exec",
       [
         "@semantic-release/github",
