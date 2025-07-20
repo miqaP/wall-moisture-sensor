@@ -231,7 +231,6 @@ jobs:
         with:
           ruby-version: 3.1
 
-
       - name: Install dependencies
         run: |
             cd kicad-jekyll-report
@@ -242,7 +241,7 @@ jobs:
       - name: Build Jekyll site
         run: |
             cd kicad-jekyll-report
-            bundle exec jekyll build --config ../ci/jekyll_config.yml,../project.yml --source . --destination ../_site --future
+            bundle exec jekyll build --config _config.yml,../project.yml --source . --destination ../_site --future
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4

@@ -261,12 +261,15 @@ jobs:
           ruby-version: 3.1
       - name: Install dependencies
         run: |
+            cd kicad-jekyll-report
             gem install bundler --user-install
             export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
             bundle config set --local path 'vendor/bundle'
-            BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle install
+            bundle install
       - name: Build Jekyll site
-        run: BUNDLE_GEMFILE=kicad-jekyll-report/Gemfile bundle exec jekyll build --config ci/jekyll_config.yml,project.yml --source . --destination ./_site --future
+        run: |
+          cd kicad-jekyll-report
+          bundle exec jekyll build --config _config.yml,../project.yml --source . --destination ./_site --future
 
       - name: Move KiRi files directly to site
         run: |

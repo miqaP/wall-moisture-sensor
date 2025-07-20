@@ -1,5 +1,16 @@
+# Jekyll configuration / customisation
+title: WallMoisture (Jekyll configuration)
+description: >- 
+  Some Description to write (Jekyll configuration)
+
+just_the_docs:
+  aux_links:
+    GitHub Repository: https://github.com/miqap/wall-moisture
+
 project: 
   name: wall_moisture-hardware
   title: Wall Moisture monitoring device
   description: >-
     Monitor the wall moisture 
+
+  manufacturers: ["JLCPCB", "Eurocircuits"]
