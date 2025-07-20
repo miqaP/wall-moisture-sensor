@@ -112,6 +112,14 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+          
+      - name: Print some KiRi files
+        run: |
+          ls -al output
+          ls -al output/kiri-dark
+          ls -al output/kiri-dark/2268276
+          ls -al output/kiri-dark/2268276/_KIRI_/pcb
+
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
         with:
@@ -134,6 +142,7 @@ jobs:
         with:
           name: reports
           path: output
+          include-hidden-files: true
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -196,7 +205,6 @@ jobs:
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
-          ref: dev
           fetch-depth: 1
 
       - name: Move artifact files
@@ -238,6 +246,7 @@ jobs:
           rm -rf output
           ls -l
           ls -l kicad-jekyll-report
+          ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -251,9 +260,12 @@ jobs:
             bundle install
       - name: Build Jekyll site
         run: |
+            ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
             cd kicad-jekyll-report
+            cat _config.yml
             echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
             bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
+            ls -al ../_site/kiri-dark/2268276/_KIRI_/pcb
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
