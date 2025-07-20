@@ -209,7 +209,7 @@ outputs:
   - name: 'Kiri Dark'
     comment: 'Generates a dark version of an interactive web page to browse the schematic and/or PCB differences between git commits.'
     type: 'kiri'
-    dir: 'KiRiDark'
+    dir: 'kiri-dark'
     options:
       background_color: '#000000'
       keep_generated: true
@@ -218,7 +218,7 @@ outputs:
   - name: 'Kiri Light'
     comment: 'Generates a light version of an interactive web page to browse the schematic and/or PCB differences between git commits.'
     type: 'kiri'
-    dir: 'KiRiLight'
+    dir: 'kiri-light'
     options:
       keep_generated: true
       zones: 'global'
