@@ -268,7 +268,7 @@ jobs:
         run: |
           cd kicad-jekyll-report
           echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
-          bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ./_site --future
+          bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
 
       - name: Move KiRi files directly to site
         run: |
