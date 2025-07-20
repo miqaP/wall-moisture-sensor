@@ -115,6 +115,9 @@ jobs:
           
       - name: Print some KiRi files
         run: |
+          ls -al output
+          ls -al output/reports/
+          ls -al output/reports/kiri-dark
           ls -al output/reports/kiri-dark/2268276
           ls -al output/reports/kiri-dark/2268276/_KIRI_/pcb
 
