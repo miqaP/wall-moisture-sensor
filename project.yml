@@ -1,7 +1,8 @@
 # Jekyll configuration / customisation
-title: WallMoisture (Jekyll configuration)
-description: >- 
-  Some Description to write (Jekyll configuration)
+title: &project_title WallMoisture 
+description: &project_descriptions >- 
+  Monitor wall moisture using capacitive sensors.
+The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
 
 just_the_docs:
   aux_links:
@@ -9,8 +10,8 @@ just_the_docs:
 
 project: 
   name: wall_moisture-hardware
-  title: Wall Moisture monitoring device
-  description: >-
-    Monitor the wall moisture 
+  title: *project_title
+  description: *project_description
+    
 
   manufacturers: ["JLCPCB", "Eurocircuits"]
