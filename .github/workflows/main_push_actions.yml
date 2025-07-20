@@ -16,8 +16,6 @@ permissions:
   issues: write
   id-token: write
 
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -28,7 +26,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0  # required for semantic-release to see tags
 
       - name: Load project.yml into outputs
         id: load
@@ -47,7 +45,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION=$(npx semantic-release --dry-run --no-ci  | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+          VERSION=$(npx semantic-release --dry-run --no-ci | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
           echo $VERSION
           echo "next_version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -56,7 +54,6 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
     env:
-      KIBOT_3D_MODELS: ${{ github.workspace }}/libraries/3d
       PROJECT_NAME: ${{needs.setup.outputs.project_name }}
 
     steps:
@@ -142,6 +139,7 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: [setup]
     env:
+      KIBOT_3D_MODELS: ${{ github.workspace }}/libraries/3d
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
     strategy:
       matrix:
@@ -154,7 +152,6 @@ jobs:
             file: ci/3d_render_bottom_lowres.kibot.yaml
           - name: step
             file: ci/3d_step_file.kibot.yaml
-            
     steps:
       - uses: actions/checkout@v4
         with: 
@@ -211,7 +208,6 @@ jobs:
           ls -l output/3d_bottom
           ls -l output/reports
           ls -l output/step
-          echo "Here 1"
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
           mv output/reports/drc_validation.md kicad-jekyll-report/
           mv output/reports/erc_validation.md kicad-jekyll-report/
@@ -224,7 +220,6 @@ jobs:
           mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top_angled.png
           mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-ibom.html
           mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom.html
-          echo "Here 2"
           mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
           mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
           mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
@@ -238,7 +233,6 @@ jobs:
           mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_eurocircuits.csv
           cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-eurocircuits.zip
           cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_eurocircuits.csv
-          echo "Here 3"
           rm -rf output
           ls -l
           ls -l kicad-jekyll-report
@@ -246,7 +240,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.1
-
       - name: Install dependencies
         run: |
             cd kicad-jekyll-report
