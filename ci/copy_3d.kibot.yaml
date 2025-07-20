@@ -1,0 +1,13 @@
+# Example KiBot config file
+kibot:
+  version: 1
+
+outputs:
+  - name: export_pcb
+    comment: 'Copy 3D models'
+    type: copy_files
+    dir: 'libraries'
+    options:
+      files:
+        - source_type: 3d_models
+          dest: 3d+
