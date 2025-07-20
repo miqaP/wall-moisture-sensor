@@ -1,5 +1,17 @@
+# Jekyll configuration / customisation
+title: &project_title WallMoisture 
+description: &project_description >- 
+  Monitor wall moisture using capacitive sensors.
+  The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
+
+just_the_docs:
+  aux_links:
+    GitHub Repository: https://github.com/miqap/wall-moisture
+
 project: 
   name: wall_moisture-hardware
-  title: 4-Channel LED Driver with PWM dimming
-  description: >-
-    4 Channel LED Driver with PWM dimming input. LED2001PHR is the driver IC…
+  title: *project_title
+  description: *project_description
+    
+
+  manufacturers: ["JLCPCB", "Eurocircuits"]

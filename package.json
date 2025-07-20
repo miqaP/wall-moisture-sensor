@@ -9,12 +9,22 @@
     "@semantic-release/commit-analyzer": "^13.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^11.0.3"
+    "@semantic-release/github": "^11.0.3",
+    "@semantic-release/release-notes-generator": "^14.0.3",
+    "semantic-release": "^24.2.7"
   },
   "release": {
     "branches": [
       "release",
-      "test-ci-workflow"
+      "test-ci-workflow",
+      {
+        "name": "main",
+        "prerelease": true
+      },
+      {
+        "name": "test-ci-workflow-pre",
+        "prerelease": true
+      }
     ],
     "plugins": [
       [
@@ -40,15 +50,58 @@
           ]
         }
       ],
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feature",
+                "section": "✨ Features",
+                "hidden": false
+              },
+              {
+                "type": "design",
+                "section": "🎨 Design",
+                "hidden": false
+              },
+              {
+                "type": "silk",
+                "section": "🧵 Silk Layer",
+                "hidden": false
+              },
+              {
+                "type": "bom",
+                "section": "📦 BOM",
+                "hidden": false
+              },
+              {
+                "type": "ci",
+                "section": "⚙️ CI",
+                "hidden": false
+              },
+              {
+                "type": "chore",
+                "section": "🔧 Chore",
+                "hidden": false
+              },
+              {
+                "type": "docs",
+                "section": "📝 Docs",
+                "hidden": false
+              }
+            ]
+          }
+        }
+      ],
       "@semantic-release/exec",
       [
         "@semantic-release/github",
         {
           "assets": [
             {
-              "path": "dist/release-jekyll_report_website.zip",
+              "path": "dist/release-jekyll_report_website-*.zip",
               "label": "Release Jekyll Report Website"
             }
           ]
