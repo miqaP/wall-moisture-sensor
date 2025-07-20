@@ -116,10 +116,9 @@ jobs:
       - name: Print some KiRi files
         run: |
           ls -al output
-          ls -al output/report/
-          ls -al output/report/kiri-dark
-          ls -al output/report/kiri-dark/2268276
-          ls -al output/report/kiri-dark/2268276/_KIRI_/pcb
+          ls -al output/kiri-dark
+          ls -al output/kiri-dark/2268276
+          ls -al output/kiri-dark/2268276/_KIRI_/pcb
 
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
