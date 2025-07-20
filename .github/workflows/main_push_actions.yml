@@ -196,7 +196,6 @@ jobs:
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
-          ref: dev
           fetch-depth: 1
 
       - name: Move artifact files
@@ -251,9 +250,12 @@ jobs:
             bundle install
       - name: Build Jekyll site
         run: |
+            ls -l kicad-jekyll-report/kiri-dark/*
             cd kicad-jekyll-report
+            cat _config.yml
             echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
             bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
+            ls -l ../_site/kiri-dark/*
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
