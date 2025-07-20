@@ -145,7 +145,7 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: [setup]
     env:
-      KIBOT_3D_MODELS: ${{ github.workspace }}/libraries/3d
+      KICAD9_3DMODEL_DIR: ${{ github.workspace }}/libraries/3d
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
       NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     strategy:
