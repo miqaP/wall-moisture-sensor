@@ -217,11 +217,11 @@ jobs:
           mv output/reports/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
           mv output/reports/KiRiDark kicad-jekyll-report/ || true
           mv output/reports/KiRiLight kicad-jekyll-report/ || true
-          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-JLCPCB.zip
+          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
           mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_jlcpcb.csv
           mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv
-          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-eurocircuits.zip
           mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_eurocircuits.csv
+          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-eurocircuits.zip
           cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_eurocircuits.csv
           echo "Here 3"
           rm -rf output

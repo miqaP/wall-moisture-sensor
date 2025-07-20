@@ -29,7 +29,7 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "preset": "angular",
+          "preset": "conventionalcommits",
           "releaseRules": [
             {
               "type": "feature",
@@ -49,7 +49,7 @@
           ]
         }
       ],
-        [
+      [
         "@semantic-release/release-notes-generator", {
           "preset": "conventionalcommits",
           "presetConfig": {
