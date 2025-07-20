@@ -71,7 +71,7 @@
         {
           "assets": [
             {
-              "path": "dist/release-jekyll_report_website.zip",
+              "path": "dist/release-jekyll_report_website-*.zip",
               "label": "Release Jekyll Report Website"
             }
           ]

@@ -62,7 +62,7 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
     env:
-      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+      PROJECT_NAME: ${{needs.setup.outputs.project_name}}
       NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
@@ -199,6 +199,7 @@ jobs:
       ]
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -269,7 +270,8 @@ jobs:
       - name: Build Jekyll site
         run: |
           cd kicad-jekyll-report
-          bundle exec jekyll build --config _config.yml,../project.yml --source . --destination ./_site --future
+          echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
+          bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ./_site --future
 
       - name: Move KiRi files directly to site
         run: |
@@ -289,6 +291,7 @@ jobs:
     needs: buildJekyll
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - uses: actions/checkout@v4
@@ -308,7 +311,7 @@ jobs:
       - name: Zip website
         run: |
           mkdir dist
-          zip -r dist/release-jekyll_report_website.zip ./_site
+          zip -r dist/release-jekyll_report_website-"${NEXT_VERSION}".zip ./_site
 
 
       - name: Install dependencies
