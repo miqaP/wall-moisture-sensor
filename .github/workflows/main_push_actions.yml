@@ -110,7 +110,7 @@ jobs:
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 3
+          verbose: 1
 
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
