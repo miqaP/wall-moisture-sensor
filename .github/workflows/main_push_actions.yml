@@ -208,6 +208,8 @@ jobs:
           ls -l output/3d_bottom
           ls -l output/reports
           ls -l output/step
+          ls -l output/reports/kiri-dark 
+          ls -l output/reports/kiri-light 
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
           mv output/reports/drc_validation.md kicad-jekyll-report/
           mv output/reports/erc_validation.md kicad-jekyll-report/
