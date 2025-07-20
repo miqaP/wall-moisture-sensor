@@ -1237,7 +1237,7 @@
 			(uuid "524e6069-f15a-451b-a389-84d26421210c")
 		)
 		(embedded_fonts no)
-		(model "${KICAD9_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_2012-2Pin_2.0x1.2mm.step"
+		(model "${KICAD9_3DMODEL_DIR}/Crystal.3dshapes/Crystal_SMD_MicroCrystal_CC8V-T1A-2Pin_2.0x1.2mm.step"
 			(offset
 				(xyz 0 0 0)
 			)
