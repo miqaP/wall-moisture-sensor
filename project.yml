@@ -1,8 +1,8 @@
 # Jekyll configuration / customisation
 title: &project_title WallMoisture 
-description: &project_descriptions >- 
+description: &project_description >- 
   Monitor wall moisture using capacitive sensors.
-The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
+  The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
 
 just_the_docs:
   aux_links:
