@@ -269,6 +269,7 @@ jobs:
         with:
           name: jekyll-site
           path: ./_site/
+          include-hidden-files: true
 
   semanticRelease:
     runs-on: ubuntu-latest
