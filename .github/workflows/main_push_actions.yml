@@ -237,6 +237,7 @@ jobs:
           rm -rf output
           ls -l
           ls -l kicad-jekyll-report
+          ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -250,12 +251,12 @@ jobs:
             bundle install
       - name: Build Jekyll site
         run: |
-            ls -l kicad-jekyll-report/kiri-dark/*
+            ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
             cd kicad-jekyll-report
             cat _config.yml
             echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
             bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
-            ls -l ../_site/kiri-dark/*
+            ls -al ../_site/kiri-dark/2268276/_KIRI_/pcb
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
