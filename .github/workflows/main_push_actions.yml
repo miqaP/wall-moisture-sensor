@@ -112,6 +112,12 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+          
+      - name: Print some KiRi files
+        run: |
+          ls -al output/reports/kiri-dark/2268276
+          ls -al output/reports/kiri-dark/2268276/_KIRI_/pcb
+
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
         with:
