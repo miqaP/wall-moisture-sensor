@@ -51,7 +51,7 @@
       ],
         [
         "@semantic-release/release-notes-generator", {
-          "preset": "angular",
+          "preset": "conventionalcommits",
           "presetConfig": {
             "types": [
               { "type": "feature", "section": "✨ Features", "hidden": false },
