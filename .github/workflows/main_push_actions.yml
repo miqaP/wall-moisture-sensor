@@ -73,6 +73,16 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+      - name: Run Kibot BoM sanatize
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: sanatize_bom
+        with:
+          config: ci/sanatize_bom.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
       - name: "Setup jq"
         uses: dcarbone/install-jq-action@v2
       - name: Parse ERC
