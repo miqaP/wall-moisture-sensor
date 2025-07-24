@@ -231,6 +231,7 @@ jobs:
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
+          ref: dev
           fetch-depth: 1
 
       - name: Move artifact files
