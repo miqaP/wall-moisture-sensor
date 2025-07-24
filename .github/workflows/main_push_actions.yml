@@ -120,6 +120,10 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
+      # This _local_ commit broke the KiRi, this step removes it
+      - name: Clean KiRi commits
+        run: |
+          find output/kiri-* -type f -name commits -exec sed -i '/^_local_|/d' {} + || true
 
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
@@ -137,13 +141,6 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-
-      # This _local_ commit broke the KiRi, this step removes it
-      - name: Clean KiRi commits
-        run: |
-          ls output -al 
-          ls output/reports -al || true
-          find output/kiri-* -type f -name commits -exec sed -i '/^_local_|/d' {} +
 
       - name: Upload reports
         uses: actions/upload-artifact@v4
