@@ -10,7 +10,6 @@ outputs:
   - name: blender_3d_bottom
     comment: "HQ 3D Render of the PCB"
     type: blender_export
-    dir: renders
     options:
       outputs:
         - type: render

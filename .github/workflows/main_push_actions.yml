@@ -153,7 +153,7 @@ jobs:
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ci/manufacturing/jlcpcb.kibot.yaml
-          dir: output/manufacturing
+          dir: manufacturing
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
@@ -163,6 +163,13 @@ jobs:
         with:
           name: reports
           path: output
+          include-hidden-files: true
+
+      - name: Upload manufacturing
+        uses: actions/upload-artifact@v4
+        with:
+          name: manufacturing
+          path: manufacturing
           include-hidden-files: true
   renders:
     runs-on: ubuntu-latest
@@ -233,7 +240,9 @@ jobs:
         run: |
           ls -l
           ls -l output
-          ls -l output/renders
+          ls -l output/manufacturing
+          ls -l output/manufacturing/** || true
+          ls -l output/3d_*
           ls -l output/reports/kiri-dark 
           ls -l output/reports/kiri-light 
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
@@ -242,16 +251,16 @@ jobs:
           mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
           mv output/reports/${{ env.PROJECT_NAME }}-drc.html kicad-jekyll-report/
           mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
-          mv output/renders/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
-          mv output/renders/*.png kicad-jekyll-report/images/
+          mv output/step/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
+          find output/3d_*/ -type f -name "*.png" -exec mv {} kicad-jekyll-report/images/ \;
           mv output/reports/bom/* kicad-jekyll-report/export/
           mv output/reports/schematic/* kicad-jekyll-report/documents/
           mv output/reports/layout/* kicad-jekyll-report/documents/
           mv output/reports/kiri-dark kicad-jekyll-report/ || true
           mv output/reports/kiri-light kicad-jekyll-report/ || true
           mv output/manufacturing/jlcpcb/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
-          mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
-          mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
+          mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
+          mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
           rm -rf output
           ls -l
           ls -l kicad-jekyll-report

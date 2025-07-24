@@ -64,19 +64,19 @@ outputs:
     dir: jlcpcb/drill
     options:
       pth_and_npth_single_file: false
-      pth_id: "-PTH"
-      npth_id: "-NPTH"
+      pth_id: "pth"
+      npth_id: "npth"
       metric_units: true
       map: gerber
       route_mode_for_oval_holes: false
-      output: "%f%i.%x"
+      output: "%f-%i.%x"
   - name: jlcpcb_pick_place
     comment: "Pick and place file, JLCPCB style"
     type: position
     dir: jlcpcb/pick-and-place
     options:
       variant: rotated
-      output: "%f-cpl.%x"
+      output: "%f-cpl_jlcpcb.%x"
       dnf_filter: _kibom_dnf_Config
       format: CSV
       units: millimeters
@@ -101,7 +101,7 @@ outputs:
     dir: jlcpcb/bom
     options:
       group_fields: ['part', 'part lib', 'value', 'mpn', 'footprint', 'footprint lib', 'voltage', 'tolerance', 'current', 'power']      
-      output: "%f-%i_jlc.%x"
+      output: "%f-%i_jlcpcb.%x"
       exclude_filter: "only_jlc_parts"
       ref_separator: ","
       columns:
@@ -122,6 +122,7 @@ outputs:
     type: compress
     dir: jlcpcb
     options:
+      output: "%f-jlcpcb.%x"
       files:
         - from_output: jlcpcb_gerbers
           dest: /
