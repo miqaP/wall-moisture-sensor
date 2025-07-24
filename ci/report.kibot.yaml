@@ -3,7 +3,7 @@ kibot:
 
 globals:
   resources_dir: resources
-  field_lcsc_part: "LCSC Part"
+  field_lcsc_part: "LCSC"
   solder_mask_color: black
   pcb_finish: ENIG
 
@@ -12,7 +12,7 @@ filters:
     comment: "Only parts with JLC (LCSC Part) code"
     type: generic
     include_only:
-      - column: "LCSC Part"
+      - column: "LCSC"
         regex: '^C\d+'
 
 variants:
@@ -21,6 +21,13 @@ variants:
     type: kibom
     variant: rotated
     pre_transform: _rot_footprint_jlcpcb
+
+
+preflight: 
+  # This is required to allow "extra_fields" in interactive BoM (ibom) output
+  update_xml: 
+    enabled: true
+    as_warnings: false
 
 outputs:
   - name: "report"
@@ -81,6 +88,18 @@ outputs:
         - field: "LCSC"
           name: "LCSC Part #"
       format: "HTML"
+
+  - name: interactive_bom
+    comment: Interactive BOM
+    type: ibom
+    dir: bom
+    options:
+      output: "%f-%i.%x"
+      checkboxes: ' '
+      extra_fields: "MPN,LCSC"
+      include_tracks: true
+      include_nets: true
+
     comment: 'Generates a dark version of an interactive web page to browse the schematic and/or PCB differences between git commits.'
     type: 'kiri'
     dir: 'kiri-dark'
