@@ -7,10 +7,14 @@ globals:
   pcb_finish: ENIG
 
 outputs:
-  - name: _blender_3d_top_angled
+  - name: blender_3d_top_angled
     comment: "HQ 3D Render of the PCB"
     type: blender_export
+    dir: renders
     options:
+      outputs:
+        - type: render
+          output: '%f-3d_top_angled.%x'
       light:
         - name: "light1"
           energy: 2
@@ -96,5 +100,3 @@ outputs:
         rotate_y: 25
         rotate_z: 90
         view: top
-      outputs:
-        - type: render

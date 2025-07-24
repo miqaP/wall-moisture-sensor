@@ -170,7 +170,7 @@ jobs:
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ${{ matrix.file }}
-          dir: output/${{ matrix.name }}
+          dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
@@ -178,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.name }}
-          path: output/${{ matrix.name }}
+          path: output
 
   buildJekyll:
     runs-on: ubuntu-latest
@@ -211,11 +211,7 @@ jobs:
         run: |
           ls -l
           ls -l output
-          ls -l output/3d_top_angled
-          ls -l output/3d_top
-          ls -l output/3d_bottom
-          ls -l output/reports
-          ls -l output/step
+          ls -l output/renders
           ls -l output/reports/kiri-dark 
           ls -l output/reports/kiri-light 
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
@@ -224,17 +220,8 @@ jobs:
           mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
           mv output/reports/${{ env.PROJECT_NAME }}-drc.html kicad-jekyll-report/
           mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
-          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3D.step
-          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top.png
-          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_bottom.png
-          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top_angled.png
-          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-ibom.html
-          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom.html
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
-          mv output/reports/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
-          mv output/reports/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/renders/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
+          mv output/renders/*.png kicad-jekyll-report/images/
           mv output/reports/kiri-dark kicad-jekyll-report/ || true
           mv output/reports/kiri-light kicad-jekyll-report/ || true
           mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip

@@ -7,10 +7,14 @@ globals:
   pcb_finish: ENIG
 
 outputs:
-  - name: _blender_3d_bottom
+  - name: blender_3d_bottom
     comment: "HQ 3D Render of the PCB"
     type: blender_export
+    dir: renders
     options:
+      outputs:
+        - type: render
+          output: '%f-3d_bottom.%x'
       light:
         - name: "light2"
           energy: 13
@@ -47,5 +51,3 @@ outputs:
         rotate_y: 0
         rotate_z: 0
         view: "top" # Bottom doesn't work, use 180 X axis rotation.
-      outputs:
-        - type: render
