@@ -759,5 +759,8 @@
       "Analog frontend"
     ]
   ],
-  "text_variables": {}
+  "text_variables": {
+    "COMPANY": "__COMPANY__",
+    "VERSION": "__VERSION__"
+  }
 }

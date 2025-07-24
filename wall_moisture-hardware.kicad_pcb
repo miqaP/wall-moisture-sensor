@@ -150,6 +150,7 @@
 			(outputdirectory "")
 		)
 	)
+	(property "COMPANY" "__COMPANY__")
 	(property "VERSION" "__VERSION__")
 	(net 0 "")
 	(net 1 "GND")
