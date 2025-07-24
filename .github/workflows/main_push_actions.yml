@@ -233,6 +233,7 @@ jobs:
           mv output/renders/*.png kicad-jekyll-report/images/
           mv output/reports/bom/* kicad-jekyll-report/export/
           mv output/reports/schematic/* kicad-jekyll-report/documents/
+          mv output/reports/layout/* kicad-jekyll-report/documents/
           mv output/reports/kiri-dark kicad-jekyll-report/ || true
           mv output/reports/kiri-light kicad-jekyll-report/ || true
           mv output/manufacturing/jlcpcb/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip

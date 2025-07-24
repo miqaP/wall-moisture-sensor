@@ -12,11 +12,11 @@ globals:
   pcb_finish: ENIG
 
 outputs:
-  - name: "pcb_print"
+  - name: pcb_print
     type: "pcb_print"
-    dir: "PCBPrint@COLOR_SCHEME@"
+    dir: "layout/"
     options:
-      output: "%f-%i%I%v.%x"
+      output: "%f-layout-@COLOR_SCHEME@.%x"
       add_background: true
       background_color: "@BACKGROUND_COLOR@"
       color_theme: "_builtin_default"
