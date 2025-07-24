@@ -6,6 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "${SHEETNAME}")
+		(rev "${VERSION}")
+		(company "${COMPANY}")
 	)
 	(lib_symbols
 		(symbol "symbols:BC847"

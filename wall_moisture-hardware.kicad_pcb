@@ -8,9 +8,9 @@
 	)
 	(paper "A4")
 	(title_block
-		(title "CapacitiveSensore")
-		(rev "0.0.1")
-		(company "EL-CE")
+		(title "Wall Moisture Sensor - WMS1")
+		(rev "${VERSION}")
+		(company "${COMPANY}")
 	)
 	(layers
 		(0 "F.Cu" signal)
@@ -150,6 +150,7 @@
 			(outputdirectory "")
 		)
 	)
+	(property "VERSION" "__VERSION__")
 	(net 0 "")
 	(net 1 "GND")
 	(net 2 "+5V")
