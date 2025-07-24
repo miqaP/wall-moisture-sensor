@@ -1,0 +1,46 @@
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  field_lcsc_part: "lcsc"
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+preflight:
+  check_fields:
+    - field: reference
+      regex: "^.+$"     # Trigger error on empty string
+      severity: error
+      severity_missing: error
+    - field: mpn
+      regex: ".*"     # Maybe empty or not depending the type of component
+      severity_missing: continue
+    - field: value
+      regex: ".*"     # Maybe empty or not depending the type of component
+      severity_missing: continue
+    - field: footprint
+      regex: '.*'
+    - field: description
+      regex: '.*'
+    - field: lcsc
+      regex: '^C\d+'
+      severity: warning
+      severity_missing: warning
+    - field: sim.pins
+      regex: '.*'
+    - field: sim.type
+      regex: '.*'
+    - field: sim.device
+      regex: '.*'
+    - field: sim.name
+      regex: '.*'
+    - field: sim.library
+      regex: '.*'
+    - field: "*"
+      severity_missing: error
+
+# Should also check if this detects when the field doesn't exists
+# see https://github.com/INTI-CMNB/KiBot/issues/774 for checking that no additional field are present
+# Could also add a rule triggered on specific condition that assert JCLC references are populated
+# I don't know how to check the resistor value format

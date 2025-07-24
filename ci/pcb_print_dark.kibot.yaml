@@ -7,4 +7,4 @@ import:
       BACKGROUND_COLOR: "#050505"
       FOREGROUND_COLOR: "#FFFFFF"
       DIM_COLOR: "#202020ee"
-      COLOR_SCHEME: "Dark"
+      COLOR_SCHEME: "dark"
