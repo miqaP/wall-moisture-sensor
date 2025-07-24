@@ -137,6 +137,15 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+      - name: Kibot generate JLCPCB production files
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/manufacturing/jlcpcb.kibot.yaml
+          dir: output/manufacturing
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
@@ -222,14 +231,13 @@ jobs:
           mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
           mv output/renders/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
           mv output/renders/*.png kicad-jekyll-report/images/
+          mv output/reports/bom/* kicad-jekyll-report/export/
+          mv output/reports/schematic/* kicad-jekyll-report/documents/
           mv output/reports/kiri-dark kicad-jekyll-report/ || true
           mv output/reports/kiri-light kicad-jekyll-report/ || true
-          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
-          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_jlcpcb.csv
-          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv
-          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_eurocircuits.csv
-          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-eurocircuits.zip
-          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_eurocircuits.csv
+          mv output/manufacturing/jlcpcb/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
+          mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
+          mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
           rm -rf output
           ls -l
           ls -l kicad-jekyll-report
