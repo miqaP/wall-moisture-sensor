@@ -21,7 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
-      next_version: ${{ steps.get_version.outputs.next_version }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -33,7 +32,7 @@ jobs:
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
-  reports:
+  checks:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
@@ -46,111 +45,56 @@ jobs:
         with:
           fetch-depth: 1
 
-
-      - name: Run Kibot ERC / DRC
+      - name: Run Kibot ERC (schematic)
         uses: INTI-CMNB/KiBot@v2_k9
-        id: erc_drc
+        id: erc
+        continue-on-error: true
         with:
-          config: ci/preflight_enforce.kibot.yaml
+          config: ci/preflight_erc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Run Kibot DRC (layout)
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: drc
+        continue-on-error: true
+        with:
+          config: ci/preflight_drc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+         
+      - name: Run Kibot BoM sanatize
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: sanatize_bom
+        continue-on-error: true
+        with:
+          config: ci/sanatize_bom.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-      - name: "Setup jq"
-        uses: dcarbone/install-jq-action@v2
-      - name: Parse ERC
+      - name: Fail if any Kibot step failed
+        if: |
+          steps.erc.outcome == 'failure' ||
+          steps.drc.outcome == 'failure'
         run: |
-          erc_warnings=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
-          erc_errors=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "error")] | length')
-          cat <<EOF > output/erc_validation.md
-          ### ERC Report
-          - **Errors**: $erc_errors
-          - **Warnings**: $erc_warnings
-          - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
-          EOF
-      - name: Parse DRC
-        run: |
-          drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
-          drc_errors=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "error")] | length')
-          cat <<EOF > output/drc_validation.md
-          ### DRC Report
-          - **Errors**: $drc_errors
-          - **Warnings**: $drc_warnings
-          - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
-          EOF
+          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
+            echo "❌ ERC Step : Failed"
+          fi
+          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
+            echo "❌ DRC Step : Failed"
+          fi
+          if [ "${{ steps.sanatize_bom.outcome }}" = "failure" ]; then
+            echo "❌ Sanatize BoM Step : Failed"
+          fi
+          exit 1
 
-      - name: Move template to root
-        run: |
-          ls -l
-          mkdir template
-          cp ci/template/* template/
-          ls -l template
-
-      - name: Kibot generate report
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/report.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
-      - name: Kibot generate Dark PCBPrint
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/pcb_print_dark.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-      - name: Kibot generate Light PCBPrint
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ci/pcb_print_light.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
-      - name: Upload reports
+      - name: Upload checks
         uses: actions/upload-artifact@v4
         with:
-          name: reports
+          name: Preflight checks
           path: output
-  renders:
-    runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
-    needs: [setup]
-    env:
-      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
-    strategy:
-      matrix:
-        include:
-          - name: 3d_top_angled
-            file: ci/3d_render_top_angled_lowres.kibot.yaml
-          - name: 3d_top
-            file: ci/3d_render_top_lowres.kibot.yaml
-          - name: 3d_bottom
-            file: ci/3d_render_bottom_lowres.kibot.yaml
-          - name: step
-            file: ci/3d_step_file.kibot.yaml
-            # …and so on for each config…
-    steps:
-      - uses: actions/checkout@v4
-        with: 
-          fetch-depth: 1
-
-      - name: Run ${{ matrix.name }}
-        uses: INTI-CMNB/KiBot@v2_k9
-        with:
-          config: ${{ matrix.file }}
-          dir: output/${{ matrix.name }}
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-      - name: Upload ${{ matrix.name }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.name }}
-          path: output/${{ matrix.name }}

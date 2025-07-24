@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
+      company_name: ${{ steps.load.outputs.company_name }}
       next_version: ${{ steps.get_version.outputs.next_version }}
     steps:
       - name: Check out repository
@@ -32,6 +33,7 @@ jobs:
         id: load
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "company_name=$(yq e '.project.company' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -54,7 +56,9 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
     env:
-      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      COMPANY_NAME: ${{ needs.setup.outputs.company_name }}
+      NEXT_VERSION: ${{ needs.setup.outputs.next_version }}
 
     steps:
       - name: Checkout
@@ -62,6 +66,10 @@ jobs:
         with:
           fetch-depth: 0 # Required by KiRi output in order to get information about all commits
 
+      - name: Substitute text variables in layout and schematic
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
 
       - name: Run Kibot ERC / DRC
         uses: INTI-CMNB/KiBot@v2_k9
@@ -112,14 +120,6 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
-          
-      - name: Print some KiRi files
-        run: |
-          ls -al output
-          ls -al output/kiri-dark
-          ls -al output/kiri-dark/2268276
-          ls -al output/kiri-dark/2268276/_KIRI_/pcb
-
       - name: Kibot generate Dark PCBPrint
         uses: INTI-CMNB/KiBot@v2_k9
         with:
@@ -143,6 +143,20 @@ jobs:
           name: reports
           path: output
           include-hidden-files: true
+
+      - name: Kibot generate JLCPCB production files
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/manufacturing/jlcpcb.kibot.yaml
+          dir: manufacturing
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Upload manufacturing
+        uses: actions/upload-artifact@v4
+        with:
+          name: manufacturing
+          path: manufacturing
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -150,6 +164,7 @@ jobs:
     env:
       KICAD9_3DMODEL_DIR: ${{ github.workspace }}/libraries/3d
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     strategy:
       matrix:
         include:
@@ -166,11 +181,16 @@ jobs:
         with: 
           fetch-depth: 1
 
+      - name: Substitute text variables in layout and schematic
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
+
       - name: Run ${{ matrix.name }}
         uses: INTI-CMNB/KiBot@v2_k9
         with:
           config: ${{ matrix.file }}
-          dir: output/${{ matrix.name }}
+          dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
@@ -178,7 +198,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.name }}
-          path: output/${{ matrix.name }}
+          path: output
 
   buildJekyll:
     runs-on: ubuntu-latest
@@ -205,48 +225,28 @@ jobs:
         with:
           repository: miqaP/kicad-jekyll-report
           path: kicad-jekyll-report
+          ref: dev
           fetch-depth: 1
 
       - name: Move artifact files
         run: |
-          ls -l
-          ls -l output
-          ls -l output/3d_top_angled
-          ls -l output/3d_top
-          ls -l output/3d_bottom
-          ls -l output/reports
-          ls -l output/step
-          ls -l output/reports/kiri-dark 
-          ls -l output/reports/kiri-light 
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
           mv output/reports/drc_validation.md kicad-jekyll-report/
           mv output/reports/erc_validation.md kicad-jekyll-report/
           mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
           mv output/reports/${{ env.PROJECT_NAME }}-drc.html kicad-jekyll-report/
           mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
-          mv output/step/Step/${{ env.PROJECT_NAME }}-3D.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3D.step
-          mv output/3d_top/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top.png
-          mv output/3d_bottom/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_bottom.png
-          mv output/3d_top_angled/${{ env.PROJECT_NAME }}-3D_blender_top.png kicad-jekyll-report/images/${{ env.PROJECT_NAME }}-3d_top_angled.png
-          mv output/reports/IBOM/${{ env.PROJECT_NAME }}-ibom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-ibom.html
-          mv output/reports/BOM/${{ env.PROJECT_NAME }}_bom.html kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom.html
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-default.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-default.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-dark.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-dark.pdf
-          mv output/reports/Schematic/${{ env.PROJECT_NAME }}-schematic-mono.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-schematic-mono.pdf
-          mv output/reports/PCBPrintDark/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-dark.pdf
-          mv output/reports/PCBPrintLight/${{ env.PROJECT_NAME }}-assembly.pdf kicad-jekyll-report/documents/${{ env.PROJECT_NAME }}-pcb-light.pdf
+          mv output/step/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
+          find output/3d_*/ -type f -name "*.png" -exec mv {} kicad-jekyll-report/images/ \;
+          mv output/reports/bom/* kicad-jekyll-report/export/
+          mv output/reports/schematic/* kicad-jekyll-report/documents/
+          mv output/reports/layout/* kicad-jekyll-report/documents/
           mv output/reports/kiri-dark kicad-jekyll-report/ || true
           mv output/reports/kiri-light kicad-jekyll-report/ || true
-          mv output/reports/JLCPCB/${{ env.PROJECT_NAME }}-JLCPCB.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
-          mv output/reports/JLCPCB/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_jlcpcb.csv
-          mv output/reports/JLCPCB/PickAndPlace/${{ env.PROJECT_NAME }}_cpl_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv
-          mv output/reports/Eurocircuits/BOM/${{ env.PROJECT_NAME }}_bom_jlc.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_bom_eurocircuits.csv
-          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-eurocircuits.zip
-          cp kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}_cpl_eurocircuits.csv
+          mv output/manufacturing/jlcpcb/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
+          mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
+          mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
           rm -rf output
-          ls -l
-          ls -l kicad-jekyll-report
-          ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -260,12 +260,9 @@ jobs:
             bundle install
       - name: Build Jekyll site
         run: |
-            ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
             cd kicad-jekyll-report
-            cat _config.yml
             echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
             bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
-            ls -al ../_site/kiri-dark/2268276/_KIRI_/pcb
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
@@ -279,6 +276,7 @@ jobs:
     needs: buildJekyll
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - uses: actions/checkout@v4

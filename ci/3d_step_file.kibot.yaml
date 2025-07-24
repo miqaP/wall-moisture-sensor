@@ -8,11 +8,11 @@ globals:
   pcb_finish: ENIG
 
 outputs:
-  - name: "Step"
+  - name: step
     comment: "Exports the PCB as a 3D model."
     type: "export_3d"
-    dir: "Step"
     options:
       format: "step"
+      output: '%f-3d.%x'
       download: false
       download_lcsc: false

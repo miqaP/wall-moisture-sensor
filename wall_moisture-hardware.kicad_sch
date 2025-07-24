@@ -5,9 +5,9 @@
 	(uuid "dedd74c5-8e82-403a-8a1b-f763d3ee00bb")
 	(paper "A4")
 	(title_block
-		(title "Wall Moisture Sensor (WMS1)")
-		(rev "r1")
-		(company "Micka Inc")
+		(title "Wall Moisture Sensor - WMS1")
+		(rev "${VERSION}")
+		(company "${COMPANY}")
 	)
 	(lib_symbols)
 	(junction
