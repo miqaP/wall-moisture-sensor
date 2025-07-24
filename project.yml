@@ -4,15 +4,13 @@ description: &project_description >-
   Monitor wall moisture using capacitive sensors.
   The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
 
-just_the_docs:
-  aux_links:
-    GitHub Repository: https://github.com/miqap/wall-moisture
-
 project: 
   name: wall_moisture-hardware
   title: *project_title
   description: *project_description
   company: "EL-ED"
+  repository: https://github.com/miqap/wall-moisture
+
     
 
   manufacturers: ["jlcpcb"]
