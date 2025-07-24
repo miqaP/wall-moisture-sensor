@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       project_name: ${{ steps.load.outputs.project_name }}
+      company_name: ${{ steps.load.outputs.company_name }}
       next_version: ${{ steps.get_version.outputs.next_version }}
     steps:
       - name: Check out repository
@@ -32,6 +33,7 @@ jobs:
         id: load
         run: |
           echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "company_name=$(yq e '.project.company' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -55,6 +57,7 @@ jobs:
     needs: setup
     env:
       PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+      COMPANY_NAME: ${{needs.setup.outputs.company_name }}
 
     steps:
       - name: Checkout
@@ -62,6 +65,10 @@ jobs:
         with:
           fetch-depth: 0 # Required by KiRi output in order to get information about all commits
 
+      - name: Substitute text variables
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" "$PROJECT_NAME.kicad_*"
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" "$PROJECT_NAME.kicad_*"
 
       - name: Run Kibot ERC / DRC
         uses: INTI-CMNB/KiBot@v2_k9

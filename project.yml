@@ -1,5 +1,5 @@
 # Jekyll configuration / customisation
-title: &project_title WallMoisture 
+title: &project_title Wall Moisture Sensor - WSM1
 description: &project_description >- 
   Monitor wall moisture using capacitive sensors.
   The device supports two methods for reading capacitive values, allowing for comparison and experimentation.
@@ -12,6 +12,7 @@ project:
   name: wall_moisture-hardware
   title: *project_title
   description: *project_description
+  company: "EL-ED"
     
 
-  manufacturers: ["JLCPCB", "Eurocircuits"]
+  manufacturers: ["jlcpcb"]
