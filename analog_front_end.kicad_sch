@@ -2330,7 +2330,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0d4c87c8-53aa-4192-9347-0a33e6325d92")
 		(property "Reference" "U7"
 			(at 99.06 105.3398 0)
@@ -2340,7 +2339,7 @@
 				)
 			)
 		)
-		(property "Value" "OPA388IDBV"
+		(property "Value" "~"
 			(at 99.06 107.8798 0)
 			(effects
 				(font
@@ -2367,6 +2366,23 @@
 			)
 		)
 		(property "Description" "Operational amplifier, single"
+			(at 86.36 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "OPA388IDBV"
+			(at 95.504 108.204 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "LCSC" "C1850240"
 			(at 86.36 111.76 0)
 			(effects
 				(font
@@ -2555,6 +2571,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C98220"
+			(at 182.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0184e28a-65de-4c03-9597-d831ac5d5d53")
 		)
@@ -2622,6 +2647,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14675"
+			(at 59.69 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5f179270-01f5-4cdd-95ab-cb6ca8562f63")
 		)
@@ -2681,6 +2715,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 59.69 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14675"
 			(at 59.69 104.14 0)
 			(effects
 				(font
@@ -2757,6 +2800,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22548"
+			(at 190.5 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3a886023-2095-417d-8291-007217f3bda5")
 		)
@@ -2780,7 +2832,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "210905d4-2e0a-49c4-aee0-0c98b42cd0fc")
 		(property "Reference" "Q4"
 			(at 210.82 129.5399 0)
@@ -2791,7 +2842,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BSS316N"
+		(property "Value" "~"
 			(at 210.82 132.0799 0)
 			(effects
 				(font
@@ -2845,7 +2896,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C19829413"
 			(at 204.47 130.81 0)
 			(effects
 				(font
@@ -2861,6 +2912,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" "BSS316N"
+			(at 215.138 131.826 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -2899,7 +2958,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x03_Pin"
+		(property "Value" "~"
 			(at 116.205 54.61 0)
 			(effects
 				(font
@@ -2934,6 +2993,23 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C5383112"
+			(at 115.57 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 115.57 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "3"
 			(uuid "09a3fcd3-d80e-46f2-97fe-9de03fe8da81")
 		)
@@ -2960,7 +3036,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "40c87699-b1ec-47b0-89e5-de2b182453df")
 		(property "Reference" "Q3"
 			(at 198.12 139.6999 0)
@@ -2971,7 +3046,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "BC847,215"
+		(property "Value" "~"
 			(at 198.12 142.2399 0)
 			(effects
 				(font
@@ -3037,13 +3112,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C130417"
 			(at 193.04 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" "BC847,215"
+			(at 201.422 144.526 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "3"
@@ -3082,7 +3165,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x03_Pin"
+		(property "Value" "~"
 			(at 127.635 100.33 0)
 			(effects
 				(font
@@ -3115,6 +3198,23 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC" "C5383112"
+			(at 127 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 127 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "3"
@@ -3187,6 +3287,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14675"
+			(at 59.69 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "862d7833-e104-4916-b057-3030aab706b7")
 		)
@@ -3246,6 +3355,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 59.69 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14675"
 			(at 59.69 121.92 0)
 			(effects
 				(font
@@ -3390,6 +3508,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 29.21 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6c49f669-23bf-45af-97b8-8f3a37c82371")
 		)
@@ -3451,7 +3578,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "6.3V"
+		(property "Description" "10V"
+			(at 16.51 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C59782"
 			(at 16.51 31.75 0)
 			(effects
 				(font
@@ -3480,7 +3616,7 @@
 		(at 158.75 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -3520,6 +3656,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 158.75 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
 			(at 158.75 59.69 0)
 			(effects
 				(font

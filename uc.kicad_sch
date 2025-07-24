@@ -3837,6 +3837,16 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 153.67) (xy 99.06 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5bc55aa5-1c5f-438c-a30f-2de771a8c72c")
+	)
+	(wire
+		(pts
 			(xy 22.86 111.76) (xy 22.86 109.22)
 		)
 		(stroke
@@ -4134,16 +4144,6 @@
 			(type default)
 		)
 		(uuid "94623fcd-becd-46f2-b34f-b0921d34b06d")
-	)
-	(wire
-		(pts
-			(xy 95.25 153.67) (xy 99.06 153.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "94f6a1c2-48ce-4bc9-bc7d-6f1e231a95aa")
 	)
 	(wire
 		(pts
@@ -5379,7 +5379,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "067e6f4e-3979-49f2-869e-be2c2ced26db")
 		(property "Reference" "D2"
 			(at 89.8525 158.75 0)
@@ -5389,7 +5388,7 @@
 				)
 			)
 		)
-		(property "Value" "KT-0805R Red"
+		(property "Value" "~"
 			(at 89.8525 161.29 0)
 			(effects
 				(font
@@ -5415,7 +5414,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Light emitting diode"
+		(property "Description" "Light emitting diode red"
 			(at 91.44 165.1 0)
 			(effects
 				(font
@@ -5442,6 +5441,14 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "KT-0805R"
+			(at 90.17 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "bc39f075-5141-4824-89d7-bebc8b81e7fc")
 		)
@@ -5465,7 +5472,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0d54d1b4-8a3d-427f-ab23-cc7bb90f4586")
 		(property "Reference" "D1"
 			(at 89.8525 147.32 0)
@@ -5475,7 +5481,7 @@
 				)
 			)
 		)
-		(property "Value" "KT-0805B Blue"
+		(property "Value" "~"
 			(at 89.8525 149.86 0)
 			(effects
 				(font
@@ -5501,7 +5507,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Light emitting diode"
+		(property "Description" "Light emitting diode blue"
 			(at 91.44 153.67 0)
 			(effects
 				(font
@@ -5526,6 +5532,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" "KT-0805B"
+			(at 89.662 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -5590,6 +5604,15 @@
 			)
 		)
 		(property "Description" "10V"
+			(at 105.41 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 105.41 30.48 0)
 			(effects
 				(font
@@ -5665,6 +5688,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106245"
+			(at 95.25 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "2b2a58ee-3b6b-49ce-832f-7b07eadf2c8d")
 		)
@@ -5727,6 +5759,15 @@
 			)
 		)
 		(property "Description" "10V"
+			(at 40.64 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 40.64 30.48 0)
 			(effects
 				(font
@@ -5834,7 +5875,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "ECS-.327-7-12RR-TR"
+		(property "Value" "~"
 			(at 100.584 83.312 90)
 			(effects
 				(font
@@ -5868,6 +5909,23 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC" "C2450089"
+			(at 102.87 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "ECS-.327-7-12RR-TR"
+			(at 108.712 83.312 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -5940,6 +5998,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 27.94 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b5136138-22cd-46f1-8311-a8838bfa316e")
 		)
@@ -6002,6 +6069,15 @@
 			)
 		)
 		(property "Description" "Resistor"
+			(at 30.48 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C114662"
 			(at 30.48 64.77 0)
 			(effects
 				(font
@@ -6110,7 +6186,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STM32L432KCUx"
+		(property "Value" "~"
 			(at 140.6241 127 0)
 			(effects
 				(font
@@ -6139,6 +6215,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 138.43 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2928224"
+			(at 138.43 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "STM32L432KBUx"
 			(at 138.43 99.06 0)
 			(effects
 				(font
@@ -6310,6 +6404,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C19666"
+			(at 16.51 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1128abdc-bbb4-4bda-82d3-e7205db4b5c2")
 		)
@@ -6372,6 +6475,15 @@
 			)
 		)
 		(property "Description" "10V"
+			(at 71.12 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 71.12 30.48 0)
 			(effects
 				(font
@@ -6448,7 +6560,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C105588"
 			(at 102.87 165.1 0)
 			(effects
 				(font
@@ -6516,6 +6628,15 @@
 			)
 		)
 		(property "Description" "10V"
+			(at 35.56 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C14663"
 			(at 35.56 140.97 0)
 			(effects
 				(font
@@ -6661,6 +6782,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C114662"
+			(at 38.1 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "027e243c-1b42-4d6e-92ec-2d1ba5de6fad")
 		)
@@ -6720,6 +6850,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 95.25 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C106245"
 			(at 95.25 95.25 0)
 			(effects
 				(font
@@ -6796,6 +6935,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C36936594"
+			(at 29.21 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b39d03ff-174c-40df-bc74-acefa9c05e57")
 		)
@@ -6864,7 +7012,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C105588"
 			(at 102.87 176.53 0)
 			(effects
 				(font
@@ -7008,7 +7156,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C128059"
 			(at 102.87 153.67 0)
 			(effects
 				(font
@@ -7039,7 +7187,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "af6350da-7842-4f91-862f-4c59ff6e7711")
 		(property "Reference" "J5"
@@ -7050,7 +7198,7 @@
 				)
 			)
 		)
-		(property "Value" "490107670612"
+		(property "Value" "~"
 			(at 207.645 29.21 0)
 			(effects
 				(font
@@ -7077,6 +7225,24 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x06, script generated"
+			(at 207.01 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
+			(at 207.01 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "490107670612"
 			(at 207.01 39.37 0)
 			(effects
 				(font
@@ -7159,6 +7325,15 @@
 			)
 		)
 		(property "Description" "6.3V"
+			(at 92.71 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C19666"
 			(at 92.71 30.48 0)
 			(effects
 				(font
@@ -7467,7 +7642,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "AD7747"
+		(property "Value" "~"
 			(at 216.154 77.216 0)
 			(effects
 				(font
@@ -7485,7 +7660,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad7747.pdf"
 			(at 218.44 97.79 0)
 			(effects
 				(font
@@ -7495,6 +7670,24 @@
 			)
 		)
 		(property "Description" ""
+			(at 218.44 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C578507"
+			(at 218.44 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "AD7747ARUZ"
 			(at 218.44 97.79 0)
 			(effects
 				(font
@@ -7568,7 +7761,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "e22817d5-23e2-4bf9-969b-eedf5e9487e2")
 		(property "Reference" "SW1"
 			(at 34.29 86.36 0)
@@ -7578,7 +7770,7 @@
 				)
 			)
 		)
-		(property "Value" "DSHP08TSGET"
+		(property "Value" "~"
 			(at 34.29 88.9 0)
 			(effects
 				(font
@@ -7611,6 +7803,23 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "LCSC" "C40738"
+			(at 34.29 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "DSHP08TSGET"
+			(at 34.29 116.332 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "12"
@@ -7745,7 +7954,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "ebfc3b83-445b-45c6-bb59-c86adff5c7de")
 		(property "Reference" "D3"
 			(at 89.8525 170.18 0)
@@ -7755,7 +7963,7 @@
 				)
 			)
 		)
-		(property "Value" "KT-0805G Green"
+		(property "Value" "~"
 			(at 89.8525 172.72 0)
 			(effects
 				(font
@@ -7781,7 +7989,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Light emitting diode"
+		(property "Description" "Light emitting diode green"
 			(at 91.44 176.53 0)
 			(effects
 				(font
@@ -7806,6 +8014,14 @@
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" "KT-0805G"
+			(at 90.424 173.482 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -7936,6 +8152,15 @@
 			)
 		)
 		(property "Description" "10V"
+			(at 58.42 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C59782"
 			(at 58.42 30.48 0)
 			(effects
 				(font
