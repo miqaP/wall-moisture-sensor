@@ -6,9 +6,6 @@ on:
     branches:
       - main
       - test-ci-workflow-pre
-  pull_request:
-    branches:
-      - test-ci-workflow-pre
 env:
   # we’ll use `yq` to read project.yml
   PROJECT_CONFIGURATION: project.yml
@@ -50,7 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          VERSION="1.1.1.dummy"
+          VERSION=$(npx semantic-release --dry-run --no-ci | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
           echo $VERSION
           echo "next_version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -59,8 +56,9 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
     needs: setup
     env:
-      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
-      COMPANY_NAME: ${{needs.setup.outputs.company_name }}
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      COMPANY_NAME: ${{ needs.setup.outputs.company_name }}
+      NEXT_VERSION: ${{ needs.setup.outputs.next_version }}
 
     steps:
       - name: Checkout
@@ -68,7 +66,7 @@ jobs:
         with:
           fetch-depth: 0 # Required by KiRi output in order to get information about all commits
 
-      - name: Substitute text variables
+      - name: Substitute text variables in layout and schematic
         run: |
           sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
           sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
@@ -78,16 +76,6 @@ jobs:
         id: erc_drc
         with:
           config: ci/preflight_enforce.kibot.yaml
-          dir: output
-          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
-          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
-          verbose: 1
-
-      - name: Run Kibot BoM sanatize
-        uses: INTI-CMNB/KiBot@v2_k9
-        id: sanatize_bom
-        with:
-          config: ci/sanatize_bom.kibot.yaml
           dir: output
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
@@ -149,6 +137,13 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: output
+          include-hidden-files: true
+
       - name: Kibot generate JLCPCB production files
         uses: INTI-CMNB/KiBot@v2_k9
         with:
@@ -157,20 +152,11 @@ jobs:
           schema: "${{ env.PROJECT_NAME }}.kicad_sch"
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
-
-      - name: Upload reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: reports
-          path: output
-          include-hidden-files: true
-
       - name: Upload manufacturing
         uses: actions/upload-artifact@v4
         with:
           name: manufacturing
           path: manufacturing
-          include-hidden-files: true
   renders:
     runs-on: ubuntu-latest
     container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
@@ -178,6 +164,7 @@ jobs:
     env:
       KICAD9_3DMODEL_DIR: ${{ github.workspace }}/libraries/3d
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
     strategy:
       matrix:
         include:
@@ -193,6 +180,11 @@ jobs:
       - uses: actions/checkout@v4
         with: 
           fetch-depth: 1
+
+      - name: Substitute text variables in layout and schematic
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
 
       - name: Run ${{ matrix.name }}
         uses: INTI-CMNB/KiBot@v2_k9
@@ -238,13 +230,6 @@ jobs:
 
       - name: Move artifact files
         run: |
-          ls -l
-          ls -l output
-          ls -l output/manufacturing
-          ls -l output/manufacturing/** || true
-          ls -l output/3d_*
-          ls -l output/reports/kiri-dark 
-          ls -l output/reports/kiri-light 
           mkdir -p kicad-jekyll-report/{export,html,images,documents}
           mv output/reports/drc_validation.md kicad-jekyll-report/
           mv output/reports/erc_validation.md kicad-jekyll-report/
@@ -262,9 +247,6 @@ jobs:
           mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
           mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
           rm -rf output
-          ls -l
-          ls -l kicad-jekyll-report
-          ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -278,12 +260,9 @@ jobs:
             bundle install
       - name: Build Jekyll site
         run: |
-            ls -al kicad-jekyll-report/kiri-dark/2268276/_KIRI_/pcb
             cd kicad-jekyll-report
-            cat _config.yml
             echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
             bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
-            ls -al ../_site/kiri-dark/2268276/_KIRI_/pcb
 
       - name: Upload Site Artifact
         uses: actions/upload-artifact@v4
@@ -297,6 +276,7 @@ jobs:
     needs: buildJekyll
     env:
       PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
 
     steps:
       - uses: actions/checkout@v4
