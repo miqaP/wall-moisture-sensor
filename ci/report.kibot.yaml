@@ -36,7 +36,7 @@ outputs:
     dir: "report"
     options:
       converted_output: "%f-%i%I%v.%x"
-      eurocircuits_class_target: "3B"
+      eurocircuits_class_target: "6A"
       eurocircuits_reduce_holes: 0
       template: "full"
       do_convert: true
