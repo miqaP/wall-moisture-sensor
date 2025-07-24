@@ -16,7 +16,7 @@ outputs:
     type: "pcb_print"
     dir: "layout/"
     options:
-      output: "%f-layout-@COLOR_SCHEME@.%x"
+      output: "%f-layout_@COLOR_SCHEME@.%x"
       add_background: true
       background_color: "@BACKGROUND_COLOR@"
       color_theme: "_builtin_default"

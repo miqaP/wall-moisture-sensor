@@ -50,7 +50,7 @@ outputs:
       background_color: true
       monochrome: false
       dnf_filter: ""
-      output: "%f-%i%I%v-dark.%x"
+      output: "%f-%i%I%v_dark.%x"
   - name: "pdf_sch_print_default"
     comment: "Schematic PDF light mode"
     type: "pdf_sch_print"
@@ -58,14 +58,14 @@ outputs:
     options:
       all_pages: true
       monochrome: false
-      output: "%f-%i%I%v-default.%x"
+      output: "%f-%i%I%v_default.%x"
   - name: "pdf_sch_print_mono"
     type: "pdf_sch_print"
     dir: "schematic"
     options:
       all_pages: true
       monochrome: true
-      output: "%f-%i%I%v-mono.%x"
+      output: "%f-%i%I%v_mono.%x"
 
   - name: html_bom
 
