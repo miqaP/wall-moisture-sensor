@@ -137,6 +137,11 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
 
+      # This _local_ commit broke the KiRi, this step removes it
+      - name: Clean KiRi commits
+        run: |
+          find output/reports/kiri-* -type f -name commits -exec sed -i '/^_local_|/d' {} +
+
       - name: Upload reports
         uses: actions/upload-artifact@v4
         with:
