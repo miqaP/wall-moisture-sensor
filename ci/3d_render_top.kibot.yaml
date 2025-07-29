@@ -1,0 +1,59 @@
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+outputs:
+  - name: blender_3d_top
+    comment: "HQ 3D Render of the PCB"
+    type: blender_export
+    options:
+      outputs:
+        - type: render
+          output: '%f-3d_top.%x'
+      light:
+        - name: "light1"
+          energy: 4
+          pos_x: -size*3.33
+          pos_y: size*3.33
+          pos_z: size*8
+          type: "AREA"
+
+        - name: "light2"
+          energy: 2
+          pos_x: 0
+          pos_y: size*3.33
+          pos_z: size*9
+          type: "AREA"
+
+        - name: "light3"
+          energy: 2
+          pos_x: 0
+          pos_y: 0
+          pos_z: size*15
+          type: "AREA"
+
+        - name: "light4"
+          energy: 0.2
+          pos_x: size/2
+          pos_y: size/2
+          pos_z: size
+          type: "AREA"
+      pcb3d:
+        download: false
+        download_lcsc: false
+      render_options:
+        auto_crop: true
+        transparent_background: true
+        samples: 2
+        resolution_x: 2048
+        resolution_y: 2048
+      auto_camera_z_axis_factor: 0.9
+      point_of_view:
+        rotate_x: 0
+        rotate_y: 0
+        rotate_z: 0
+        view: "top"
