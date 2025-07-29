@@ -1,0 +1,112 @@
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  field_lcsc_part: "LCSC"
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+preflight: 
+  # This is required to allow "extra_fields" in interactive BoM (ibom) output
+  update_xml: 
+    enabled: true
+    as_warnings: false
+
+outputs:
+  - name: report
+    comment: "Generates a report about the design."
+    type: "report"
+    dir: "report"
+    options:
+      converted_output: "%f-%i%I%v.%x"
+      eurocircuits_class_target: "6A"
+      eurocircuits_reduce_holes: 0
+      template: "full"
+      do_convert: true
+      convert_to: "pdf"
+  - name: "pdf_sch_print_dark"
+    comment: "Schematic PDF dark mode"
+    type: "pdf_sch_print"
+    dir: "schematic"
+    options:
+      all_pages: true
+      background_color: true
+      monochrome: false
+      dnf_filter: ""
+      output: "%f-%i%I%v_dark.%x"
+  - name: "pdf_sch_print_default"
+    comment: "Schematic PDF light mode"
+    type: "pdf_sch_print"
+    dir: "schematic"
+    options:
+      all_pages: true
+      monochrome: false
+      output: "%f-%i%I%v_default.%x"
+  - name: "pdf_sch_print_mono"
+    type: "pdf_sch_print"
+    dir: "schematic"
+    options:
+      all_pages: true
+      monochrome: true
+      output: "%f-%i%I%v_mono.%x"
+
+  - name: html_bom
+
+    type: bom
+    dir: bom
+    options:
+      output: "%f-%i.%x"
+      group_fields: ['part', 'part lib', 'value', 'mpn', 'footprint', 'footprint lib', 'voltage', 'tolerance', 'current', 'power']      
+      columns:
+        - field: References
+          name: Reference Designator
+        - field: Quantity Per PCB
+          name: Quantity
+        - field: Value
+          name: Value
+        - field: MPN
+          name: "Manufacturer Part Number"
+        - Footprint
+        - field: Description
+          name: Description
+        - Datasheet
+        - field: "LCSC"
+          name: "LCSC Part #"
+      format: "HTML"
+
+  - name: interactive_bom
+    comment: Interactive BOM
+    type: ibom
+    dir: bom
+    options:
+      output: "%f-%i.%x"
+      checkboxes: ' '
+      extra_fields: "MPN,LCSC"
+      include_tracks: true
+      include_nets: true
+
+  - name: kiri_dark
+    comment: 'Generates a dark version of an interactive web page to browse the schematic and/or PCB differences between git commits.'
+    type: 'kiri'
+    dir: 'kiri-dark'
+    options:
+      background_color: '#000000'
+      keep_generated: true
+      zones: 'global'
+    layers: all
+  - name: kiri_light
+    comment: 'Generates a light version of an interactive web page to browse the schematic and/or PCB differences between git commits.'
+    type: 'kiri'
+    dir: 'kiri-light'
+    options:
+      keep_generated: true
+      zones: 'global'
+    layers: all
+
+  - name: info
+    comment: "Records information about the current run."
+    type: "info"
+    options:
+      environment: "names"
+      output: "versions.%x"

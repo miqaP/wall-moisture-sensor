@@ -3,13 +3,6 @@ name: Pull Request actions
 
 on:
   pull_request:
-    paths:
-      - '*.kicad_sch'
-      - '*.kicad_pcb'
-      - '*.kibot.yaml'
-      - libraries
-      - ci
-      - '.github/workflows/*'
     branches:
       - main
       - release
