@@ -3,9 +3,8 @@ on:
   # Ignore the trigger main and release branch as the commit should be pushed 
   # through a pull request
   pull_request:
-    branches-ignore:
-      - main 
-      - release
+    branches:
+      - "*"
 
 permissions:
   contents: read
