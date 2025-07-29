@@ -31,7 +31,7 @@ jobs:
 
   checks:
     runs-on: ubuntu-latest
-    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:dev
     needs: setup
     env:
       PROJECT_NAME: ${{needs.setup.outputs.project_name }}
@@ -77,7 +77,8 @@ jobs:
       - name: Fail if any Kibot step failed
         if: |
           steps.erc.outcome == 'failure' ||
-          steps.drc.outcome == 'failure'
+          steps.drc.outcome == 'failure' ||
+          steps.sanatize_bom == 'failure'
         run: |
           if [ "${{ steps.erc.outcome }}" = "failure" ]; then
             echo "❌ ERC Step : Failed"
