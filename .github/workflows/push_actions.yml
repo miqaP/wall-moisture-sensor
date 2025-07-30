@@ -1,0 +1,350 @@
+# Action triggered on release branche
+name: Push actions
+
+on:
+  push:
+    branches:
+      - release
+      - main
+      - test-ci-workflow
+      - test-ci-workflow-pre
+env:
+  # we’ll use `yq` to read project.yml
+  PROJECT_CONFIGURATION: project.yml
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      project_name: ${{ steps.load.outputs.project_name }}
+      company_name: ${{ steps.load.outputs.company_name }}
+      next_version: ${{ steps.get_version.outputs.next_version }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Load project.yml into outputs
+        id: load
+        run: |
+          echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+          echo "company_name=$(yq e '.project.company' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get semantic-release version (dry-run)
+        id: get_version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" != "push" ]]; then
+            VERSION="dummy"
+            echo "Not on push event. Using dummy version: $VERSION."
+            exit 0
+          else
+            VERSION=$(npx semantic-release --dry-run --no-ci | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
+            echo $VERSION
+          fi
+          echo "next_version=$VERSION" >> $GITHUB_OUTPUT
+
+  reports:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: setup
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      COMPANY_NAME: ${{ needs.setup.outputs.company_name }}
+      NEXT_VERSION: ${{ needs.setup.outputs.next_version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required by KiRi output in order to get information about all commits
+
+      - name: Substitute text variables in layout and schematic
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
+
+      - name: "Setup jq"
+        uses: dcarbone/install-jq-action@v2
+
+      - name: Run Kibot ERC
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: erc
+        with:
+          config: ci/preflight_erc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Run Kibot DRC
+        uses: INTI-CMNB/KiBot@v2_k9
+        id: drc
+        with:
+          config: ci/preflight_drc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Parse ERC
+        run: |
+          erc_warnings=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          erc_errors=$(cat output/$PROJECT_NAME-erc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/erc_validation.md
+          ### ERC Report
+          - **Errors**: $erc_errors
+          - **Warnings**: $erc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-erc.html)
+          EOF
+      - name: Parse DRC
+        run: |
+          drc_warnings=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "warning")] | length')
+          drc_errors=$(cat output/$PROJECT_NAME-drc.json | jq '[try .violations[] | select(.severity == "error")] | length')
+          cat <<EOF > output/drc_validation.md
+          ### DRC Report
+          - **Errors**: $drc_errors
+          - **Warnings**: $drc_warnings
+          - **Link**: [HTML Report]($PROJECT_NAME-drc.html)
+          EOF
+
+      - name: Move template to root
+        run: |
+          ls -l
+          mkdir template
+          cp ci/template/* template/
+          ls -l template
+
+      - name: Kibot generate report
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/report.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      # The commit "_local_" broke KiRi, this step removes it
+      - name: Clean KiRi commits
+        run: |
+          find output/kiri-* -type f -name commits -exec sed -i '/^_local_|/d' {} + || true
+
+      - name: Kibot generate Dark PCBPrint
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/pcb_print_dark.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Kibot generate Light PCBPrint
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/pcb_print_light.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: output
+          include-hidden-files: true
+
+      - name: Kibot generate JLCPCB production files
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ci/manufacturing/jlcpcb.kibot.yaml
+          dir: manufacturing
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Upload manufacturing
+        uses: actions/upload-artifact@v4
+        with:
+          name: manufacturing
+          path: manufacturing
+  renders:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:latest
+    needs: [setup]
+    env:
+      KICAD9_3DMODEL_DIR: ${{ github.workspace }}/libraries/3d
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{needs.setup.outputs.next_version}}
+    strategy:
+      matrix:
+        include:
+          - name: 3d_top_angled
+            file: ci/3d_render_top_angled.kibot.yaml
+          - name: 3d_top
+            file: ci/3d_render_top.kibot.yaml
+          - name: 3d_bottom
+            file: ci/3d_render_bottom.kibot.yaml
+          - name: step
+            file: ci/3d_step_file.kibot.yaml
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 1
+
+      - name: Substitute text variables in layout and schematic
+        run: |
+          sed -i "s/__VERSION__/$NEXT_VERSION/g" $PROJECT_NAME.kicad_*
+          sed -i "s/__COMPANY__/$COMPANY_NAME/g" $PROJECT_NAME.kicad_*
+
+      - name: Run ${{ matrix.name }}
+        uses: INTI-CMNB/KiBot@v2_k9
+        with:
+          config: ${{ matrix.file }}
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board:  "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Upload ${{ matrix.name }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: output
+
+  buildJekyll:
+    runs-on: ubuntu-latest
+    needs:
+      [
+        setup,
+        reports,
+        renders,
+      ]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{ needs.setup.outputs.next_version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: output
+      - name: Checkout Jekyll site repository
+        uses: actions/checkout@v4
+        with:
+          repository: miqaP/kicad-jekyll-report
+          path: kicad-jekyll-report
+          ref: dev
+          fetch-depth: 1
+
+      - name: Move artifact files
+        run: |
+          mkdir -p kicad-jekyll-report/{export,html,images,documents}
+          mv output/reports/drc_validation.md kicad-jekyll-report/
+          mv output/reports/erc_validation.md kicad-jekyll-report/
+          mv output/reports/report/${{ env.PROJECT_NAME }}-report.txt kicad-jekyll-report/report.md
+          mv output/reports/${{ env.PROJECT_NAME }}-drc.html kicad-jekyll-report/
+          mv output/reports/${{ env.PROJECT_NAME }}-erc.html kicad-jekyll-report/
+          mv output/step/${{ env.PROJECT_NAME }}-3d.step kicad-jekyll-report/${{ env.PROJECT_NAME }}-3d.step
+          find output/3d_*/ -type f -name "*.png" -exec mv {} kicad-jekyll-report/images/ \;
+          mv output/reports/bom/* kicad-jekyll-report/export/
+          mv output/reports/schematic/* kicad-jekyll-report/documents/
+          mv output/reports/layout/* kicad-jekyll-report/documents/
+          mv output/reports/kiri-dark kicad-jekyll-report/ || true
+          mv output/reports/kiri-light kicad-jekyll-report/ || true
+          mv output/manufacturing/jlcpcb/${{ env.PROJECT_NAME }}-jlcpcb.zip kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-jlcpcb.zip
+          mv output/manufacturing/jlcpcb/bom/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-bom_jlcpcb.csv
+          mv output/manufacturing/jlcpcb/pick-and-place/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv kicad-jekyll-report/export/${{ env.PROJECT_NAME }}-cpl_jlcpcb.csv
+          rm -rf output
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Install dependencies
+        run: |
+            cd kicad-jekyll-report
+            gem install bundler --user-install
+            export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+            bundle config set --local path 'vendor/bundle'
+            bundle install
+      - name: Build Jekyll site
+        run: |
+            cd kicad-jekyll-report
+            echo -e "project:\n  version: \"${{ env.NEXT_VERSION }}\"" > _version.yml
+            bundle exec jekyll build --config _config.yml,../project.yml,_version.yml --source . --destination ../_site --future
+
+      - name: Upload Site Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site/
+          include-hidden-files: true
+
+  semanticRelease:
+    runs-on: ubuntu-latest
+    needs: [
+        setup,
+        buildJekyll
+      ]
+    env:
+      PROJECT_NAME: ${{ needs.setup.outputs.project_name }}
+      NEXT_VERSION: ${{ needs.setup.outputs.next_version}}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for semantic-release to see tags
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download Site Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site
+      - name: Zip website
+        run: |
+          mkdir dist
+          zip -r dist/release-jekyll_report_website-"${NEXT_VERSION}".zip ./_site
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release
+
+  deployJekyll:
+    if: github.ref_name == 'release'
+    needs: buildJekyll
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Site Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: jekyll-site
+          path: ./_site
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=_site --prod

@@ -1,0 +1,18 @@
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  field_lcsc_part: "LCSC Part"
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+outputs:
+  - name: step
+    comment: "Exports the PCB as a 3D model."
+    type: "export_3d"
+    options:
+      format: "step"
+      output: '%f-3d.%x'
+      download: false
+      download_lcsc: false

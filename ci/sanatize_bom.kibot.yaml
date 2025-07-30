@@ -1,0 +1,84 @@
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  field_lcsc_part: "lcsc"
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+filters:
+  - name: not_in_bom
+    type: generic
+    comment: 'Select only component in BoM'
+    exclude_not_in_bom: true
+    invert: true # -> In short, all included components will be checked in check_fields
+  - name: all_expect_rc
+    type: generic
+    comment: 'Select only resistors and capacitors'
+    exclude_not_in_bom: true
+    include_only:
+      - column: reference
+        regex: "^[CR].*"    # Include references starting by C or R as exclusion filter
+    invert: true # -> In short, all included components will be checked in check_fields
+  - name: all_rc
+    type: generic
+    comment: 'Select all but resistors and capacitors'
+    exclude_not_in_bom: true
+    include_only:
+      - column: reference
+        regex: "^[^CR].*" 
+    invert: true # -> all included components will be will be checked in check_fields
+
+
+# exclude filter : All components selected in filter are excluded
+preflight:
+  check_fields:
+    - field: reference
+      regex: "^.+$"     # Trigger error on empty string
+      severity: error
+      severity_missing: error
+    - field: mpn
+      regex: '.*'     # Trigger error on empty string
+      severity_missing: continue
+    - field: value
+      regex: '.*'    # Trigger error on empty string
+    - field: lcsc
+      regex: '.*'     # Trigger error on empty string
+      severity_missing: continue
+    - field: mpn
+      exclude_filter: all_rc 
+      regex: "^.+$"     # Trigger error on empty string
+      severity: error
+      severity_missing: error
+    - field: value
+      exclude_filter: all_expect_rc
+      regex: "^.+$"     # Trigger error on empty string
+      severity: error
+      severity_missing: error
+    - field: footprint
+      regex: '.*'
+    - field: description
+      regex: '.*'
+    - field: lcsc
+      exclude_filter: not_in_bom
+      regex: '^C\d+'
+      severity: error
+      severity_missing: warning
+    - field: sim.pins
+      regex: '.*'
+    - field: sim.type
+      regex: '.*'
+    - field: sim.device
+      regex: '.*'
+    - field: sim.name
+      regex: '.*'
+    - field: sim.library
+      regex: '.*'
+    - field: "*"
+      severity_missing: error
+
+# Should also check if this detects when the field doesn't exists
+# see https://github.com/INTI-CMNB/KiBot/issues/774 for checking that no additional field are present
+# Could also add a rule triggered on specific condition that assert JCLC references are populated
+# I don't know how to check the resistor value format

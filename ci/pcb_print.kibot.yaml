@@ -1,0 +1,145 @@
+# ATTENTION! THIS ISN'T A FULLY FUNCTIONAL EXAMPLE.
+# You should take portions of this example and edit the options to make
+# them suitable for your use.
+# This file is useful to know all the available options.
+kibot:
+  version: 1
+
+globals:
+  resources_dir: resources
+  field_lcsc_part: "LCSC"
+  solder_mask_color: black
+  pcb_finish: ENIG
+
+outputs:
+  - name: pcb_print
+    type: "pcb_print"
+    dir: "layout/"
+    options:
+      output: "%f-layout_@COLOR_SCHEME@.%x"
+      add_background: true
+      background_color: "@BACKGROUND_COLOR@"
+      color_theme: "_builtin_default"
+      dpi: 1200
+      forced_edge_cuts_use_for_center: true
+      format: "PDF"
+      frame_plot_mechanism: "plot"
+      keep_temporal_files: false
+      colored_pads: false
+      colored_vias: false
+      pages:
+        - title: "Layer 1"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: true
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: F.Cu
+            - layer: Edge.Cuts
+              color: "@FOREGROUND_COLOR@"
+        - title: "Layer 2"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: true
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: In1.Cu
+            - layer: Edge.Cuts
+              color: "@FOREGROUND_COLOR@"
+        - title: "Layer 3"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: true
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: In2.Cu
+            - layer: Edge.Cuts
+              color: "@FOREGROUND_COLOR@"
+        - title: "Layer 4"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: true
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: B.Cu
+            - layer: Edge.Cuts
+            - layer: F.Fab
+              color: "@FOREGROUND_COLOR@"
+        - title: "Layer 4 (Component Dimensions)"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: true
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: F.Cu
+            - layer: Edge.Cuts
+            - layer: F.Silkscreen
+              color: "@FOREGROUND_COLOR@"
+            - layer: User.1
+              color: "@FOREGROUND_COLOR@"
+        - title: "Front Fabrication"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: false
+          tent_vias: false
+          colored_holes: true
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          holes_color: "@BACKGROUND_COLOR@"
+          layers:
+            - layer: F.Cu
+              color: "@DIM_COLOR@"
+            - layer: Edge.Cuts
+              color: "@FOREGROUND_COLOR@"
+            - layer: User.Drawings
+              color: "@FOREGROUND_COLOR@"
+        - title: "Front Silkscreen"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: false
+          tent_vias: false
+          colored_holes: true
+          holes_color: "@BACKGROUND_COLOR@"
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          layers:
+            - layer: F.Cu
+              color: "@DIM_COLOR@"
+            - layer: Edge.Cuts
+            - layer: F.Silkscreen
+              color: "@FOREGROUND_COLOR@"
+        - title: "Back Fabrication"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: false
+          tent_vias: false
+          colored_holes: true
+          holes_color: "@BACKGROUND_COLOR@"
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          layers:
+            - layer: B.Cu
+              color: "@DIM_COLOR@"
+            - layer: Edge.Cuts
+              color: "@FOREGROUND_COLOR@"
+            - layer: User.Drawings
+              color: "@FOREGROUND_COLOR@"
+        - title: "Back Silkscreen"
+          scaling: 1.3
+          sketch_pads_on_fab_layers: false
+          tent_vias: false
+          colored_holes: true
+          holes_color: "@BACKGROUND_COLOR@"
+          sheet_reference_color: "@FOREGROUND_COLOR@"
+          layers:
+            - layer: B.Cu
+              color: "@DIM_COLOR@"
+            - layer: Edge.Cuts
+            - layer: B.Silkscreen
+              color: "@FOREGROUND_COLOR@"
+
+...
+definitions:
+  BACKGROUND_COLOR: "#050505"
+  FOREGROUND_COLOR: "#FFFFFF"
+  DIM_COLOR: "#202020"
+  COLOR_SCHEME: "dark"
