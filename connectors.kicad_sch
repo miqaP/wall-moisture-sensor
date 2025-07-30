@@ -1545,13 +1545,21 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 147.32 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 147.32 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -1622,13 +1630,21 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 102.87 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 102.87 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -1765,13 +1781,21 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 125.73 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 125.73 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -2732,13 +2756,21 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 77.47 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 77.47 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"

@@ -5017,7 +5017,7 @@
 		)
 		(uuid "a14591fd-5944-4339-96be-46dbe2377d22")
 	)
-	(label "LED_B"
+	(label "LED_Y"
 		(at 109.22 153.67 0)
 		(effects
 			(font
@@ -5107,7 +5107,7 @@
 		)
 		(uuid "c4287474-2f6f-40ae-902f-1d7f88d8696c")
 	)
-	(label "LED_B"
+	(label "LED_Y"
 		(at 123.19 99.06 180)
 		(effects
 			(font
@@ -5434,7 +5434,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2295"
+		(property "LCSC" "C84256"
 			(at 91.44 165.1 0)
 			(effects
 				(font
@@ -5443,7 +5443,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "KT-0805R"
+		(property "MPN" "NCD0805R1"
 			(at 90.17 161.29 0)
 			(effects
 				(font
@@ -5527,7 +5527,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2293"
+		(property "LCSC" "C2296"
 			(at 91.44 153.67 0)
 			(effects
 				(font
@@ -5536,7 +5536,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "KT-0805B"
+		(property "MPN" "KT-0805Y"
 			(at 89.662 149.86 0)
 			(effects
 				(font
@@ -5690,13 +5690,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C106245"
+		(property "LCSC" "C1634"
 			(at 95.25 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 95.25 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -6097,13 +6105,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C114662"
+		(property "LCSC" "C4190"
 			(at 30.48 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 30.48 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -6580,13 +6596,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C105588"
+		(property "LCSC" "C22775"
 			(at 102.87 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 102.87 165.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -6802,13 +6826,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C114662"
+		(property "LCSC" "C4190"
 			(at 38.1 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 38.1 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -6878,7 +6910,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C106245"
+		(property "LCSC" "C1634"
 			(at 95.25 95.25 0)
 			(effects
 				(font
@@ -6936,7 +6968,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:SW_Tactile_SPST_NO_Straight_CK_PTS636Sx25SMTRLFS"
+		(property "Footprint" "footprints:SW_Push_1P1T_XKB_TS-1187A"
 			(at 24.13 140.97 0)
 			(effects
 				(font
@@ -6963,7 +6995,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C36936594"
+		(property "LCSC" "C318884"
 			(at 29.21 140.97 0)
 			(effects
 				(font
@@ -6972,12 +7004,13 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "TS1305-TZ50HBM"
-			(at 29.21 140.97 0)
+		(property "MPN" "TS-1187A-B-A-B"
+			(at 17.78 141.224 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -7048,13 +7081,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C105588"
+		(property "LCSC" "C22775"
 			(at 102.87 176.53 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 102.87 176.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -7157,7 +7198,7 @@
 				)
 			)
 		)
-		(property "Value" "15"
+		(property "Value" "100"
 			(at 102.87 149.86 90)
 			(effects
 				(font
@@ -7192,13 +7233,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C128059"
+		(property "LCSC" "C22775"
 			(at 102.87 153.67 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 102.87 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
@@ -8196,13 +8245,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 58.42 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 58.42 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
