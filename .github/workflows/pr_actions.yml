@@ -1,0 +1,98 @@
+# Action triggered on main branche
+name: Pull Request actions
+
+on:
+  pull_request:
+    branches:
+      - main
+      - release
+      - test-ci-workflow-pre
+      - test-ci-workflow
+env:
+  # we’ll use `yq` to read project.yml
+  PROJECT_CONFIGURATION: project.yml
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      project_name: ${{ steps.load.outputs.project_name }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Load project.yml into outputs
+        id: load
+        run: |
+          echo "project_name=$(yq e '.project.name' ${{ env.PROJECT_CONFIGURATION }})" >> $GITHUB_OUTPUT
+
+  checks:
+    runs-on: ubuntu-latest
+    container: ghcr.io/inti-cmnb/kicad9_auto_full:dev
+    needs: setup
+    env:
+      PROJECT_NAME: ${{needs.setup.outputs.project_name }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Kibot ERC (schematic)
+        uses: INTI-CMNB/KiBot@v2_dk9
+        id: erc
+        continue-on-error: true
+        with:
+          config: ci/preflight_erc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+      - name: Run Kibot DRC (layout)
+        uses: INTI-CMNB/KiBot@v2_dk9
+        id: drc
+        continue-on-error: true
+        with:
+          config: ci/preflight_drc.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+         
+      - name: Run Kibot BoM sanatize
+        uses: INTI-CMNB/KiBot@v2_dk9
+        id: sanatize_bom
+        continue-on-error: true
+        with:
+          config: ci/sanatize_bom.kibot.yaml
+          dir: output
+          schema: "${{ env.PROJECT_NAME }}.kicad_sch"
+          board: "${{ env.PROJECT_NAME }}.kicad_pcb"
+          verbose: 1
+
+      - name: Fail if any Kibot step failed
+        if: |
+          steps.erc.outcome == 'failure' ||
+          steps.drc.outcome == 'failure' ||
+          steps.sanatize_bom.outcome == 'failure'
+        run: |
+          if [ "${{ steps.erc.outcome }}" = "failure" ]; then
+            echo "❌ ERC Step : Failed"
+          fi
+          if [ "${{ steps.drc.outcome }}" = "failure" ]; then
+            echo "❌ DRC Step : Failed"
+          fi
+          if [ "${{ steps.sanatize_bom.outcome }}" = "failure" ]; then
+            echo "❌ Sanatize BoM Step : Failed"
+          fi
+          exit 1
+
+      - name: Upload checks
+        uses: actions/upload-artifact@v4
+        with:
+          name: Preflight checks
+          path: output
