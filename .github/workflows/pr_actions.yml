@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Kibot ERC (schematic)
-        uses: INTI-CMNB/KiBot@v2_k9
+        uses: INTI-CMNB/KiBot@v2_dk9
         id: erc
         continue-on-error: true
         with:
@@ -53,7 +53,7 @@ jobs:
           board: "${{ env.PROJECT_NAME }}.kicad_pcb"
           verbose: 1
       - name: Run Kibot DRC (layout)
-        uses: INTI-CMNB/KiBot@v2_k9
+        uses: INTI-CMNB/KiBot@v2_dk9
         id: drc
         continue-on-error: true
         with:
@@ -64,7 +64,7 @@ jobs:
           verbose: 1
          
       - name: Run Kibot BoM sanatize
-        uses: INTI-CMNB/KiBot@v2_k9
+        uses: INTI-CMNB/KiBot@v2_dk9
         id: sanatize_bom
         continue-on-error: true
         with:
@@ -78,7 +78,7 @@ jobs:
         if: |
           steps.erc.outcome == 'failure' ||
           steps.drc.outcome == 'failure' ||
-          steps.sanatize_bom == 'failure'
+          steps.sanatize_bom.outcome == 'failure'
         run: |
           if [ "${{ steps.erc.outcome }}" = "failure" ]; then
             echo "❌ ERC Step : Failed"

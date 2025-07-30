@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -69,6 +69,10 @@
         ],
         [
           "starved_thermal|104375939|136127778|b5bf18ef-57e0-45af-979c-ab65738e517f|ddd6bdd8-619c-41af-aa87-5e2b7fdf4d0c|F.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|104472803|125152778|b5bf18ef-57e0-45af-979c-ab65738e517f|01dd83e9-861d-4d68-9d51-1ffa83bfbedf|F.Cu",
           ""
         ],
         [
@@ -279,7 +283,7 @@
     "erc_exclusions": [
       [
         "label_dangling|1524000|1016000|213abb76-b059-4e2f-a0c0-283937477de2|00000000-0000-0000-0000-000000000000|/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/2a3fb7ae-12df-4167-9b5f-4fb9d4c182aa||",
-        "That expected, the SENSOR_SHIELD is connected to a copper pour "
+        ""
       ],
       [
         "multiple_net_names|1701800|1016000|c3d86059-fd26-4cc2-8811-503d1ea2e13f|ad8464a9-2000-4869-886c-0752bfb15b02|/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/639d936a-4332-4d32-a789-7d8ba12f07a1|/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/639d936a-4332-4d32-a789-7d8ba12f07a1|/dedd74c5-8e82-403a-8a1b-f763d3ee00bb/639d936a-4332-4d32-a789-7d8ba12f07a1",
