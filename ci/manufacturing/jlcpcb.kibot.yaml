@@ -8,19 +8,32 @@ globals:
   pcb_finish: ENIG
 
 filters:
-  - name: only_jlc_parts
+  - name: only_jlcpcb_parts
     comment: "Only parts with JLC (LCSC Part) code"
     type: generic
     include_only:
       - column: "LCSC"
         regex: '^C\d+'
 
+  - name: fix_jlcpcb_rotation
+    comment: 'Adjust rotation for JLC'
+    type: rot_footprint
+    negative_bottom: false
+    mirror_bottom: true
+    rotations:
+      - ["^SW_DIP_SPSTx08", -90.0]
+      - ["^QFN-", 0]
+      - ["^PinHeader", 90]
+    offsets:
+      - ["^PinHeader", "2.54,0"]
+
 variants:
   - name: rotated
     comment: "Rotate for JLCPCB"
     type: kibom
     variant: rotated
-    pre_transform: _rot_footprint_jlcpcb
+    pre_transform: fix_jlcpcb_rotation
+    
 
 
 outputs:
@@ -102,7 +115,7 @@ outputs:
     options:
       group_fields: ['part', 'part lib', 'value', 'mpn', 'footprint', 'footprint lib', 'voltage', 'tolerance', 'current', 'power']      
       output: "%f-%i_jlcpcb.%x"
-      exclude_filter: "only_jlc_parts"
+      exclude_filter: "only_jlcpcb_parts"
       ref_separator: ","
       columns:
         - field: Value
