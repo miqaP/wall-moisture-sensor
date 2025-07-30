@@ -7,7 +7,7 @@
 		(at -2.5 -11.9 180)
 		(unlocked yes)
 		(layer "F.SilkS")
-		(uuid "488178c9-5d4e-4135-8be9-7b47cec8ad1b")
+		(uuid "abb1fbe4-968b-4438-a90f-4f7fb138f07d")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 		(at 0 13 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "b42e404d-8472-4411-8e44-e48db9475e48")
+		(uuid "76d8281e-7df0-49bb-9a22-f1e242932b35")
 		(effects
 			(font
 				(size 1 1)
@@ -32,7 +32,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "9aceaf58-d79c-4a2a-8d24-8c71ff69238e")
+		(uuid "026acd0e-bd2b-48d5-8cf2-39cb71a88e9b")
 		(effects
 			(font
 				(size 1 1)
@@ -45,7 +45,7 @@
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
-		(uuid "093e771f-7921-44c7-bd9d-e1b3a59f8090")
+		(uuid "173edd29-45ef-4550-a835-fce95f77e11e")
 		(effects
 			(font
 				(size 1 1)
@@ -53,12 +53,38 @@
 			)
 		)
 	)
-	(attr smd)
+	(property "LCSC" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8e9e70d8-35cd-4150-a5dd-8df6a7257e50")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ca0d3ec7-e459-44e2-841f-6ec4f78df867")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd exclude_from_bom)
 	(fp_text user "${REFERENCE}"
 		(at 0 2.5 0)
 		(unlocked yes)
 		(layer "F.Fab")
-		(uuid "2aebf5d2-9036-4001-89c8-9b702e89e484")
+		(uuid "78ee2432-d5c5-4d96-90c8-4f5a14219551")
 		(effects
 			(font
 				(size 1 1)
@@ -67,13 +93,13 @@
 		)
 	)
 	(pad "1" smd circle
-		(at 0 0 180)
+		(at 0 0)
 		(size 20 20)
 		(layers "F.Cu")
-		(uuid "e03851a2-d306-4be2-9c49-18146ec4f950")
+		(uuid "0a0b696d-8119-4dad-aed8-cea8fc5d946a")
 	)
 	(pad "2" smd custom
-		(at 0 30 180)
+		(at 0 -30)
 		(size 5 5)
 		(layers "F.Cu")
 		(options
@@ -88,7 +114,7 @@
 				(fill no)
 			)
 		)
-		(uuid "aa3ebdd7-95bc-4038-81f7-3452652cfd0d")
+		(uuid "6aa4d2c3-60ed-4d8f-9ce1-d0aacba0f531")
 	)
 	(embedded_fonts no)
 )
