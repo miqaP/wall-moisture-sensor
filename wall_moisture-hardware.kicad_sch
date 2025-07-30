@@ -1,0 +1,518 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "dedd74c5-8e82-403a-8a1b-f763d3ee00bb")
+	(paper "A4")
+	(title_block
+		(title "Wall Moisture Sensor - WMS1")
+		(rev "${VERSION}")
+		(company "${COMPANY}")
+	)
+	(lib_symbols)
+	(junction
+		(at 104.14 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3805e5a7-e17a-444e-875e-25bf5e780e58")
+	)
+	(wire
+		(pts
+			(xy 54.61 104.14) (xy 54.61 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0618d39b-5dc6-47b8-a855-f083a58fa374")
+	)
+	(wire
+		(pts
+			(xy 101.6 101.6) (xy 101.6 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "163da744-d12b-431f-b13a-506f9351e322")
+	)
+	(wire
+		(pts
+			(xy 104.14 99.06) (xy 104.14 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ade3ad8-2f2c-4f03-ada0-dee9cefc3fb3")
+	)
+	(wire
+		(pts
+			(xy 54.61 99.06) (xy 104.14 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "205c34b1-5f2c-4723-b9e4-e716bced4189")
+	)
+	(wire
+		(pts
+			(xy 173.99 99.06) (xy 173.99 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "27f0453d-81ef-41f2-8dbc-4df5b5f755b6")
+	)
+	(wire
+		(pts
+			(xy 125.73 123.19) (xy 143.51 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d42a923-4e75-4d6f-97d3-0452344663e6")
+	)
+	(wire
+		(pts
+			(xy 125.73 118.11) (xy 143.51 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "552fe653-e9d5-45ab-b46d-500f177d6f80")
+	)
+	(wire
+		(pts
+			(xy 68.58 125.73) (xy 96.52 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "978f0fe4-3ef2-41ac-bfe3-b20c825ee111")
+	)
+	(wire
+		(pts
+			(xy 125.73 113.03) (xy 143.51 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5333b70-6732-499c-8b49-8e1df2146ac3")
+	)
+	(wire
+		(pts
+			(xy 57.15 104.14) (xy 57.15 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1288780-6dbd-4b4d-bad2-8c1cc13edaf7")
+	)
+	(wire
+		(pts
+			(xy 125.73 128.27) (xy 143.51 128.27)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3f24101-df95-448d-a675-6925d32fbf1a")
+	)
+	(wire
+		(pts
+			(xy 125.73 130.81) (xy 143.51 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ba1e14e8-65ad-452f-b0c9-bbfee6333bc1")
+	)
+	(wire
+		(pts
+			(xy 125.73 125.73) (xy 143.51 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5170dbb-fe8d-43b2-afbe-affe734d7e3d")
+	)
+	(wire
+		(pts
+			(xy 104.14 99.06) (xy 173.99 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce6e8a67-64ca-4195-b0a0-2ac57b626395")
+	)
+	(wire
+		(pts
+			(xy 57.15 101.6) (xy 101.6 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dfb71b01-2814-401c-ac38-2c92174177a8")
+	)
+	(wire
+		(pts
+			(xy 68.58 123.19) (xy 96.52 123.19)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e02ce1ab-b896-438e-be6c-233e177343e3")
+	)
+	(sheet
+		(at 143.51 104.14)
+		(size 35.56 30.48)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "2a3fb7ae-12df-4167-9b5f-4fb9d4c182aa")
+		(property "Sheetname" "Analog frontend"
+			(at 144.78 102.616 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "analog_front_end.kicad_sch"
+			(at 143.51 135.2046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3.3V_LN" input
+			(at 173.99 104.14 90)
+			(uuid "9eb84329-5a2f-4c1c-8f43-9561ca022b3e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SENSOR_POSITIVE_AD7747" input
+			(at 143.51 113.03 180)
+			(uuid "efd4c6c9-5a45-4649-b0a9-986c9d30cfde")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SENSOR_EXC_1" input
+			(at 143.51 123.19 180)
+			(uuid "94e0d1ab-1ac8-4ee7-9be4-0b4691ed71ad")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SENSOR_EXC_2" input
+			(at 143.51 125.73 180)
+			(uuid "2e2ea611-c101-4f67-8338-17d99f2e9556")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SENSOR_EXC_3" input
+			(at 143.51 128.27 180)
+			(uuid "77e381cf-1257-4240-acf0-159eabb4bcd2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SENSOR_SHIELD_AD7747" input
+			(at 143.51 118.11 180)
+			(uuid "eb2fa6fc-34f7-4e51-b231-8d1de80fa33b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "SENSOR_EXC_4" input
+			(at 143.51 130.81 180)
+			(uuid "bbe51eda-1908-4a22-b24f-9d44077fba55")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "wall_moisture-hardware"
+				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 96.52 104.14)
+		(size 29.21 30.48)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "639d936a-4332-4d32-a789-7d8ba12f07a1")
+		(property "Sheetname" "µC and digital"
+			(at 106.68 102.362 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "uc.kicad_sch"
+			(at 96.52 135.2046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "3.3V" input
+			(at 101.6 104.14 90)
+			(uuid "4e1e885b-702a-4b94-84ee-f5eb24bd4d40")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3.3V_LN" input
+			(at 104.14 104.14 90)
+			(uuid "00249b0f-b7c6-438c-90e2-d76a29633798")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "LPUART_RX" input
+			(at 96.52 123.19 180)
+			(uuid "bb2a85ef-5e24-4d8e-9936-1fdde29daaf8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "LPUART_TX" output
+			(at 96.52 125.73 180)
+			(uuid "f88916e3-6b73-4fbf-b447-2d9d3347be8e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "AD7747_SHIELD" output
+			(at 125.73 118.11 0)
+			(uuid "a8dfbd35-f5d8-4e7c-a861-29819d02b575")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "AD7747_CIN+" output
+			(at 125.73 113.03 0)
+			(uuid "36285d00-963e-4840-87df-6e6e012cc286")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SENSOR_EXC_1" output
+			(at 125.73 123.19 0)
+			(uuid "b7957fe1-d4c0-45b4-8b81-28e9b7226562")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SENSOR_EXC_2" output
+			(at 125.73 125.73 0)
+			(uuid "bfd71a09-ce79-452c-b1e7-7ada0f3d1509")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SENSOR_EXC_3" output
+			(at 125.73 128.27 0)
+			(uuid "8b24f206-7062-433a-b11c-4ee068fd2eec")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "SENSOR_EXC_4" output
+			(at 125.73 130.81 0)
+			(uuid "8bb27c56-cb63-4fc4-9ba9-4e6b5461fd8b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "wall_moisture-hardware"
+				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 38.1 104.14)
+		(size 30.48 27.94)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6d9e78ef-2aac-40ff-a2f1-475c572a17ad")
+		(property "Sheetname" "Connectors and Power"
+			(at 32.512 102.108 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "connectors.kicad_sch"
+			(at 38.1 132.6646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "MASTER_RX" input
+			(at 68.58 125.73 0)
+			(uuid "28d9d723-2308-4238-8266-738efe4ccc5e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "MASTER_TX" output
+			(at 68.58 123.19 0)
+			(uuid "86e2cff0-6b02-43fe-88c1-671e5dedf155")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3.3V" output
+			(at 57.15 104.14 90)
+			(uuid "77444e89-1fc5-4283-96c6-ba26198a66e3")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "3.3V_LN" output
+			(at 54.61 104.14 90)
+			(uuid "b3ecb439-8888-48df-b394-bcc0a0811d02")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "wall_moisture-hardware"
+				(path "/dedd74c5-8e82-403a-8a1b-f763d3ee00bb"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
