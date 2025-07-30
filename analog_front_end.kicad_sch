@@ -2573,13 +2573,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C98220"
+		(property "LCSC" "C25804"
 			(at 182.88 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 182.88 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -2649,13 +2657,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C14675"
+		(property "LCSC" "C25803"
 			(at 59.69 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 59.69 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -2725,13 +2741,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C14675"
+		(property "LCSC" "C25803"
 			(at 59.69 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 59.69 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -2767,7 +2791,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "2.2k"
 			(at 190.5 127 90)
 			(effects
 				(font
@@ -2802,13 +2826,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C22548"
+		(property "LCSC" "C4190"
 			(at 190.5 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 190.5 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -2898,7 +2930,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C19829413"
+		(property "LCSC" "C20917"
 			(at 204.47 130.81 0)
 			(effects
 				(font
@@ -2916,7 +2948,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "BSS316N"
+		(property "MPN" "AO3400A"
 			(at 215.138 131.826 0)
 			(effects
 				(font
@@ -2950,7 +2982,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "2bc64df5-f1dd-4010-82fa-723016f4cea1")
 		(property "Reference" "J3"
 			(at 116.205 52.07 0)
@@ -3005,11 +3036,12 @@
 			)
 		)
 		(property "MPN" "2541WV-03P"
-			(at 115.57 59.69 0)
+			(at 108.458 59.944 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "3"
@@ -3114,7 +3146,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C130417"
+		(property "LCSC" "C8512"
 			(at 193.04 140.97 0)
 			(effects
 				(font
@@ -3123,8 +3155,8 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "BC847,215"
-			(at 201.422 144.526 0)
+		(property "MPN" "MMBT2222A 1P"
+			(at 186.69 145.796 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3157,7 +3189,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "4b2e98cc-c0c8-4b60-a309-ad36eac9e47c")
 		(property "Reference" "J4"
 			(at 127.635 97.79 0)
@@ -3212,11 +3243,12 @@
 			)
 		)
 		(property "MPN" "2541WV-03P"
-			(at 127 105.41 0)
+			(at 119.38 105.664 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "3"
@@ -3289,13 +3321,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C14675"
+		(property "LCSC" "C25803"
 			(at 59.69 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 59.69 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -3365,13 +3405,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C14675"
+		(property "LCSC" "C25803"
 			(at 59.69 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 59.69 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "2"
@@ -3589,13 +3637,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 16.51 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(hide yes)
+			)
+		)
+		(property "MPN" ""
+			(at 16.51 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
 			)
 		)
 		(pin "1"
