@@ -9,6 +9,7 @@
 	(paper "A4")
 	(title_block
 		(title "Wall Moisture Sensor - WMS1")
+		(date "${CURRENT_DATE}")
 		(rev "${VERSION}")
 		(company "${COMPANY}")
 	)
@@ -211,7 +212,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J3"
-			(at 0 -2.33 90)
+			(at -1.755386 -2.756229 180)
 			(layer "F.SilkS")
 			(uuid "b93f5172-7296-4bf2-9031-4558a62fb049")
 			(effects
@@ -942,7 +943,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R12"
-			(at -3.303025 -0.093673 0)
+			(at -2.561561 -1.772222 0)
 			(layer "F.SilkS")
 			(uuid "d3b1d6ca-2ecd-4aa2-89fc-1975ddeafca5")
 			(effects
@@ -1987,7 +1988,7 @@
 		(descr "TSSOP, 16 Pin (https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "TSSOP SO JEDEC-MO-153-AB TI-PW0016A Microchip-ST Toshiba-TSSOP16-P-0044-0.65A NXP-SOT403-1 Infineon-P-TSSOP-16-800")
 		(property "Reference" "U8"
-			(at 0 -3.45 180)
+			(at 0.238439 -3.772222 180)
 			(layer "F.SilkS")
 			(uuid "f17b651f-38c2-4182-b2d3-148700be1106")
 			(effects
@@ -4592,7 +4593,7 @@
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U3"
-			(at 0 -2.4 180)
+			(at 0.038439 -2.772222 180)
 			(layer "F.SilkS")
 			(uuid "580b4636-e636-48f5-9764-b95b1025c4fc")
 			(effects
@@ -5773,7 +5774,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R3"
-			(at -2.5 0 0)
+			(at -2.561561 -0.272222 0)
 			(layer "F.SilkS")
 			(uuid "83e38c8a-ddfe-4adf-a683-69fc10bd8a8a")
 			(effects
@@ -7218,7 +7219,7 @@
 			(net 1 "GND")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "7699a7bd-7d7c-4632-8b5b-14e77ed35ab8")
+			(uuid "4aeed654-e4f4-4dcd-b643-20c97bc4d33d")
 		)
 		(pad "2" smd rect
 			(at -3 1.875 90)
@@ -7236,7 +7237,7 @@
 			(net 36 "/µC and digital/NRST")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "b55b7d3d-16ec-4509-8cdd-a407a1e258c5")
+			(uuid "6ec1338a-0041-471b-b36a-960bce38c521")
 		)
 		(embedded_fonts no)
 		(model "${KICAD9_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_Push_1P1T_XKB_TS-1187A.step"
@@ -7518,7 +7519,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R2"
-			(at -2.5 0 0)
+			(at -2.561561 -0.372222 0)
 			(layer "F.SilkS")
 			(uuid "7b5f7f74-65a5-4533-b3cd-96ddb41280c4")
 			(effects
@@ -9258,7 +9259,7 @@
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U4"
-			(at 0 -2.4 180)
+			(at 3.138439 1.327778 180)
 			(layer "F.SilkS")
 			(uuid "05438486-8c9e-434e-a1c0-c5967885cdc9")
 			(effects
@@ -9634,7 +9635,7 @@
 		(descr "SMD 8x-dip-switch SPST KingTek_DSHP08TJ, Slide, row spacing 5.25 mm (206 mils), body size  (see http://www.kingtek.net.cn/pic/201601201446313350.pdf), JPin")
 		(tags "SMD DIP Switch SPST Slide 5.25mm 206mil JPin")
 		(property "Reference" "SW1"
-			(at -2.427778 7.038439 270)
+			(at -2.427778 7.038439 90)
 			(layer "F.SilkS")
 			(uuid "d6479f84-5156-4a0c-a29b-477e88099271")
 			(effects
@@ -9679,7 +9680,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C40738"
+		(property "LCSC" "C89711"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9692,7 +9693,7 @@
 				)
 			)
 		)
-		(property "MPN" "DSHP08TSGET"
+		(property "MPN" "DHN-08F-T-V-T/R"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12076,7 +12077,7 @@
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -12918,7 +12919,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J4"
-			(at 0 -2.33 90)
+			(at -2.451432 -2.761251 180)
 			(layer "F.SilkS")
 			(uuid "4fa11b3b-6195-4722-b2dc-2e775e538942")
 			(effects
@@ -13215,7 +13216,7 @@
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -13382,6 +13383,26 @@
 		(uuid "1ba5ee9d-8f13-46d2-8af5-36899232f56e")
 	)
 	(gr_line
+		(start 92.2 116.3)
+		(end 95.4 116.3)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3b7c92a3-3f41-4a6a-8a9c-f82f4bb935ef")
+	)
+	(gr_line
+		(start 88.4 117.5)
+		(end 88.4 116.3)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "45aba4b8-2a5e-44c4-9b37-c1d8769cc817")
+	)
+	(gr_line
 		(start 72.538439 120.527778)
 		(end 62.538439 120.527778)
 		(stroke
@@ -13390,6 +13411,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "4e1f3c71-87db-489e-b15f-6c6c5b969428")
+	)
+	(gr_line
+		(start 91.6 116.3)
+		(end 91.6 117.5)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "762042e0-8bdc-473d-9a2c-fb64493386ba")
 	)
 	(gr_arc
 		(start 131.338439 97.027778)
@@ -13401,6 +13432,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "853f48ff-d195-400e-a8aa-2b5e2eb0b5ab")
+	)
+	(gr_line
+		(start 87.4 124.2)
+		(end 85.906325 124.2)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9670bdeb-3a21-4d5c-a1ab-9f2c3c47df92")
 	)
 	(gr_line
 		(start 62.038439 120.027778)
@@ -13422,6 +13463,46 @@
 		)
 		(layer "F.SilkS")
 		(uuid "b031a2f1-fac1-4dc0-beac-fa2a379b8bd7")
+	)
+	(gr_line
+		(start 92.2 117.5)
+		(end 92.2 116.3)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b03ae23a-7ea6-4dd5-8bd7-5a1ced0f9ab3")
+	)
+	(gr_line
+		(start 87.4 120.7)
+		(end 85.906325 120.7)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b8d77e4a-3b0c-4457-961a-7debffcaa467")
+	)
+	(gr_line
+		(start 95.4 116.3)
+		(end 95.4 117.5)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ba040f6c-001d-42f8-a72a-fff5f8aef407")
+	)
+	(gr_line
+		(start 88.4 116.3)
+		(end 91.6 116.3)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c341ce52-2a10-4707-a400-293830700273")
 	)
 	(gr_arc
 		(start 62.538439 120.527778)
@@ -13475,6 +13556,150 @@
 		(layer "Edge.Cuts")
 		(uuid "fb716483-5162-437e-ac24-d4ab513bf619")
 	)
+	(gr_text "SHIELD"
+		(at 80.5 124.8 0)
+		(layer "F.SilkS")
+		(uuid "009d5aea-b53c-42be-a5c0-662e5a8b364b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_TX"
+		(at 134.3 132.1 90)
+		(layer "F.SilkS")
+		(uuid "0e03f255-a41a-4625-b597-18661b85b7d6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_RX"
+		(at 58.7 124.2 270)
+		(layer "F.SilkS")
+		(uuid "15b79173-efb5-4ef3-a10c-4c3ffd935fea")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_TX"
+		(at 58.6 128.4 270)
+		(layer "F.SilkS")
+		(uuid "195254d6-205e-46fc-ae92-31ee6e9b7442")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 58.6 135.9 270)
+		(layer "F.SilkS")
+		(uuid "31762f3b-21cf-47e2-9360-31ae8611c84c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "MCU"
+		(at 92.2 116 0)
+		(layer "F.SilkS")
+		(uuid "5adb0ef4-ef21-48a2-967e-be94c8dd24b3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "AD"
+		(at 89.2 116 0)
+		(layer "F.SilkS")
+		(uuid "64dcefe3-606a-4d1b-974d-c1ae6c1e0eaa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "GND"
+		(at 58.6 132.4 270)
+		(layer "F.SilkS")
+		(uuid "7f7ad6fe-892c-4720-a64f-68a4aabc32ba")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_RX"
+		(at 134.3 128.1 90)
+		(layer "F.SilkS")
+		(uuid "999b1165-a5ec-442d-8cfb-7f1e5c4558a7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 134.3 137.4 90)
+		(layer "F.SilkS")
+		(uuid "a4eb5482-73a6-48fe-8e82-820be461c685")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "GND"
+		(at 134.3 135.3 90)
+		(layer "F.SilkS")
+		(uuid "aa1e807b-b3cd-4cb9-9726-fdc25be74c41")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SIGNAL"
+		(at 80.5 121.4 0)
+		(layer "F.SilkS")
+		(uuid "c82a4931-8e43-40c7-b7cb-006eca28c537")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "WallMoisture\nv${VERSION}"
 		(at 67.538439 118.027778 0)
 		(layer "F.SilkS")
@@ -13482,7 +13707,7 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 		)
 	)

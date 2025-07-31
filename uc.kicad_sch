@@ -6,6 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "${SHEETNAME}")
+		(date "${CURRENT_DATE}")
 		(rev "${VERSION}")
 		(company "${COMPANY}")
 	)
@@ -7890,7 +7891,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C40738"
+		(property "LCSC" "C89711"
 			(at 34.29 104.14 0)
 			(effects
 				(font
@@ -7899,7 +7900,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "DSHP08TSGET"
+		(property "MPN" "DHN-08F-T-V-T/R"
 			(at 34.29 116.332 0)
 			(effects
 				(font

@@ -13,7 +13,8 @@ module.exports = {
           releaseRules: [
             { type: 'feature', release: 'major' },
             { type: 'design', release: 'minor' },
-            { type: ['bom', 'silk'], release: 'patch' }
+            { type: 'bom', release: 'patch' },
+            { type: 'silk', release: 'patch' }
           ]
         }
       ],
