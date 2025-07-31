@@ -6,6 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "${SHEETNAME}")
+		(date "${CURRENT_DATE}")
 		(rev "${VERSION}")
 		(company "${COMPANY}")
 	)

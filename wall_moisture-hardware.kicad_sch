@@ -6,6 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "Wall Moisture Sensor - WMS1")
+		(date "${CURRENT_DATE}")
 		(rev "${VERSION}")
 		(company "${COMPANY}")
 	)
