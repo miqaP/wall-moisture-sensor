@@ -943,7 +943,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R12"
-			(at -3.303025 -0.093673 0)
+			(at -2.561561 -1.772222 0)
 			(layer "F.SilkS")
 			(uuid "d3b1d6ca-2ecd-4aa2-89fc-1975ddeafca5")
 			(effects
@@ -1988,7 +1988,7 @@
 		(descr "TSSOP, 16 Pin (https://www.jedec.org/document_search?search_api_views_fulltext=MO-153), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "TSSOP SO JEDEC-MO-153-AB TI-PW0016A Microchip-ST Toshiba-TSSOP16-P-0044-0.65A NXP-SOT403-1 Infineon-P-TSSOP-16-800")
 		(property "Reference" "U8"
-			(at 0 -3.45 180)
+			(at 0.238439 -3.772222 180)
 			(layer "F.SilkS")
 			(uuid "f17b651f-38c2-4182-b2d3-148700be1106")
 			(effects
@@ -4593,7 +4593,7 @@
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U3"
-			(at 0 -2.4 180)
+			(at 0.038439 -2.772222 180)
 			(layer "F.SilkS")
 			(uuid "580b4636-e636-48f5-9764-b95b1025c4fc")
 			(effects
@@ -5774,7 +5774,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R3"
-			(at -2.5 0 0)
+			(at -2.561561 -0.272222 0)
 			(layer "F.SilkS")
 			(uuid "83e38c8a-ddfe-4adf-a683-69fc10bd8a8a")
 			(effects
@@ -7519,7 +7519,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R2"
-			(at -2.5 0 0)
+			(at -2.561561 -0.372222 0)
 			(layer "F.SilkS")
 			(uuid "7b5f7f74-65a5-4533-b3cd-96ddb41280c4")
 			(effects
@@ -9259,7 +9259,7 @@
 		(descr "SOT, 5 Pin (JEDEC MO-178 Var AA https://www.jedec.org/document_search?search_api_views_fulltext=MO-178), generated with kicad-footprint-generator ipc_gullwing_generator.py")
 		(tags "SOT TO_SOT_SMD")
 		(property "Reference" "U4"
-			(at 0 -2.4 180)
+			(at 3.138439 1.327778 180)
 			(layer "F.SilkS")
 			(uuid "05438486-8c9e-434e-a1c0-c5967885cdc9")
 			(effects
@@ -9680,7 +9680,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C40738"
+		(property "LCSC" "C89711"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9693,7 +9693,7 @@
 				)
 			)
 		)
-		(property "MPN" "DSHP08TSGET"
+		(property "MPN" "DHN-08F-T-V-T/R"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12077,7 +12077,7 @@
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.1)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -13216,7 +13216,7 @@
 			(effects
 				(font
 					(size 1 1)
-					(thickness 0.1)
+					(thickness 0.15)
 				)
 				(justify mirror)
 			)
@@ -13386,8 +13386,8 @@
 		(start 92.2 116.3)
 		(end 95.4 116.3)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "3b7c92a3-3f41-4a6a-8a9c-f82f4bb935ef")
@@ -13396,8 +13396,8 @@
 		(start 88.4 117.5)
 		(end 88.4 116.3)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "45aba4b8-2a5e-44c4-9b37-c1d8769cc817")
@@ -13416,8 +13416,8 @@
 		(start 91.6 116.3)
 		(end 91.6 117.5)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "762042e0-8bdc-473d-9a2c-fb64493386ba")
@@ -13434,11 +13434,11 @@
 		(uuid "853f48ff-d195-400e-a8aa-2b5e2eb0b5ab")
 	)
 	(gr_line
-		(start 87.4 124.248568)
-		(end 85.906325 124.262951)
+		(start 87.4 124.2)
+		(end 85.906325 124.2)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "9670bdeb-3a21-4d5c-a1ab-9f2c3c47df92")
@@ -13468,8 +13468,8 @@
 		(start 92.2 117.5)
 		(end 92.2 116.3)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "b03ae23a-7ea6-4dd5-8bd7-5a1ced0f9ab3")
@@ -13478,8 +13478,8 @@
 		(start 87.4 120.7)
 		(end 85.906325 120.7)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "b8d77e4a-3b0c-4457-961a-7debffcaa467")
@@ -13488,8 +13488,8 @@
 		(start 95.4 116.3)
 		(end 95.4 117.5)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "ba040f6c-001d-42f8-a72a-fff5f8aef407")
@@ -13498,8 +13498,8 @@
 		(start 88.4 116.3)
 		(end 91.6 116.3)
 		(stroke
-			(width 0.1)
-			(type default)
+			(width 0.15)
+			(type solid)
 		)
 		(layer "F.SilkS")
 		(uuid "c341ce52-2a10-4707-a400-293830700273")
@@ -13563,19 +13563,55 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
 	)
 	(gr_text "M_TX"
-		(at 134.3 131.5 90)
+		(at 134.3 132.1 90)
 		(layer "F.SilkS")
 		(uuid "0e03f255-a41a-4625-b597-18661b85b7d6")
 		(effects
 			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_RX"
+		(at 58.7 124.2 270)
+		(layer "F.SilkS")
+		(uuid "15b79173-efb5-4ef3-a10c-4c3ffd935fea")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_TX"
+		(at 58.6 128.4 270)
+		(layer "F.SilkS")
+		(uuid "195254d6-205e-46fc-ae92-31ee6e9b7442")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 58.6 135.9 270)
+		(layer "F.SilkS")
+		(uuid "31762f3b-21cf-47e2-9360-31ae8611c84c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
@@ -13587,7 +13623,7 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
@@ -13599,79 +13635,55 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
-			)
-			(justify left bottom)
-		)
-	)
-	(gr_text "5V"
-		(at 59.9 136 90)
-		(layer "F.SilkS")
-		(uuid "88b54a64-e49e-442f-bc39-179cfe1ecdff")
-		(effects
-			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
 	)
 	(gr_text "GND"
-		(at 59.9 134.3 90)
+		(at 58.6 132.4 270)
 		(layer "F.SilkS")
-		(uuid "9526b4e5-78a0-42a7-b5de-4ac07fac3c71")
+		(uuid "7f7ad6fe-892c-4720-a64f-68a4aabc32ba")
 		(effects
 			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
 	)
 	(gr_text "M_RX"
-		(at 134.3 128.6 90)
+		(at 134.3 128.1 90)
 		(layer "F.SilkS")
 		(uuid "999b1165-a5ec-442d-8cfb-7f1e5c4558a7")
 		(effects
 			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
-			)
-			(justify left bottom)
-		)
-	)
-	(gr_text "M_RX"
-		(at 59.9 128.8 90)
-		(layer "F.SilkS")
-		(uuid "a4a23dff-7d8a-4530-98af-fca224426650")
-		(effects
-			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
 	)
 	(gr_text "5V"
-		(at 134.3 135.8 90)
+		(at 134.3 137.4 90)
 		(layer "F.SilkS")
 		(uuid "a4eb5482-73a6-48fe-8e82-820be461c685")
 		(effects
 			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
 	)
 	(gr_text "GND"
-		(at 134.3 134.1 90)
+		(at 134.3 135.3 90)
 		(layer "F.SilkS")
 		(uuid "aa1e807b-b3cd-4cb9-9726-fdc25be74c41")
 		(effects
 			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
+				(size 1 1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
@@ -13683,7 +13695,7 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
 			(justify left bottom)
 		)
@@ -13695,20 +13707,8 @@
 		(effects
 			(font
 				(size 1 1)
-				(thickness 0.1)
+				(thickness 0.15)
 			)
-		)
-	)
-	(gr_text "M_TX"
-		(at 59.9 131.7 90)
-		(layer "F.SilkS")
-		(uuid "e430125e-77f2-454e-98b4-8a4604d7c08a")
-		(effects
-			(font
-				(size 0.7 0.7)
-				(thickness 0.1)
-			)
-			(justify left bottom)
 		)
 	)
 	(dimension
