@@ -212,7 +212,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J3"
-			(at 0 -2.33 90)
+			(at -1.755386 -2.756229 180)
 			(layer "F.SilkS")
 			(uuid "b93f5172-7296-4bf2-9031-4558a62fb049")
 			(effects
@@ -9635,7 +9635,7 @@
 		(descr "SMD 8x-dip-switch SPST KingTek_DSHP08TJ, Slide, row spacing 5.25 mm (206 mils), body size  (see http://www.kingtek.net.cn/pic/201601201446313350.pdf), JPin")
 		(tags "SMD DIP Switch SPST Slide 5.25mm 206mil JPin")
 		(property "Reference" "SW1"
-			(at -2.427778 7.038439 270)
+			(at -2.427778 7.038439 90)
 			(layer "F.SilkS")
 			(uuid "d6479f84-5156-4a0c-a29b-477e88099271")
 			(effects
@@ -12919,7 +12919,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J4"
-			(at 0 -2.33 90)
+			(at -2.451432 -2.761251 180)
 			(layer "F.SilkS")
 			(uuid "4fa11b3b-6195-4722-b2dc-2e775e538942")
 			(effects
@@ -13383,6 +13383,26 @@
 		(uuid "1ba5ee9d-8f13-46d2-8af5-36899232f56e")
 	)
 	(gr_line
+		(start 92.2 116.3)
+		(end 95.4 116.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "3b7c92a3-3f41-4a6a-8a9c-f82f4bb935ef")
+	)
+	(gr_line
+		(start 88.4 117.5)
+		(end 88.4 116.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "45aba4b8-2a5e-44c4-9b37-c1d8769cc817")
+	)
+	(gr_line
 		(start 72.538439 120.527778)
 		(end 62.538439 120.527778)
 		(stroke
@@ -13391,6 +13411,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "4e1f3c71-87db-489e-b15f-6c6c5b969428")
+	)
+	(gr_line
+		(start 91.6 116.3)
+		(end 91.6 117.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "762042e0-8bdc-473d-9a2c-fb64493386ba")
 	)
 	(gr_arc
 		(start 131.338439 97.027778)
@@ -13402,6 +13432,16 @@
 		)
 		(layer "F.SilkS")
 		(uuid "853f48ff-d195-400e-a8aa-2b5e2eb0b5ab")
+	)
+	(gr_line
+		(start 87.4 124.248568)
+		(end 85.906325 124.262951)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "9670bdeb-3a21-4d5c-a1ab-9f2c3c47df92")
 	)
 	(gr_line
 		(start 62.038439 120.027778)
@@ -13423,6 +13463,46 @@
 		)
 		(layer "F.SilkS")
 		(uuid "b031a2f1-fac1-4dc0-beac-fa2a379b8bd7")
+	)
+	(gr_line
+		(start 92.2 117.5)
+		(end 92.2 116.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "b03ae23a-7ea6-4dd5-8bd7-5a1ced0f9ab3")
+	)
+	(gr_line
+		(start 87.4 120.7)
+		(end 85.906325 120.7)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "b8d77e4a-3b0c-4457-961a-7debffcaa467")
+	)
+	(gr_line
+		(start 95.4 116.3)
+		(end 95.4 117.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "ba040f6c-001d-42f8-a72a-fff5f8aef407")
+	)
+	(gr_line
+		(start 88.4 116.3)
+		(end 91.6 116.3)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "c341ce52-2a10-4707-a400-293830700273")
 	)
 	(gr_arc
 		(start 62.538439 120.527778)
@@ -13476,6 +13556,138 @@
 		(layer "Edge.Cuts")
 		(uuid "fb716483-5162-437e-ac24-d4ab513bf619")
 	)
+	(gr_text "SHIELD"
+		(at 80.5 124.8 0)
+		(layer "F.SilkS")
+		(uuid "009d5aea-b53c-42be-a5c0-662e5a8b364b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_TX"
+		(at 134.3 131.5 90)
+		(layer "F.SilkS")
+		(uuid "0e03f255-a41a-4625-b597-18661b85b7d6")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "MCU"
+		(at 92.2 116 0)
+		(layer "F.SilkS")
+		(uuid "5adb0ef4-ef21-48a2-967e-be94c8dd24b3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "AD"
+		(at 89.2 116 0)
+		(layer "F.SilkS")
+		(uuid "64dcefe3-606a-4d1b-974d-c1ae6c1e0eaa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 59.9 136 90)
+		(layer "F.SilkS")
+		(uuid "88b54a64-e49e-442f-bc39-179cfe1ecdff")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "GND"
+		(at 59.9 134.3 90)
+		(layer "F.SilkS")
+		(uuid "9526b4e5-78a0-42a7-b5de-4ac07fac3c71")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_RX"
+		(at 134.3 128.6 90)
+		(layer "F.SilkS")
+		(uuid "999b1165-a5ec-442d-8cfb-7f1e5c4558a7")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "M_RX"
+		(at 59.9 128.8 90)
+		(layer "F.SilkS")
+		(uuid "a4a23dff-7d8a-4530-98af-fca224426650")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "5V"
+		(at 134.3 135.8 90)
+		(layer "F.SilkS")
+		(uuid "a4eb5482-73a6-48fe-8e82-820be461c685")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "GND"
+		(at 134.3 134.1 90)
+		(layer "F.SilkS")
+		(uuid "aa1e807b-b3cd-4cb9-9726-fdc25be74c41")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(gr_text "SIGNAL"
+		(at 80.5 121.4 0)
+		(layer "F.SilkS")
+		(uuid "c82a4931-8e43-40c7-b7cb-006eca28c537")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
 	(gr_text "WallMoisture\nv${VERSION}"
 		(at 67.538439 118.027778 0)
 		(layer "F.SilkS")
@@ -13485,6 +13697,18 @@
 				(size 1 1)
 				(thickness 0.1)
 			)
+		)
+	)
+	(gr_text "M_TX"
+		(at 59.9 131.7 90)
+		(layer "F.SilkS")
+		(uuid "e430125e-77f2-454e-98b4-8a4604d7c08a")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.1)
+			)
+			(justify left bottom)
 		)
 	)
 	(dimension
